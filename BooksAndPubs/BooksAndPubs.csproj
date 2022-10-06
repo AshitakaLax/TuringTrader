@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <TargetFramework>net6.0-windows</TargetFramework>
     <Authors>Felix Bertram et al</Authors>
     <Company>Bertram Solutions LLC</Company>
     <Product>TuringTrader</Product>
@@ -27,6 +27,10 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="copy $(TargetPath) ..\Algorithms\$(TargetFileName)" />
   </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TuringTrader.Simulator\TuringTrader.Simulator.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="TuringTrader.Simulator">

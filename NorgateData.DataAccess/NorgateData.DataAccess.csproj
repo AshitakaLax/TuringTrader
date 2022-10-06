@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>NorgateData.DataAccess</RootNamespace>
+		<AssemblyName>norgate.data.dotnet</AssemblyName>
+		<TargetFramework>net6.0-windows</TargetFramework>
+
+		<OutputType>Library</OutputType>
+		<Platforms>x64</Platforms>
+		
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+
+	
+</Project>

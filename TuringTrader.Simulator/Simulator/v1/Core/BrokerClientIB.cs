@@ -593,7 +593,7 @@ namespace TuringTrader.Simulator
             }
 
             ClientSocket.reqMarketDataType(3);
-            ClientSocket.reqMktData(infoHash, info.Details.Summary, string.Empty, false, null);
+            ClientSocket.reqMktData(infoHash, info.Details.Summary, string.Empty, false, false, null);
         }
         public void CancelMarketData(InstrumentInfo info)
         {

@@ -439,8 +439,140 @@ namespace TuringTrader.Simulator
                 Output.WriteLine(tier.DisplayName);
             }
         }
-        #endregion
+
+    public void tickPrice(int tickerId, int field, double price, TickAttrib attribs)
+    {
     }
+
+    public void orderStatus(int orderId, string status, double filled, double remaining, double avgFillPrice, int permId, int parentId, double lastFillPrice, int clientId, string whyHeld, double mktCapPrice)
+    {
+    }
+
+    public void historicalData(int reqId, IBApi.Bar bar)
+    {
+    }
+
+    public void historicalDataUpdate(int reqId, IBApi.Bar bar)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void familyCodes(FamilyCode[] familyCodes)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void symbolSamples(int reqId, ContractDescription[] contractDescriptions)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void mktDepthExchanges(DepthMktDataDescription[] depthMktDataDescriptions)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void tickNews(int tickerId, long timeStamp, string providerCode, string articleId, string headline, string extraData)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void smartComponents(int reqId, Dictionary<int, KeyValuePair<string, char>> theMap)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void tickReqParams(int tickerId, double minTick, string bboExchange, int snapshotPermissions)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void newsProviders(NewsProvider[] newsProviders)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void newsArticle(int requestId, int articleType, string articleText)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void historicalNews(int requestId, string time, string providerCode, string articleId, string headline)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void historicalNewsEnd(int requestId, bool hasMore)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void headTimestamp(int reqId, string headTimestamp)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void histogramData(int reqId, HistogramEntry[] data)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void rerouteMktDataReq(int reqId, int conId, string exchange)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void rerouteMktDepthReq(int reqId, int conId, string exchange)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void marketRule(int marketRuleId, PriceIncrement[] priceIncrements)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void pnl(int reqId, double dailyPnL, double unrealizedPnL, double realizedPnL)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void pnlSingle(int reqId, int pos, double dailyPnL, double unrealizedPnL, double realizedPnL, double value)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void historicalTicks(int reqId, HistoricalTick[] ticks, bool done)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void historicalTicksBidAsk(int reqId, HistoricalTickBidAsk[] ticks, bool done)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void historicalTicksLast(int reqId, HistoricalTickLast[] ticks, bool done)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void tickByTickAllLast(int reqId, int tickType, long time, double price, int size, TickAttrib attribs, string exchange, string specialConditions)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void tickByTickBidAsk(int reqId, long time, double bidPrice, double askPrice, int bidSize, int askSize, TickAttrib attribs)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void tickByTickMidPoint(int reqId, long time, double midPoint)
+    {
+      throw new NotImplementedException();
+    }
+    #endregion
+  }
 }
 
 #pragma warning restore 1591 // CS1591: missing XML comment
