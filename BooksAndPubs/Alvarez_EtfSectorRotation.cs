@@ -34,7 +34,11 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "ETF Sector Rotation";
 
-        private static readonly string[] UNIVERSE =
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    private static readonly string[] UNIVERSE =
         {
             Assets.XLY,
             Assets.XLP,

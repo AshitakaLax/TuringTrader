@@ -14,4 +14,8 @@
     <ProjectReference Include="..\TuringTrader.Simulator\TuringTrader.Simulator.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Algorithm\" />
+  </ItemGroup>
+
 </Project>

@@ -520,31 +520,15 @@ namespace TuringTrader.Simulator
             //===== instantiate data source
             string dataSource = infos[DataSourceParam.dataFeed].ToLower();
 
-#if ENABLE_NORGATE
-            if (dataSource.Contains("norgate"))
-            {
-                return new DataSourceNorgate(infos);
-            }
-            else
-#endif
-#if ENABLE_TIINGO
             if (dataSource.Contains("tiingo"))
             {
                 return new DataSourceTiingo(infos);
             }
             else
-#endif
 #if ENABLE_FRED
             if (dataSource.Contains("fred"))
             {
                 return new DataSourceFred(infos);
-            }
-            else
-#endif
-#if ENABLE_FAKEOPTIONS
-            if (dataSource.Contains("fakeoptions"))
-            {
-                return new DataSourceFakeOptions(infos);
             }
             else
 #endif

@@ -43,7 +43,11 @@ namespace TuringTrader.Simulator
                 private readonly double _yield;
                 private readonly string _symbol;
 
-                public SimConstantYield(List<Bar> data, DateTime startTime, DateTime endTime, double yield)
+        public override string Description => throw new NotImplementedException();
+
+        public override string Author => throw new NotImplementedException();
+
+        public SimConstantYield(List<Bar> data, DateTime startTime, DateTime endTime, double yield)
                 {
                     _data = data;
                     _startTime = startTime;

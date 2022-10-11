@@ -219,7 +219,12 @@ namespace TuringTrader.BooksAndPubs
     public class Keller_DAA_G4 : Keller_DAA_Core
     {
         public override string Name => "Keller's DAA-G4";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "VEA", // Vanguard FTSE Developed Markets ETF
@@ -248,7 +253,12 @@ namespace TuringTrader.BooksAndPubs
     public class Keller_DAA_G6 : Keller_DAA_Core
     {
         public override string Name => "Keller's DAA-G6";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
             {
                     "SPY", // SPDR S&P 500 ETF
                     "VEA", // Vanguard FTSE Developed Markets ETF
@@ -279,7 +289,12 @@ namespace TuringTrader.BooksAndPubs
     public class Keller_DAA_G12 : Keller_DAA_Core
     {
         public override string Name => "Keller's DAA-G12";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             Assets.SPY, // SPDR S&P 500 ETF
             Assets.IWM, // iShares Russell 2000 ETF
@@ -317,7 +332,12 @@ namespace TuringTrader.BooksAndPubs
     public class Keller_DAA1_G4 : Keller_DAA_Core
     {
         public override string Name => "Keller's DAA1-G4";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "VEA", // Vanguard FTSE Developed Markets ETF
@@ -346,7 +366,12 @@ namespace TuringTrader.BooksAndPubs
     public class Keller_DAA1_G12 : Keller_DAA_Core
     {
         public override string Name => "Keller's DAA1-G12";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "IWM", // iShares Russell 2000 ETF
@@ -383,7 +408,12 @@ namespace TuringTrader.BooksAndPubs
     public class Keller_DAA1_U1 : Keller_DAA_Core
     {
         public override string Name => "Keller's DAA1-U1";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
         };
@@ -420,7 +450,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: R4:SPY,VEA,VWO,BND + C2:SHY,IEF
         // Trades: R4:SPY,VEA,VWO,BND + C2:SHY,IEF
         public override string Name => "Keller's DAA-G4: Non-Leveraged Benchmark";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "VEA", // Vanguard FTSE Developed Markets ETF
@@ -453,7 +488,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY,VEA,VWO,BND + C2:SHY,IEF
         // Trades: SSO,EFO,VWO,BND + C2:SHY,UST
         public override string Name => "Keller's DAA-G4: Limited Double Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "VEA", // Vanguard FTSE Developed Markets ETF
@@ -495,7 +535,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY,VEA,VWO,BND + C2:SHY,IEF
         // Trades: SSO,EFO,EET,BND + C2:SHY,UST
         public override string Name => "Keller's DAA-G4: Expanded Double Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "VEA", // Vanguard FTSE Developed Markets ETF
@@ -538,7 +583,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY,VEA,VWO,BND + C2:SHY,IEF
         // Trades: UPRO,DZK,VWO,BND + C2:SHY,TYD
         public override string Name => "Keller's DAA-G4: Limited Triple Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "VEA", // Vanguard FTSE Developed Markets ETF
@@ -580,7 +630,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY,VEA,VWO,BND + C2:SHY,IEF
         // Trades: UPRO,DZK,EDC,BND + C2:SHY,TYD
         public override string Name => "Keller's DAA-G4: Expanded Triple Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "VEA", // Vanguard FTSE Developed Markets ETF
@@ -623,7 +678,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY,QQQ,IWM,VGK,EWJ,VWO,GSG,GLD,VNQ,HYG,TLT,LQD + C2:SHY,IEF
         // Trades:  SPY,QQQ,IWM,VGK,EWJ,VWO,GSG,GLD,VNQ,HYG,TLT,LQD + C2:SHY,IEF
         public override string Name => "Keller's DAA-G12: Non-Leveraged Benchmark";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "QQQ", // Invesco Nasdaq-100 ETF
@@ -662,7 +722,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY,QQQ,IWM,VGK,EWJ,VWO,GSG,GLD,VNQ,HYG,LQD,TLT + C2:SHY,IEF
         // Trades:  SSO,QLD,UWM,VGK,EWJ,VWO,GSG,GLD,URE,HYG,LQD,UBT + C2:SHY,UST
         public override string Name => "Keller's DAA-G12: Limited Double Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "QQQ", // Invesco Nasdaq-100 ETF
@@ -714,7 +779,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY,QQQ,IWM,VGK,EWJ,VWO,GSG,GLD,VNQ,HYG,LQD,TLT + C2:SHY,IEF
         // Trades:  SSO,QLD,UWM,VGK,EWJ,EET,GSG,GLD,URE,HYG,LQD,UBT + C2:SHY,UST
         public override string Name => "Keller's DAA-G12: Expanded Double Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "QQQ", // Invesco Nasdaq-100 ETF
@@ -767,7 +837,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY, QQQ, IWM,VGK,EWJ,VWO,GSG,GLD,VNQ,HYG,LQD,TLT + C2:SHY,IEF
         // Trades:  UPRO,TQQQ,TNA,VGK,EWJ,VWO,GSG,GLD,DRN,HYG,LQD,TMF + C2:SHY,TYD
         public override string Name => "Keller's DAA-G12: Limited Triple Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "QQQ", // Invesco Nasdaq-100 ETF
@@ -819,7 +894,12 @@ namespace TuringTrader.BooksAndPubs
         // Signals: SPY, QQQ, IWM,VGK,EWJ,VWO,GSG,GLD,VNQ,HYG,LQD,TLT + C2:SHY,IEF
         // Trades:  UPRO,TQQQ,TNA,VGK,EWJ,EDC,GSG,GLD,DRN,HYG,LQD,TMF + C2:SHY,TYD
         public override string Name => "Keller's DAA-G12: Expanded Triple Leverage";
-        protected override List<string> RISKY_UNIVERSE => new List<string>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override List<string> RISKY_UNIVERSE => new List<string>
         {
             "SPY", // SPDR S&P 500 ETF
             "QQQ", // Invesco Nasdaq-100 ETF

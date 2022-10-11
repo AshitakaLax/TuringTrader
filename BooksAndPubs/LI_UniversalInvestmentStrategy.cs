@@ -482,7 +482,11 @@ namespace TuringTrader.BooksAndPubs
             "SPY", // VFINX
             "TLT", // VUSTX. LogicalInvest uses HEDGE strategy here
         };
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region 3x Leveraged 'Hell on Fire'
     public class LI_UniversalInvestmentStrategy_3x : LI_UniversalInvestmentStrategy_Core
@@ -495,7 +499,11 @@ namespace TuringTrader.BooksAndPubs
             Assets.SPXL,
             Assets.TMF,
         };
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
 
     #region more

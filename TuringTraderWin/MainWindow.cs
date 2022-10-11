@@ -2,7 +2,7 @@ namespace TuringTraderWin
 {
   public partial class MainWindow : Form
   {
-    private AlgorithmManager AlgorithmManager;
+    private IAlgorithmManager AlgorithmManager;
     public MainWindow()
     {
       InitializeComponent();
@@ -15,7 +15,7 @@ namespace TuringTraderWin
     {
       AlgorithmManager.LoadAlgorithms();
       AlgorithmComboBox.Items.Clear();
-      AlgorithmComboBox.Items.AddRange(AlgorithmManager.AlgorithmInfoList.Select(algo => algo.Name).Cast<object>().ToArray());
+      AlgorithmComboBox.Items.AddRange(AlgorithmManager.AlgorithmList.ToArray());
     }
   }
 }

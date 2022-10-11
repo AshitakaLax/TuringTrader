@@ -61,9 +61,13 @@ namespace TuringTrader.BooksAndPubs
 
         public virtual DateTime START_DATE { get; set; } = DateTime.Parse("01/01/1990", CultureInfo.InvariantCulture);
         public virtual DateTime END_DATE { get; set; } = DateTime.Now.Date;
-        #endregion
-        #region separate portfolios for the four economic phases
-        public class Soto_SectorRotation_Decline : LazyPortfolio
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+    #endregion
+    #region separate portfolios for the four economic phases
+    public class Soto_SectorRotation_Decline : LazyPortfolio
         {
             // Economic output and corporate earnings are negative;
             // Outperformers: Staples.
@@ -73,7 +77,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.XLP, 0.0), // XLP
         };
             public override string BENCH => Indices.SPXTR;
-        }
+
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+    }
         public class Soto_SectorRotation_Recovery : LazyPortfolio
         {
             // Economic output and corporate earnings are recovering;
@@ -85,7 +93,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.XLY, 0.0), // XLY
         };
             public override string BENCH => Indices.SPXTR;
-        }
+
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+    }
         public class Soto_SectorRotation_Early : LazyPortfolio
         {
             // Economic output and corporate earnings are growing;
@@ -98,7 +110,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.XLI, 0.0), // XLI
         };
             public override string BENCH => Indices.SPXTR;
-        }
+
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+    }
         public class Soto_SectorRotation_Late : LazyPortfolio
         {
             // Economic output and corporate earnings are slowing;
@@ -110,7 +126,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.XLV, 0.0), // XLV
         };
             public override string BENCH => Indices.SPXTR;
-        }
+
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+    }
         #endregion
 
         #region core logic

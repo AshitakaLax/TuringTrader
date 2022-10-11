@@ -36,7 +36,6 @@ namespace TuringTrader.Simulator
     /// </summary>
     public abstract class Algorithm : SimulatorCore, IAlgorithm
     {
-        #region public Algorithm()
         /// <summary>
         /// Initialize trading algorithm. Most trading algorithms will
         /// only do very little here; the majority of the initialization
@@ -50,8 +49,6 @@ namespace TuringTrader.Simulator
             foreach (OptimizerParam param in OptimizerParam.GetParams(this))
                 OptimizerParams[param.Name] = param;
         }
-        #endregion
-        #region public Algorithm Clone()
         /// <summary>
         /// Clone algorithm, including all optimizer parameters. The application uses
         /// this method to clone the 'master' instance, and create new algorithm 
@@ -75,7 +72,6 @@ namespace TuringTrader.Simulator
 
             return clonedInstance;
         }
-        #endregion
 
         #region public bool CanRunAsChild
         /// <summary>
@@ -224,13 +220,11 @@ namespace TuringTrader.Simulator
         /// </summary>
         public double FitnessReturn { get => NetAssetValue[0]; }
         #endregion
-        #region public double FitnessRisk
         /// <summary>
         /// Algorithm fitness: risk
         /// </summary>
         public double FitnessRisk { get => NetAssetValueMaxDrawdown; }
-        #endregion
-        #region public double FitnessValue
+
         /// <summary>
         /// Custom fitness value. Algorithms should use this, to report
         /// the fitness of the current algorithm settings to the optimizer.
@@ -241,15 +235,20 @@ namespace TuringTrader.Simulator
             get;
             set;
         }
-        #endregion
 
-        #region public string SubclassedParam
-        /// <summary>
-        /// Field w/ optional additional parameters for subclassed parameters. 
-        /// This field is populated from the data source's nickname used to
-        /// instantiate the algorithm.
-        /// </summary>
-        public string SubclassedParam = null;
+    /// <inheritdoc/>
+    public abstract string Description { get; }
+
+    /// <inheritdoc/>
+    public abstract string Author { get; }
+    
+    #region public string SubclassedParam
+    /// <summary>
+    /// Field w/ optional additional parameters for subclassed parameters. 
+    /// This field is populated from the data source's nickname used to
+    /// instantiate the algorithm.
+    /// </summary>
+    public string SubclassedParam = null;
         #endregion
     }
 }

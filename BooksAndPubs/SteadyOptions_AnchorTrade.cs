@@ -473,7 +473,12 @@ namespace TuringTrader.BooksAndPubs
                 return _incomeHedgeTargetLots;
             }
         }
-        private void MaintainIncomeHedge()
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    private void MaintainIncomeHedge()
         {
             //----- close existing hedge position
             if (_incomeHedgeCurrentLots > 0)

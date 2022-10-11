@@ -208,7 +208,12 @@ namespace TuringTrader.BooksAndPubs
     public class Antonacci_USStocksWithAbsoluteMomentum : Antonacci_DualMomentumInvesting_Core
     {
         public override string Name => "Antonacci's U.S. Stocks w/ Absolute Momentum";
-        protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
             new AssetClass
             {
@@ -226,7 +231,12 @@ namespace TuringTrader.BooksAndPubs
     public class Antonacci_GlobalEquitiesMomentum : Antonacci_DualMomentumInvesting_Core
     {
         public override string Name => "Antonacci's Global Equities Momentum";
-        protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
             new AssetClass
             {
@@ -273,7 +283,12 @@ namespace TuringTrader.BooksAndPubs
     public class Antonacci_GlobalBalancedMomentum : Antonacci_DualMomentumInvesting_Core
     {
         public override string Name => "Antonacci's Global Balanced Momentum";
-        protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
             new AssetClass
             {
@@ -302,7 +317,12 @@ namespace TuringTrader.BooksAndPubs
     public class Antonacci_ParityPortfolioWithAbsoluteMomentum : Antonacci_DualMomentumInvesting_Core
     {
         public override string Name => "Antonacci's Parity Portfolio w/ Absolute Momentum";
-        protected override string BENCHMARK => Indices.PORTF_60_40;
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override string BENCHMARK => Indices.PORTF_60_40;
 
         protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
@@ -353,7 +373,12 @@ namespace TuringTrader.BooksAndPubs
     public class Antonacci_DualMomentumSectorRotation : Antonacci_DualMomentumInvesting_Core
     {
         public override string Name => "Antonacci's Dual Momentum Sector Rotation";
-        protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
             new AssetClass { assets = new HashSet<string> { Assets.XLB,  ABS_MOMENTUM } },
             new AssetClass { assets = new HashSet<string> { Assets.XLC,  ABS_MOMENTUM } },
@@ -382,7 +407,12 @@ namespace TuringTrader.BooksAndPubs
     public class Antonacci_4PairsDualMomentum : Antonacci_DualMomentumInvesting_Core
     {
         public override string Name => "Antonacci's Dual Momentum w/ 4 Pairs";
-        protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
             //--- equity
             new AssetClass {
@@ -431,8 +461,12 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Engineered Portfolio's Accelerating Dual Momentum";
 
-        //protected override DateTime START_TIME => DateTime.Parse("01/01/1990");
-        protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    //protected override DateTime START_TIME => DateTime.Parse("01/01/1990");
+    protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
             new AssetClass
             {

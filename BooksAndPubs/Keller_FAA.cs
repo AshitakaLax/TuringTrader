@@ -381,7 +381,11 @@ namespace TuringTrader.BooksAndPubs
         }
         public override HashSet<Tuple<object, double>> ALLOCATION => _allocation;
         public override string BENCH => Indices.PORTF_60_40;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
 
     #region FAA Example 1: Relative momentum (factor R)
@@ -393,7 +397,11 @@ namespace TuringTrader.BooksAndPubs
         public override int N { get; set; } = 3;
         public override int LOOKBACK_R { get; set; } = 84;
         public override int RMIN => -999; // defeat absolute momentum
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region FAA Example 2: Absolute momentum (factor A)
     public class Keller_FAA_Example2_RA : Keller_FAA_Core
@@ -402,7 +410,11 @@ namespace TuringTrader.BooksAndPubs
         protected override string U_SAFE => Keller_FAA_U7.SafeInstrument;
         public override int N { get; set; } = 3;
         public override int LOOKBACK_R { get; set; } = 84;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region FAA Example 3: Generalized momentum with factors R, A and V
     public class Keller_FAA_Example3_RAV : Keller_FAA_Core
@@ -413,7 +425,11 @@ namespace TuringTrader.BooksAndPubs
         public override int LOOKBACK_R { get; set; } = 84;
         public override int LOOKBACK_V { get; set; } = 84;
         public override int WV { get; set; } = 50;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region FAA Example 4: Correlations
     public class Keller_FAA_Example4_RAVC : Keller_FAA_Core
@@ -426,7 +442,11 @@ namespace TuringTrader.BooksAndPubs
         public override int LOOKBACK_C { get; set; } = 84;
         public override int WV { get; set; } = 50;
         public override int WC { get; set; } = 50;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region FAA Example: Logarithmic loss function
     public class Keller_FAA_Example_LogLoss : Keller_FAA_Core
@@ -441,7 +461,11 @@ namespace TuringTrader.BooksAndPubs
         public override int WV { get; set; } = 50;
         public override int WC { get; set; } = 50;
 
-        protected override Dictionary<Instrument, double> LossFunction(Dictionary<Instrument, indicatorValues> indicators)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override Dictionary<Instrument, double> LossFunction(Dictionary<Instrument, indicatorValues> indicators)
         {
             var rmax = indicators.Max(kv => kv.Value.r);
             var vmin = indicators.Min(kv => kv.Value.v);
@@ -473,7 +497,11 @@ namespace TuringTrader.BooksAndPubs
         public override int LOOKBACK_C { get; set; } = 84;
         public override int WV { get; set; } = 80;
         public override int WC { get; set; } = 60;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
 }
 

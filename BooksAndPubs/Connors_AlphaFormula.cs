@@ -55,7 +55,11 @@ namespace TuringTrader.BooksAndPubs
 
         public virtual string BENCHMARK => Indices.PORTF_60_40;
 
-        public virtual double MOMENTUM(Instrument i) =>
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    public virtual double MOMENTUM(Instrument i) =>
             ((i.Close[0] - i.Close[21]) / i.Close[21]
             + (i.Close[0] - i.Close[63]) / i.Close[63]
             + (i.Close[0] - i.Close[126]) / i.Close[126]
@@ -180,9 +184,13 @@ namespace TuringTrader.BooksAndPubs
         public virtual string IDLE_CASH => "splice:SHY,VFIRX";
         public virtual string BENCHMARK => "SPY";
         public virtual string SPX => "$SPX";
-        #endregion
-        #region ctor
-        public Connors_AlphaFormula_WeeklyMeanReversion()
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+    #endregion
+    #region ctor
+    public Connors_AlphaFormula_WeeklyMeanReversion()
         {
             _plotter = new Plotter(this);
         }
@@ -371,9 +379,13 @@ namespace TuringTrader.BooksAndPubs
             84,  // 4 months
             105, // 5 months
         };
-        #endregion
-        #region public override void Run()
-        public override IEnumerable<Bar> Run(DateTime? startTime, DateTime? endTime)
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+    #endregion
+    #region public override void Run()
+    public override IEnumerable<Bar> Run(DateTime? startTime, DateTime? endTime)
         {
             //========== initialization ==========
 
@@ -522,9 +534,13 @@ namespace TuringTrader.BooksAndPubs
         };
         public virtual string IDLE_CASH => "SHY"; // 1-3yr Treasuries
         public virtual string BENCHMARK => "SH"; // S&P 500 Short
-        #endregion
-        #region ctor
-        public Connors_AlphaFormula_EtfAvalanches()
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+    #endregion
+    #region ctor
+    public Connors_AlphaFormula_EtfAvalanches()
         {
             _plotter = new Plotter(this);
         }
@@ -692,11 +708,15 @@ namespace TuringTrader.BooksAndPubs
 
         public override string BENCH => Indices.PORTF_60_40;
 
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
 #if USE_BOOK_RANGE
         public override DateTime START_TIME => DateTime.Parse("01/01/2007", CultureInfo.InvariantCulture);
         public override DateTime END_TIME => DateTime.Parse("12/31/2018", CultureInfo.InvariantCulture);
 #endif
-    }
+  }
     #endregion
     #region public class Connors_AlphaFormula_LeveragedPortfolio
     public class Connors_AlphaFormula_LeveragedPortfolio : LazyPortfolio
@@ -711,11 +731,15 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Indices.PORTF_60_40;
 
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
 #if USE_BOOK_RANGE
         public override DateTime START_TIME => DateTime.Parse("01/01/2007", CultureInfo.InvariantCulture);
         public override DateTime END_TIME => DateTime.Parse("12/31/2018", CultureInfo.InvariantCulture);
 #endif
-    }
+  }
     #endregion
 }
 

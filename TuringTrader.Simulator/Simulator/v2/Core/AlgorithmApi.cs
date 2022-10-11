@@ -111,7 +111,10 @@ namespace TuringTrader.Simulator.v2
         public virtual double FitnessReturn => 0.0;
         public virtual double FitnessRisk => 0.0;
         public virtual double FitnessValue => 0.0;
-    }
+
+    public abstract string Description { get; }
+    public abstract string Author { get; }
+  }
 }
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

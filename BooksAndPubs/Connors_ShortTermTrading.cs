@@ -142,7 +142,11 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(0, 20, 1)]
         public virtual int ENTRY_MAX_RSI { get; set; } = 5;
 
-        protected override int Rules(Instrument market)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override int Rules(Instrument market)
         {
             //----- calculate indicators
 
@@ -189,7 +193,11 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int EXIT_MIN_RSI { get; set; } = 65;
 
-        protected override int Rules(Instrument market)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override int Rules(Instrument market)
         {
             //----- calculate indicators
 
@@ -231,7 +239,11 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(5, 10, 1)]
         public virtual int DOUBLE_DAYS { get; set; } = 7;
 
-        protected override int Rules(Instrument market)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override int Rules(Instrument market)
         {
             var marketSma200 = market.Close.SMA(200);
             var marketHi7 = market.TypicalPrice().Highest(DOUBLE_DAYS);
@@ -278,7 +290,11 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int LX_MIN_MKT_RSI { get; set; } = 65;
 
-        protected override int Rules(Instrument market)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override int Rules(Instrument market)
         {
             Instrument volatility = FindInstrument(VOLATILITY);
 
@@ -326,7 +342,11 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int LX_MIN_MKT_RSI { get; set; } = 65;
 
-        protected override int Rules(Instrument market)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override int Rules(Instrument market)
         {
             Instrument volatility = FindInstrument(VOLATILITY);
 
@@ -425,7 +445,11 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int LX_MIN_MKT_RSI { get; set; } = 65;
 
-        protected override int Rules(Instrument market)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override int Rules(Instrument market)
         {
             //----- calculate indicators
 
@@ -461,7 +485,11 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(2, 7, 1)]
         public virtual int LE5_MIN_MKT_UP { get; set; } = 4;
 
-        protected override int Rules(Instrument market)
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override int Rules(Instrument market)
         {
             //----- calculate indicators
 

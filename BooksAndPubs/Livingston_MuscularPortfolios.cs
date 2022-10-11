@@ -254,14 +254,23 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>("splice:AGG,BND", 0.50),
         };
         public override string BENCH => Indices.PORTF_60_40;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region Mama Bear
     // https://muscularportfolios.com/mama-bear/
     public class Livingston_MuscularPortfolios_MamaBear : Livingston_MuscularPortfolios
     {
         public override string Name => "Livingston's Mama Bear";
-        protected override HashSet<string> ETF_MENU => new HashSet<string>()
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override HashSet<string> ETF_MENU => new HashSet<string>()
         {
 #if true
             // proxies as suggest by Brian Livingston
@@ -315,7 +324,12 @@ namespace TuringTrader.BooksAndPubs
     public class Livingston_MuscularPortfolios_PapaBear : Livingston_MuscularPortfolios
     {
         public override string Name => "Livingston's Papa Bear";
-        protected override HashSet<string> ETF_MENU => new HashSet<string>()
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override HashSet<string> ETF_MENU => new HashSet<string>()
         {
             // proxies as suggest by Brian Livingston
             // reaching back to December 2006

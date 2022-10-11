@@ -141,7 +141,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.BIL, 1e-10),
         };
         public override string BENCH => Assets.SPY;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region 60/40 benchmark
     public class Benchmark_60_40 : LazyPortfolio
@@ -153,7 +157,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.AGG, 0.40),
         };
         public override string BENCH => Indices.SPXTR;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region Tony Robbins' All-Seasons Portfolio
     public class Robbins_AllSeasonsPortfolio : LazyPortfolio
@@ -169,8 +177,12 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.DBC,        0.075), // 7.5% Commodities
         };
         public override string BENCH => Indices.PORTF_60_40;
-        //public override DateTime START_TIME => DateTime.Parse("01/01/1900", CultureInfo.InvariantCulture);
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+    //public override DateTime START_TIME => DateTime.Parse("01/01/1900", CultureInfo.InvariantCulture);
+  }
 #if false
     public class Robbins_AllSeasonsPortfolio_2x : LazyPortfolio
     {
@@ -221,7 +233,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>(Assets.GLD,               0.25),  // 25% Gold
         };
         public override string BENCH => Indices.PORTF_60_40;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
 #if false
     // NOTE: 3x Gold not available after summer 2020
     public class Browne_PermanentPortfolio_2x : LazyPortfolio

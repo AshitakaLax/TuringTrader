@@ -275,14 +275,24 @@ namespace TuringTrader.BooksAndPubs
     public class Keller_CAA_N8_TV5 : Keller_CAA_N8
     {
         public override string Name => "Keller's CAA-N=8-TV=5%";
-        protected override double TVOL => 0.05;
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override double TVOL => 0.05;
     }
     #endregion
     #region N=8, TV=10%
     public class Keller_CAA_N8_TV10 : Keller_CAA_N8
     {
         public override string Name => "Keller's CAA-N=8-TV=10%";
-        protected override double TVOL => 0.10;
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    protected override double TVOL => 0.10;
     }
     #endregion
 }

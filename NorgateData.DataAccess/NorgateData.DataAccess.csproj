@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<RootNamespace>NorgateData.DataAccess</RootNamespace>
 		<AssemblyName>norgate.data.dotnet</AssemblyName>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 
 		<OutputType>Library</OutputType>
 		<Platforms>x64</Platforms>

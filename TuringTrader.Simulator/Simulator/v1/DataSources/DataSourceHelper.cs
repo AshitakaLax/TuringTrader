@@ -38,7 +38,11 @@ namespace TuringTrader.Simulator
             private List<Bar> _alignedBars;
             private static readonly string SPX = "$SPX";
 
-            public _alignWithMarket(DateTime startTime, DateTime endTime, List<Bar> rawBars, List<Bar> alignedBars)
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+
+      public _alignWithMarket(DateTime startTime, DateTime endTime, List<Bar> rawBars, List<Bar> alignedBars)
             {
                 _rawBars = rawBars;
                 _alignedBars = alignedBars;

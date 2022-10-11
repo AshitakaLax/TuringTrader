@@ -132,9 +132,9 @@ namespace TuringTrader.Simulator
             && info.ContainsKey(DataSourceParam.symbolStooq))
                 return new DataUpdaterStooq(simulator, info);
 
-            if (dataUpdater.Contains("fred")
-            && info.ContainsKey(DataSourceParam.symbolFred))
-                return new DataUpdaterFred(simulator, info);
+            //if (dataUpdater.Contains("fred")
+            //&& info.ContainsKey(DataSourceParam.symbolFred))
+            //    return new DataUpdaterFred(simulator, info);
 
             return null;
         }

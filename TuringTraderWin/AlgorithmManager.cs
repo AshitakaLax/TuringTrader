@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using AshitakalaxAlgos;
 using TuringTrader.Simulator;
 
 namespace TuringTraderWin
@@ -12,17 +6,26 @@ namespace TuringTraderWin
   /// <summary>
   /// This handles the loading of all the different Algorithms
   /// </summary>
-  public class AlgorithmManager
+  public class AlgorithmManager: IAlgorithmManager
   {
+    /// <summary>
+    /// Creates the Algorthim Manager.
+    /// </summary>
     public AlgorithmManager()
     {
 
     }
 
-    public List<AlgorithmInfo> AlgorithmInfoList { get; set; } = new List<AlgorithmInfo>();
+    /// <summary>
+    /// Gets or sets the algorithms available to run.
+    /// </summary>
+    public List<IAlgorithm> AlgorithmList { get; set; } = new List<IAlgorithm>();
+
+    /// <inheritdoc />
     public void LoadAlgorithms()
     {
-      AlgorithmInfoList = TuringTrader.Simulator.AlgorithmLoader.GetAllAlgorithms();
+      //We can enhance this, but the idea is to have a simple creation of the algo's.
+      AlgorithmList.Add(new SimpleSMA());
     }
   }
 }

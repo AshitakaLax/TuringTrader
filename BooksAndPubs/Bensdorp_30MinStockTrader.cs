@@ -53,9 +53,13 @@ namespace TuringTrader.BooksAndPubs
 
         [OptimizerParam(1, 10, 1)]
         public virtual int MAX_ENTRIES { get; set; } = 10;
-        #endregion
-        #region internal data
-        private static readonly string BENCHMARK = Indices.SPXTR;
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+    #endregion
+    #region internal data
+    private static readonly string BENCHMARK = Indices.SPXTR;
         private static readonly string SPX = Assets.SPY;
         #endregion
 
@@ -521,7 +525,11 @@ namespace TuringTrader.BooksAndPubs
         public override int MAX_RISK { get; set; } = 20;  // 20%
         public override int MAX_ENTRIES { get; set; } = 10;  // 10
         public override int MAX_HOLD_DAYS { get; set; } = 4;   // 4 days
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
 
     public class Bensdorp_30MinStockTrader_MRS : Bensdorp_30MinStockTrader_MRx
     {
@@ -536,7 +544,11 @@ namespace TuringTrader.BooksAndPubs
         public override int MAX_RISK { get; set; } = 20;  // 20%
         public override int MAX_ENTRIES { get; set; } = 10;  // 10
         public override int MAX_HOLD_DAYS { get; set; } = 2;   // 2 days
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
 
     #region Combo: WR + MRS
@@ -553,7 +565,11 @@ namespace TuringTrader.BooksAndPubs
 
         public override DateTime START_TIME => Globals.START_TIME;
         public override DateTime END_TIME => Globals.END_TIME;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region Combo: MRL + MRS
     public class Bensdorp_30MinStockTrader_MRL_MRS_Combo : LazyPortfolio
@@ -569,7 +585,11 @@ namespace TuringTrader.BooksAndPubs
 
         public override DateTime START_TIME => Globals.START_TIME;
         public override DateTime END_TIME => Globals.END_TIME;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
 }
 

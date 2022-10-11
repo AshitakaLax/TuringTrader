@@ -348,7 +348,11 @@ namespace TuringTrader.BooksAndPubs
             Tuple.Create(Assets.IEF, 0.25),
             Tuple.Create(Assets.SHY, 0.25),
         };
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
 
     #region constructed World ETF (named WRLD)
@@ -363,7 +367,11 @@ namespace TuringTrader.BooksAndPubs
             new Tuple<object, double>("VWO", 1.0 / 6.0),
         };
         public override string BENCH => Indices.PORTF_60_40;
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
     #region LAA-G4, see Fig. 16: WRLD+IWD+GLD+IEF (25% each), switched to IWD+GLD+SHY+IEF(25% each) using GT timing
     public class Keller_LAA_G4 : Keller_LAA_Core
@@ -383,7 +391,11 @@ namespace TuringTrader.BooksAndPubs
             Tuple.Create("SHY", 0.25),
             Tuple.Create("IEF", 0.25),
         };
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
     #endregion
 }
 

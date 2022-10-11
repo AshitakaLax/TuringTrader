@@ -159,21 +159,33 @@ namespace TuringTrader.BooksAndPubs
             public override string ASSET_A { get; set; } = Assets.SHY;
             public override string ASSET_B { get; set; } = Assets.BIL;
             public override string BENCH { get; set; } = Assets.SHY;
-        }
+
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+    }
         public class TradePair_IEF_TIP : TradePair
         {
             public override string Name => base.Name + " (IEF/TIP)";
             public override string ASSET_A { get; set; } = Assets.IEF;
             public override string ASSET_B { get; set; } = Assets.TIP;
             public override string BENCH { get; set; } = Assets.IEF;
-        }
+
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+    }
         public class TradePair_HYG_TLT : TradePair
         {
             public override string Name => base.Name + " (HYG/TLT)";
             public override string ASSET_A { get; set; } = Assets.HYG;
             public override string ASSET_B { get; set; } = Assets.TLT;
             public override string BENCH { get; set; } = Assets.TLT;
-        }
+
+      public override string Description => throw new NotImplementedException();
+
+      public override string Author => throw new NotImplementedException();
+    }
         #endregion
 
         public override HashSet<Tuple<object, double>> ALLOCATION => new HashSet<Tuple<object, double>>
@@ -185,7 +197,11 @@ namespace TuringTrader.BooksAndPubs
 
         public override string BENCH => Assets.AGG;
         public override DateTime START_TIME => DateTime.Parse("01/01/1965");
-    }
+
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+  }
 
 #if true
     public class TradingMarkets_Quantamentals_AllMarketFixedIncome_SHY_BIL : TradingMarkets_Quantamentals_AllMarketFixedIncome.TradePair_SHY_BIL { }

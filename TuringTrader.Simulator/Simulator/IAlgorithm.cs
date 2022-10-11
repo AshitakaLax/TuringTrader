@@ -21,33 +21,39 @@
 //              https://www.gnu.org/licenses/agpl-3.0.
 //==============================================================================
 
-#region libraries
-using System;
 using System.Collections.Generic;
-using System.Text;
-#endregion
 
 namespace TuringTrader.Simulator
 {
-    /// <summary>
-    /// Application interface to trading algorithms.
-    /// </summary>
-    public interface IAlgorithm
+  /// <summary>
+  /// Application interface to trading algorithms.
+  /// </summary>
+  public interface IAlgorithm
     {
-        /// <summary>
-        /// Return class type name. This method will return the name of the
-        /// derived class, typically a proprietary algorithm derived from
-        /// Algorithm.
-        /// </summary>
-        public string Name { get; }
+    /// <summary>
+    /// Return class type name. This method will return the name of the
+    /// derived class, typically a proprietary algorithm derived from
+    /// Algorithm.
+    /// </summary>
+    public string Name { get; }
 
-        /// <summary>
-        /// Clone algorithm, including all optimizer parameters. The application uses
-        /// this method to clone the 'master' instance, and create new algorithm 
-        /// instances before running them.
-        /// </summary>
-        /// <returns>new algorithm instance</returns>
-        public IAlgorithm Clone();
+    /// <summary>
+    /// Gets a description of the algorithm.
+    /// </summary>
+    public string Description { get; }
+
+    /// <summary>
+    /// Gets author or source of the algorithm.
+    /// </summary>
+    public string Author { get; }
+
+    /// <summary>
+    /// Clone algorithm, including all optimizer parameters. The application uses
+    /// this method to clone the 'master' instance, and create new algorithm 
+    /// instances before running them.
+    /// </summary>
+    /// <returns>new algorithm instance</returns>
+    public IAlgorithm Clone();
 
         /// <summary>
         /// Entry point for trading algorithm. This method is called only once 

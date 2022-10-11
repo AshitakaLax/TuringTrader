@@ -63,8 +63,12 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Parking Trade";
 
-        #region inputs
-        private readonly double INITIAL_CASH = 1e6;
+    public override string Description => throw new NotImplementedException();
+
+    public override string Author => throw new NotImplementedException();
+
+    #region inputs
+    private readonly double INITIAL_CASH = 1e6;
         private readonly double COMMISSION = 0.01;
 #if FAKE_DATA
         private readonly string UNDERLYING_NICK = "$SPX";

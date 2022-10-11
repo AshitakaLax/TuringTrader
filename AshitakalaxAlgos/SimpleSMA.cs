@@ -19,6 +19,10 @@ namespace AshitakalaxAlgos
     #region optimizable parameters
 //    [OptimizerParam(0, 100, 5)]
     public int STOCK_PCNT = 60;
+
+    public override string Description => "A simple Moving Average";
+
+    public override string Author => "Levi Balling";
     #endregion
     public override void Run()
     {

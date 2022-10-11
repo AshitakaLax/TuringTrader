@@ -39,7 +39,11 @@ namespace TuringTrader.BooksAndPubs
 
         private Plotter _plotter = null;
 
-        public Comparison()
+    public override string Description => throw new System.NotImplementedException();
+
+    public override string Author => throw new System.NotImplementedException();
+
+    public Comparison()
         {
             _plotter = new Plotter(this);
         }
