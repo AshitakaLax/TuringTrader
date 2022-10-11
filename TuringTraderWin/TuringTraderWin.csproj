@@ -8,4 +8,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AshitakalaxAlgos\AshitakalaxAlgos.csproj" />
+    <ProjectReference Include="..\BooksAndPubs\BooksAndPubs.csproj" />
+    <ProjectReference Include="..\TuringTrader.Simulator\TuringTrader.Simulator.csproj" />
+  </ItemGroup>
+
 </Project>
