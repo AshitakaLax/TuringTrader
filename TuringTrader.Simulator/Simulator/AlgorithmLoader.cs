@@ -100,19 +100,12 @@ namespace TuringTrader.Simulator
                 yield break;
             }
 
-#if true
             // .net core 3
             object[] descrAttributes = assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
             string title = descrAttributes.Count() > 0
                 ? (descrAttributes[0] as AssemblyDescriptionAttribute).Description
                 : "n/a";
-#else
-            // .net framework
-            object[] titleAttributes = assembly.GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-            string title = titleAttributes.Count() > 0
-                ? (titleAttributes[0] as AssemblyTitleAttribute).Title
-                : "n/a";
-#endif
+
 
             foreach (Type type in types)
             {
@@ -225,16 +218,8 @@ namespace TuringTrader.Simulator
 
         private static IEnumerable<AlgorithmInfo> _enumStaticAlgorithms()
         {
-#if false
-            string exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            foreach (var algorithm in _enumDllAlgorithms(exePath))
-                yield return algorithm;
-#endif
-
-#if true
             foreach (var algorithm in _enumDllAlgorithms(GlobalSettings.AlgorithmPath))
                 yield return algorithm;
-#endif
 
             foreach (var algorithm in _enumSourceAlgorithms(GlobalSettings.AlgorithmPath, new List<string>()))
                 yield return algorithm;

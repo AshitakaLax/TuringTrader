@@ -262,3 +262,6 @@ Data/Data/$VIX/
 TuringTrader.Simulator/TuringTrader.Simulator.xml
 DocFX/_exported_templates/
 Algorithms/BooksAndPubs.dll
+/Algorithms/AshitakalaxAlgos.dll
+/Algorithms/AshitakalaxAlgos.deps.json
+/Algorithms/Algorithms/BooksAndPubs.dll
