@@ -45,7 +45,11 @@ namespace TuringTrader.Simulator.v2.Demo
     {
         public override string Name => "A02_Calendar";
 
-        public override void Run()
+    public override string Description => "The Example of Calendar.";
+
+    public override string Author => "";
+
+    public override void Run()
         {
             StartDate = DateTime.Parse("01/01/2021", CultureInfo.InvariantCulture);
             EndDate = DateTime.Parse("05/01/2021", CultureInfo.InvariantCulture);

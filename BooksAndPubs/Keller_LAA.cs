@@ -349,9 +349,9 @@ namespace TuringTrader.BooksAndPubs
             Tuple.Create(Assets.SHY, 0.25),
         };
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 
@@ -368,9 +368,9 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Indices.PORTF_60_40;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
     #region LAA-G4, see Fig. 16: WRLD+IWD+GLD+IEF (25% each), switched to IWD+GLD+SHY+IEF(25% each) using GT timing
@@ -392,9 +392,9 @@ namespace TuringTrader.BooksAndPubs
             Tuple.Create("IEF", 0.25),
         };
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 }

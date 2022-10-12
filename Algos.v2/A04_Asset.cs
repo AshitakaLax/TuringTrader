@@ -41,7 +41,11 @@ namespace TuringTrader.Simulator.v2.Demo
     {
         public override string Name => "A03_Quotes";
 
-        public override async void Run()
+    public override string Description => "";
+
+    public override string Author => "";
+
+    public override async void Run()
         {
             StartDate = DateTime.Parse("01/01/2021", CultureInfo.InvariantCulture);
             EndDate = DateTime.Parse("05/01/2021", CultureInfo.InvariantCulture);

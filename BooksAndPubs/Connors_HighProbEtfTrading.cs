@@ -136,9 +136,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Connors' 3-Day High/Low";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     private Dictionary<Instrument, double> _entryPrices = new Dictionary<Instrument, double>();
         private Dictionary<Instrument, int> _numPositions = new Dictionary<Instrument, int>();
@@ -201,9 +201,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Connors' RSI 25 & RSI 75";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     [OptimizerParam(10, 30, 5)]
         public int ENTRY_MAX_RSI_LONG = 25;
@@ -269,9 +269,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Connors' R3";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     [OptimizerParam(50, 70, 5)]
         public int ENTRY_MAX_RSI_2_LONG = 60;
@@ -349,9 +349,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Connors' %b";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     [OptimizerParam(10, 30, 5)]
         public int ENTRY_MAX_BB_LONG = 20;
@@ -419,9 +419,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Connors' MDU and MDD";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     [OptimizerParam(3, 6, 1)]
         public int ENTRY_MIN_UP_DN = 4;
@@ -486,9 +486,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Connors' RSI 10/6 & RSI 90/94";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     [OptimizerParam(5, 10, 1)]
         public int ENTRY_MAX_RSI_LONG = 10;
@@ -561,9 +561,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(60, 80, 5)]
         public virtual int EXIT_MIN_RSI_LONG { get; set; } = 70;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     private Dictionary<Instrument, double> _entryPrices = new Dictionary<Instrument, double>();
         private Dictionary<Instrument, int> _numPositions = new Dictionary<Instrument, int>();

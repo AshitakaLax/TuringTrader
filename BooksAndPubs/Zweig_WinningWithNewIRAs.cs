@@ -347,54 +347,54 @@ namespace TuringTrader.BooksAndPubs
         public override string Name => base.Name + " (AGG)";
         public override object ASSET { get; set; } = Assets.AGG;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Zweig_Bond_Model_LQD : Zweig_BondModel
     {
         public override string Name => base.Name + " (LQD)";
         public override object ASSET { get; set; } = Assets.LQD;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Zweig_Bond_Model_JNK : Zweig_BondModel
     {
         public override string Name => base.Name + " (JNK)";
         public override object ASSET { get; set; } = Assets.JNK;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Zweig_Bond_Model_TLT : Zweig_BondModel
     {
         public override string Name => base.Name + " (TLT)";
         public override object ASSET { get; set; } = Assets.TLT;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Zweig_Bond_Model_IEF : Zweig_BondModel
     {
         public override string Name => base.Name + " (IEF)";
         public override object ASSET { get; set; } = Assets.IEF;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Zweig_Bond_Model_SHY : Zweig_BondModel
     {
         public override string Name => base.Name + " (SHY)";
         public override object ASSET { get; set; } = Assets.SHY;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 }

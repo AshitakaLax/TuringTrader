@@ -41,22 +41,10 @@ namespace TuringTrader.Simulator
     /// </summary>
     public abstract class SimulatorCore
     {
-        #region internal data
         private readonly Dictionary<string, Instrument> _instruments = new Dictionary<string, Instrument>();
         private readonly List<DataSource> _dataSources = new List<DataSource>();
-        #endregion
-        #region internal helpers
-        // IDE1006: Naming rule violation: Prefix '_' is not expected
-#pragma warning disable IDE1006
         private void _execOrder(Order ticket)
         {
-#if PRINT_ORDERS
-            if (ticket.Type != OrderType.cash)
-                Output.WriteLine("{0:MM/dd/yyyy}, {1}: {2} {3}x {4}", 
-                    SimTime[0], Name,
-                    ticket.Quantity > 0 ? "Buy" : "Sell", ticket.Quantity, ticket.Instrument.Symbol);
-#endif
-
             if (ticket.Type == OrderType.cash)
             {
                 // to make things similar to stocks, a positive quantity
@@ -171,11 +159,6 @@ namespace TuringTrader.Simulator
                     throw new Exception("SimulatorCore.ExecOrder: unknown order type");
             }
 
-#if false
-            if (execBar.Time != execTime)
-                Output.WriteLine("WARNING: {0}: bar time mismatch. expected {1:MM/dd/yyyy}, found {2:MM/dd/yyyy}", 
-                    instrument.Symbol, execTime, execBar.Time);
-#endif
 
             // run fill model. default fill is theoretical price
             var fillPrice = ticket.Type == OrderType.cash
@@ -232,10 +215,7 @@ namespace TuringTrader.Simulator
             //ticket.Instrument = null; // the instrument holds the data source... which consumes lots of memory
             Log.Add(log);
         }
-#pragma warning restore IDE1006
 
-        // IDE1006: Naming rule violation: Prefix '_' is not expected
-#pragma warning disable IDE1006
         private void _expireOption(Instrument instrument)
         {
             Instrument underlying = _instruments[instrument.OptionUnderlying];
@@ -259,10 +239,6 @@ namespace TuringTrader.Simulator
 
             _instruments.Remove(instrument.Symbol);
         }
-#pragma warning restore IDE1006
-
-        // IDE1006: Naming rule violation: Prefix '_' is not expected
-#pragma warning disable IDE1006
         private void _delistInstrument(Instrument instrument)
         {
             if (instrument.Position != 0)
@@ -282,23 +258,16 @@ namespace TuringTrader.Simulator
 
             _instruments.Remove(instrument.Symbol);
         }
-#pragma warning restore IDE1006
 
         private bool _navInvalidFirst = true;
 
-        // IDE1006: Naming rule violation: Prefix '_' is not expected
-#pragma warning disable IDE1006
         /// <summary>
         /// calculate algorithm's net asset value.
         /// </summary>
         /// <returns>nav</returns>
         protected virtual double _calcNetAssetValue()
         {
-#if true
             var debugNavCalc = false;
-#else
-            var debugNavCalc = (EndTime - SimTime[0]).TotalDays < 5;
-#endif
             var debugNavCalcMsg = debugNavCalc ? string.Format("{0:MM/dd/yyyy}: cash=${1:C2}", SimTime[0], Cash) : "";
 
             double nav = Cash;
@@ -352,10 +321,7 @@ namespace TuringTrader.Simulator
                 ? nav
                 : NetAssetValue[0]; // yesterday's value
         }
-#pragma warning restore IDE1006
-        #endregion
 
-        #region protected SimulatorCore()
         /// <summary>
         /// Initialize simulator engine. Only very little is happening here,
         /// most of the engine initialization is performed in SimTimes, to
@@ -372,8 +338,7 @@ namespace TuringTrader.Simulator
                 Value = 0.0
             };
         }
-        #endregion
-        #region public string Name
+
         private string _Name = null;
         /// <summary>
         /// Return class type name. This method will return the name of the
@@ -391,9 +356,7 @@ namespace TuringTrader.Simulator
             { _Name = value; 
             } 
         }
-        #endregion
 
-        #region protected DateTime StartTime
         /// <summary>
         /// Time stamp representing the first bar, on which
         /// the simulator will perform trades. Most often, this is
@@ -401,8 +364,7 @@ namespace TuringTrader.Simulator
         /// unless WarmupStartTime is set to an earlier time.
         /// </summary>
         protected DateTime StartTime;
-        #endregion
-        #region protected DateTime? WarmupStartTime
+
         /// <summary>
         /// Optional value, specifying a time stamp earlier than StartTime,
         /// representing the first bar processed by the simulator. Setting
@@ -410,25 +372,21 @@ namespace TuringTrader.Simulator
         /// prior to starting trading activity.
         /// </summary>
         protected DateTime? WarmupStartTime = null;
-        #endregion
-        #region protected DateTime EndTime
+
         /// <summary>
         /// Time stamp, representing the last bar processed by the simulator.
         /// For simulations reaching into live trading, this should be set
         /// to a future time.
         /// </summary>
         protected DateTime EndTime;
-        #endregion
-        #region public int TradingDays
+
         /// <summary>
         /// Number of trading days processed. The first trading day is
         /// considered the bar, on which the very first trade is executed.
         /// This may or may not be the first trade submitted.
         /// </summary>
         public int TradingDays;
-        #endregion
 
-        #region protected IEnumerable<DateTime> SimTimes
         /// <summary>
         /// Enumerable of available simulation time stamps. An algorithm
         /// processes bars by iterating through these time stamps using
@@ -454,14 +412,6 @@ namespace TuringTrader.Simulator
                         .GetEnumerator();
                     hasData[source] = enumData[source].MoveNext();
                 }
-
-#if false
-                Output.WriteLine("Data source summary:");
-                foreach (var ds in _dataSources)
-                {
-                    Output.WriteLine("    {0}: {1:MM/dd/yyyy} - {2:MM/dd/yyyy}", ds.Info[DataSourceParam.name], ds.FirstTime, ds.LastTime);
-                }
-#endif
 
                 // reset trade log
                 Log.Clear();
@@ -621,15 +571,13 @@ namespace TuringTrader.Simulator
                 yield break;
             }
         }
-        #endregion
-        #region public TimeSeries<DateTime> SimTime
+
         /// <summary>
         /// Time series of simulation time stamps with the most recent/ current
         /// time stamp at index 0.
         /// </summary>
         public TimeSeries<DateTime> SimTime = new TimeSeries<DateTime>();
-        #endregion
-        #region public DateTime NextSimTime
+
         /// <summary>
         /// Next simulator time stamp
         /// </summary>
@@ -638,17 +586,14 @@ namespace TuringTrader.Simulator
             get;
             private set;
         }
-        #endregion
-        #region public bool IsLastBar
+
         /// <summary>
         /// Flag, indicating the last bar processed by the simulator. Algorithms
         /// may use this to implement special handling of this last bar, e.g.
         /// setting up live trades.
         /// </summary>
         public bool IsLastBar = false;
-        #endregion
 
-        #region protected DataSource AddDataSource(...)
         /// <summary>
         /// Create new data source and attach it to the simulator. If the 
         /// simulator already has a data source with the given nickname
@@ -729,8 +674,7 @@ namespace TuringTrader.Simulator
 
             throw new Exception("AddDataSource: invalid type for parameter 'obj'");
         }
-        #endregion
-        #region protected IEnumerable<DataSource> AddDataSources(IEnumerable<string> nicknames)
+
         /// <summary>
         /// Add multiple data sources at once and return an enumeration
         /// of data sources. If the simulator already has data sources
@@ -748,9 +692,7 @@ namespace TuringTrader.Simulator
 
             return retval;
         }
-        #endregion
 
-        #region public IEnumerable<Instrument> Instruments
         /// <summary>
         /// Enumeration of instruments available to the simulator. It is
         /// important to understand that instruments are created dynamically
@@ -764,8 +706,7 @@ namespace TuringTrader.Simulator
                 return _instruments.Values;
             }
         }
-        #endregion
-        #region protected bool HasInstrument(...)
+
         /// <summary>
         /// Check, if the we have an instrument with the given nickname. Use this
         /// to check if an instrument is available for a given data source.
@@ -777,8 +718,6 @@ namespace TuringTrader.Simulator
             return Instruments.Where(i => i.Nickname == nickname).Count() > 0;
         }
 
-        // CA1822: Member HasInstrument does not access instance data an can be marked as static
-#pragma warning disable CA1822
         /// <summary>
         /// Check if we have an instrument for the given datasource.
         /// </summary>
@@ -794,9 +733,7 @@ namespace TuringTrader.Simulator
 
             return ds.Instrument != null;
         }
-#pragma warning restore CA1822
-        #endregion
-        #region protected bool HasInstruments(...)
+
         /// <summary>
         /// Check, if we have instruments for all given nicknames
         /// </summary>
@@ -822,8 +759,7 @@ namespace TuringTrader.Simulator
                     true,
                     (prev, ds) => prev && HasInstrument(ds));
         }
-        #endregion
-        #region protected Instrument FindInstrument(string)
+
         /// <summary>
         /// Find an instrument in the Instruments collection by its nickname.
         /// In case multiple instruments have the same nickname, the first
@@ -846,8 +782,7 @@ namespace TuringTrader.Simulator
                 throw new Exception(string.Format("Instrument {0} not available on {1:MM/dd/yyyy}", nickname, SimTime[0]));
             }
         }
-        #endregion
-        #region protected List<Instrument> OptionChain(...)
+
         /// <summary>
         /// Retrieve option chain by its nickname. This will return a list of
         /// all instruments with the given nickname, marked as options, and with 
@@ -899,9 +834,7 @@ namespace TuringTrader.Simulator
 
             return optionChain;
         }
-        #endregion
 
-        #region public void QueueOrder(Order order)
         /// <summary>
         /// Queue order ticket for execution. Typically, algorithms won't
         /// use this function directly, but use Instrument.Trade instead.
@@ -913,8 +846,7 @@ namespace TuringTrader.Simulator
                 ? SimTime[0] : default;
             PendingOrders.Add(order);
         }
-        #endregion
-        #region public List<Order> PendingOrders
+
         /// <summary>
         /// List of pending orders.
         /// </summary>
@@ -923,23 +855,19 @@ namespace TuringTrader.Simulator
             get;
             private set;
         } = new List<Order>();
-        #endregion
-        #region public Dictionary<Instrument, int> Positions
+
         /// <summary>
         /// Collection of all instrument objects with currently open positions.
         /// Typically, algorithms will use the Positions property of an instrument,
         /// instead of checking this collection for a match.
         /// </summary>
         public Dictionary<Instrument, int> Positions = new Dictionary<Instrument, int>();
-        #endregion
-        #region public List<LogEntry> Log
+        
         /// <summary>
         /// Simulator's order log.
         /// </summary>
         public List<LogEntry> Log = new List<LogEntry>();
-        #endregion
 
-        #region protected void Deposit(double amount)
         /// <summary>
         /// Deposit cash into account. Note that the deposit amount
         /// must be positive.
@@ -963,8 +891,7 @@ namespace TuringTrader.Simulator
                 QueueOrder(order);
             }
         }
-        #endregion
-        #region protected void Withdraw(double amount)
+
         /// <summary>
         /// Withdraw cash from account. Note that the withdrawal
         /// amount must be positive.
@@ -988,8 +915,7 @@ namespace TuringTrader.Simulator
                 QueueOrder(order);
             }
         }
-        #endregion
-        #region protected double Cash
+
         /// <summary>
         /// Currently available cash position. Algorithms will typically
         /// initialize this value at the beginning of the simulation.
@@ -999,37 +925,31 @@ namespace TuringTrader.Simulator
             get;
             private set;
         }
-        #endregion
-        #region public TimeSeries<double> NetAssetValue
+
+
         /// <summary>
         /// Total net liquidation value of all positions plus cash.
         /// </summary>
         public TimeSeries<double> NetAssetValue;
-        #endregion
-        #region public double NetAssetValueHighestHigh
+
         /// <summary>
         /// Highest high of net asset value.
         /// </summary>
         public double NetAssetValueHighestHigh;
-        #endregion
-        #region public double NetAssetValueMaxDrawdown
+
         /// <summary>
         /// Maximum drawdown of net asset value, expressed
         /// as a fractional value between 0 and 1.
         /// </summary>
         public double NetAssetValueMaxDrawdown;
-        #endregion
 
-        #region protected double CommissionPerShare
         /// <summary>
         /// Commision to be paid per share. The default value is zero, equivalent
         /// to no commissions. Algorithms should set this to match the commissions
         /// paid on high account values/ large numbers of shares traded.
         /// </summary>
         protected double CommissionPerShare = 0.00;
-        #endregion
 
-        #region protected virtual double FillModel(Order orderTicket, Bar barOfExecution, double theoreticalPrice)
         /// <summary>
         /// Order fill model. This method is only called for those orders
         /// which are executed, but not for those which expired. The default
@@ -1045,8 +965,7 @@ namespace TuringTrader.Simulator
         {
             return theoreticalPrice;
         }
-        #endregion
-        #region protected virtual bool IsValidSimTime(DateTime timestamp)
+
         /// <summary>
         /// Validate simulator timestamp. Timestamps deemed invalid will be
         /// skipped and not passed on to the user algorithm. The default 
@@ -1067,8 +986,7 @@ namespace TuringTrader.Simulator
 
             return false;
         }
-        #endregion
-        #region protected virtual DateTime CalcNextSimTime(DateTime timestamp)
+
         /// <summary>
         /// Determine next sim time. This hook is used by the simulator to
         /// determine the value for NextSimTime, after reaching the end of 
@@ -1081,8 +999,7 @@ namespace TuringTrader.Simulator
         {
             return HolidayCalendar.NextLiveSimTime(timestamp);
         }
-        #endregion
-        #region protected virtual bool IsValidBar(Bar bar)
+
         /// <summary>
         /// Validate bar. This hook is used by the simulator to validate
         /// bars. Invalid bars are relevant in the following situations:
@@ -1109,7 +1026,6 @@ namespace TuringTrader.Simulator
 
             return true;
         }
-        #endregion
     }
 }
 //==============================================================================

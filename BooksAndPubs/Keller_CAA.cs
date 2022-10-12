@@ -276,9 +276,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's CAA-N=8-TV=5%";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override double TVOL => 0.05;
     }
@@ -288,9 +288,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's CAA-N=8-TV=10%";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override double TVOL => 0.10;
     }

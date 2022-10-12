@@ -209,9 +209,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Antonacci's U.S. Stocks w/ Absolute Momentum";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
@@ -232,9 +232,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Antonacci's Global Equities Momentum";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
@@ -284,9 +284,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Antonacci's Global Balanced Momentum";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
@@ -318,9 +318,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Antonacci's Parity Portfolio w/ Absolute Momentum";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override string BENCHMARK => Indices.PORTF_60_40;
 
@@ -374,9 +374,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Antonacci's Dual Momentum Sector Rotation";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
@@ -408,9 +408,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Antonacci's Dual Momentum w/ 4 Pairs";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
         {
@@ -461,9 +461,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Engineered Portfolio's Accelerating Dual Momentum";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     //protected override DateTime START_TIME => DateTime.Parse("01/01/1990");
     protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>

@@ -142,9 +142,9 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Assets.SPY;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
     #region 60/40 benchmark
@@ -158,9 +158,9 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Indices.SPXTR;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
     #region Tony Robbins' All-Seasons Portfolio
@@ -178,9 +178,9 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Indices.PORTF_60_40;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
     //public override DateTime START_TIME => DateTime.Parse("01/01/1900", CultureInfo.InvariantCulture);
   }
 #if false
@@ -234,9 +234,9 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Indices.PORTF_60_40;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
 #if false
     // NOTE: 3x Gold not available after summer 2020

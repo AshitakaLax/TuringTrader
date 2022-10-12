@@ -39,7 +39,11 @@ namespace TuringTrader.Simulator.v2.Demo
     {
         public override string Name => "A03_Cache";
 
-        public override void Run()
+    public override string Description => "";
+
+    public override string Author => "";
+
+    public override void Run()
         {
             string toDo()
             {

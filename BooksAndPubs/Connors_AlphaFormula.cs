@@ -55,9 +55,9 @@ namespace TuringTrader.BooksAndPubs
 
         public virtual string BENCHMARK => Indices.PORTF_60_40;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     public virtual double MOMENTUM(Instrument i) =>
             ((i.Close[0] - i.Close[21]) / i.Close[21]
@@ -185,9 +185,9 @@ namespace TuringTrader.BooksAndPubs
         public virtual string BENCHMARK => "SPY";
         public virtual string SPX => "$SPX";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
     #endregion
     #region ctor
     public Connors_AlphaFormula_WeeklyMeanReversion()
@@ -380,9 +380,9 @@ namespace TuringTrader.BooksAndPubs
             105, // 5 months
         };
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
     #endregion
     #region public override void Run()
     public override IEnumerable<Bar> Run(DateTime? startTime, DateTime? endTime)
@@ -535,9 +535,9 @@ namespace TuringTrader.BooksAndPubs
         public virtual string IDLE_CASH => "SHY"; // 1-3yr Treasuries
         public virtual string BENCHMARK => "SH"; // S&P 500 Short
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
     #endregion
     #region ctor
     public Connors_AlphaFormula_EtfAvalanches()
@@ -708,9 +708,9 @@ namespace TuringTrader.BooksAndPubs
 
         public override string BENCH => Indices.PORTF_60_40;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
 #if USE_BOOK_RANGE
         public override DateTime START_TIME => DateTime.Parse("01/01/2007", CultureInfo.InvariantCulture);
@@ -731,9 +731,9 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Indices.PORTF_60_40;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
 #if USE_BOOK_RANGE
         public override DateTime START_TIME => DateTime.Parse("01/01/2007", CultureInfo.InvariantCulture);

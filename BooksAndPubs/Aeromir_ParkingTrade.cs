@@ -63,9 +63,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Parking Trade";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     #region inputs
     private readonly double INITIAL_CASH = 1e6;

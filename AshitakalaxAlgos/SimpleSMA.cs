@@ -12,12 +12,16 @@ namespace AshitakalaxAlgos
     private readonly double _initialCash = 100000.00;
     private double? _initialPrice = null;
     private readonly string _instrumentNick = "SQQQ";
+    [OptimizerParam(10, 30, 5, true)]
+    public int EMA_FAST = 20;
+    [OptimizerParam(35, 100, 5, true)]
+    public int EMA_SLOW = 60;
     #endregion
 
 
 
     #region optimizable parameters
-//    [OptimizerParam(0, 100, 5)]
+    //    [OptimizerParam(0, 100, 5)]
     public int STOCK_PCNT = 60;
 
     public override string Description => "A simple Moving Average";
@@ -36,8 +40,8 @@ namespace AshitakalaxAlgos
       {
         Instrument instrument = Instruments.First();
 
-        ITimeSeries<double> slow = instrument.Close.EMA(63);
-        ITimeSeries<double> fast = instrument.Close.EMA(21);
+        ITimeSeries<double> slow = instrument.Close.EMA(EMA_SLOW);
+        ITimeSeries<double> fast = instrument.Close.EMA(EMA_FAST);
 
         int currentPosition = instrument.Position;
 
@@ -63,94 +67,14 @@ namespace AshitakalaxAlgos
         _plotter.Plot("SMA(fast)", fast[0]);
       }
     }
-
-
-
-
-
-    #region OptimizeSettings - walk-forward-optimization
-    //private void OptimizeSettings()
-    //{
-    //  // we only optimize settings on the top instance,
-    //  // not those used for walk-forward optimization
-    //  if (!IsOptimizing)
-    //  {
-    //    // enable optimizer parameters
-    //    foreach (var s in OptimizerParams)
-    //      s.Value.IsEnabled = true;
-
-    //    // run optimization
-    //    var optimizer = new OptimizerGrid(this, false);
-    //    var end = SimTime[0];
-    //    var start = end - TimeSpan.FromDays(90);
-    //    optimizer.Run(start, end);
-
-    //    // apply parameters from best result
-    //    var best = optimizer.Results
-    //        .OrderByDescending(r => r.Fitness)
-    //        .FirstOrDefault();
-    //    optimizer.SetParametersFromResult(best);
-    //  }
-    //}
-    #endregion
-    #region Run - algorithm core
-    //public override IEnumerable<Bar> Run(DateTime? startTime, DateTime? endTime)
-    //{
-    //  StartTime = startTime != null ? (DateTime)startTime : DateTime.Parse("01/01/2007", CultureInfo.InvariantCulture);
-    //  EndTime = endTime != null ? (DateTime)endTime : DateTime.Now - TimeSpan.FromDays(5);
-    //  WarmupStartTime = StartTime - TimeSpan.FromDays(90);
-
-    //  CommissionPerShare = 0.015;
-    //  Deposit(1e6);
-
-    //  var stocks = AddDataSource("SPY");
-    //  var bonds = AddDataSource("TLT");
-
-    //  bool firstOptimization = true;
-    //  foreach (var s in SimTimes)
-    //  {
-    //    // re-tune parameters on a monthly schedule
-    //    if (firstOptimization || NextSimTime.Month != SimTime[0].Month)
-    //      OptimizeSettings();
-    //    firstOptimization = false;
-
-    //    // rebalance on a monthly schedule
-    //    if (NextSimTime.Month != SimTime[0].Month)
-    //    {
-    //      var stockPcnt = STOCK_PCNT / 100.0;
-    //      var stockShares = (int)Math.Floor(NetAssetValue[0] * stockPcnt / stocks.Instrument.Close[0]);
-    //      stocks.Instrument.Trade(stockShares - stocks.Instrument.Position);
-
-    //      var bondPcnt = 1.0 - stockPcnt;
-    //      var bondShares = (int)Math.Floor(NetAssetValue[0] * bondPcnt / bonds.Instrument.Close[0]);
-    //      bonds.Instrument.Trade(bondShares - bonds.Instrument.Position);
-    //    }
-
-    //    // strategy output
-    //    if (!IsOptimizing && TradingDays > 0)
-    //    {
-    //      _plotter.SelectChart("Net Asset Value", "Date");
-    //      _plotter.SetX(SimTime[0]);
-    //      _plotter.Plot("Stock/Bond Strategy", NetAssetValue[0]);
-    //      _plotter.Plot("S&P 500", stocks.Instrument.Close[0]);
-
-    //      _plotter.SelectChart("Stock Percentage", "Date");
-    //      _plotter.SetX(SimTime[0]);
-    //      _plotter.Plot("Stock Percentage", 100.0 * stocks.Instrument.Position * stocks.Instrument.Close[0] / NetAssetValue[0]);
-    //    }
-    //  }
-
-    //  // fitness value used for walk-forward-optimization
-    //  FitnessValue = NetAssetValue[0] / NetAssetValueMaxDrawdown;
-
-    //  yield break;
-    //}
-    #endregion
-    #region Report - output chart
     public override void Report()
     {
       _plotter.OpenWith("SimpleReport");
     }
-    #endregion
+
+    public override string ToString()
+    {
+      return Name;
+    }
   }
 }

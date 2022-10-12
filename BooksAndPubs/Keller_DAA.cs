@@ -220,9 +220,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's DAA-G4";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -254,9 +254,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's DAA-G6";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
             {
@@ -290,9 +290,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's DAA-G12";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -333,9 +333,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's DAA1-G4";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -367,9 +367,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's DAA1-G12";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -409,9 +409,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Keller's DAA1-U1";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -451,9 +451,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades: R4:SPY,VEA,VWO,BND + C2:SHY,IEF
         public override string Name => "Keller's DAA-G4: Non-Leveraged Benchmark";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -489,9 +489,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades: SSO,EFO,VWO,BND + C2:SHY,UST
         public override string Name => "Keller's DAA-G4: Limited Double Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -536,9 +536,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades: SSO,EFO,EET,BND + C2:SHY,UST
         public override string Name => "Keller's DAA-G4: Expanded Double Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -584,9 +584,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades: UPRO,DZK,VWO,BND + C2:SHY,TYD
         public override string Name => "Keller's DAA-G4: Limited Triple Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -631,9 +631,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades: UPRO,DZK,EDC,BND + C2:SHY,TYD
         public override string Name => "Keller's DAA-G4: Expanded Triple Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -679,9 +679,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades:  SPY,QQQ,IWM,VGK,EWJ,VWO,GSG,GLD,VNQ,HYG,TLT,LQD + C2:SHY,IEF
         public override string Name => "Keller's DAA-G12: Non-Leveraged Benchmark";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -723,9 +723,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades:  SSO,QLD,UWM,VGK,EWJ,VWO,GSG,GLD,URE,HYG,LQD,UBT + C2:SHY,UST
         public override string Name => "Keller's DAA-G12: Limited Double Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -780,9 +780,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades:  SSO,QLD,UWM,VGK,EWJ,EET,GSG,GLD,URE,HYG,LQD,UBT + C2:SHY,UST
         public override string Name => "Keller's DAA-G12: Expanded Double Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -838,9 +838,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades:  UPRO,TQQQ,TNA,VGK,EWJ,VWO,GSG,GLD,DRN,HYG,LQD,TMF + C2:SHY,TYD
         public override string Name => "Keller's DAA-G12: Limited Triple Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {
@@ -895,9 +895,9 @@ namespace TuringTrader.BooksAndPubs
         // Trades:  UPRO,TQQQ,TNA,VGK,EWJ,EDC,GSG,GLD,DRN,HYG,LQD,TMF + C2:SHY,TYD
         public override string Name => "Keller's DAA-G12: Expanded Triple Leverage";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override List<string> RISKY_UNIVERSE => new List<string>
         {

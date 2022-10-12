@@ -255,9 +255,9 @@ namespace TuringTrader.BooksAndPubs
         };
         public override string BENCH => Indices.PORTF_60_40;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
     #region Mama Bear
@@ -266,9 +266,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Livingston's Mama Bear";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override HashSet<string> ETF_MENU => new HashSet<string>()
         {
@@ -325,9 +325,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Livingston's Papa Bear";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override HashSet<string> ETF_MENU => new HashSet<string>()
         {

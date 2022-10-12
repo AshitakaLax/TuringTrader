@@ -62,9 +62,9 @@ namespace TuringTrader.BooksAndPubs
         public virtual DateTime START_DATE { get; set; } = DateTime.Parse("01/01/1990", CultureInfo.InvariantCulture);
         public virtual DateTime END_DATE { get; set; } = DateTime.Now.Date;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
     #endregion
     #region separate portfolios for the four economic phases
     public class Soto_SectorRotation_Decline : LazyPortfolio
@@ -78,9 +78,9 @@ namespace TuringTrader.BooksAndPubs
         };
             public override string BENCH => Indices.SPXTR;
 
-      public override string Description => throw new NotImplementedException();
+      public override string Description => "";
 
-      public override string Author => throw new NotImplementedException();
+      public override string Author => "";
     }
         public class Soto_SectorRotation_Recovery : LazyPortfolio
         {
@@ -94,9 +94,9 @@ namespace TuringTrader.BooksAndPubs
         };
             public override string BENCH => Indices.SPXTR;
 
-      public override string Description => throw new NotImplementedException();
+      public override string Description => "";
 
-      public override string Author => throw new NotImplementedException();
+      public override string Author => "";
     }
         public class Soto_SectorRotation_Early : LazyPortfolio
         {
@@ -111,9 +111,9 @@ namespace TuringTrader.BooksAndPubs
         };
             public override string BENCH => Indices.SPXTR;
 
-      public override string Description => throw new NotImplementedException();
+      public override string Description => "";
 
-      public override string Author => throw new NotImplementedException();
+      public override string Author => "";
     }
         public class Soto_SectorRotation_Late : LazyPortfolio
         {
@@ -127,9 +127,9 @@ namespace TuringTrader.BooksAndPubs
         };
             public override string BENCH => Indices.SPXTR;
 
-      public override string Description => throw new NotImplementedException();
+      public override string Description => "";
 
-      public override string Author => throw new NotImplementedException();
+      public override string Author => "";
     }
         #endregion
 

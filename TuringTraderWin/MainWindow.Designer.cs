@@ -29,7 +29,13 @@
     private void InitializeComponent()
     {
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dataGridView1 = new System.Windows.Forms.DataGridView();
+      this.OptimizationGridView = new System.Windows.Forms.DataGridView();
+      this.ParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ParameterValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.EnableColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+      this.StartColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.StopColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.IncrementColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ParametersLabel = new System.Windows.Forms.Label();
       this.richTextBox1 = new System.Windows.Forms.RichTextBox();
       this.RunButton = new System.Windows.Forms.Button();
@@ -47,7 +53,7 @@
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.OptimizationGridView)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -62,7 +68,7 @@
       // 
       // splitContainer1.Panel1
       // 
-      this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
+      this.splitContainer1.Panel1.Controls.Add(this.OptimizationGridView);
       this.splitContainer1.Panel1.Controls.Add(this.ParametersLabel);
       // 
       // splitContainer1.Panel2
@@ -72,18 +78,68 @@
       this.splitContainer1.SplitterDistance = 429;
       this.splitContainer1.TabIndex = 0;
       // 
-      // dataGridView1
+      // OptimizationGridView
       // 
-      this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.OptimizationGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridView1.Location = new System.Drawing.Point(0, 44);
-      this.dataGridView1.Name = "dataGridView1";
-      this.dataGridView1.RowHeadersWidth = 102;
-      this.dataGridView1.RowTemplate.Height = 49;
-      this.dataGridView1.Size = new System.Drawing.Size(1736, 385);
-      this.dataGridView1.TabIndex = 1;
+      this.OptimizationGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.OptimizationGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ParameterNameColumn,
+            this.ParameterValueColumn,
+            this.EnableColumn,
+            this.StartColumn,
+            this.StopColumn,
+            this.IncrementColumn});
+      this.OptimizationGridView.Location = new System.Drawing.Point(0, 44);
+      this.OptimizationGridView.Name = "OptimizationGridView";
+      this.OptimizationGridView.RowHeadersVisible = false;
+      this.OptimizationGridView.RowHeadersWidth = 102;
+      this.OptimizationGridView.RowTemplate.Height = 49;
+      this.OptimizationGridView.Size = new System.Drawing.Size(1736, 385);
+      this.OptimizationGridView.TabIndex = 1;
+      // 
+      // ParameterNameColumn
+      // 
+      this.ParameterNameColumn.HeaderText = "Name";
+      this.ParameterNameColumn.MinimumWidth = 12;
+      this.ParameterNameColumn.Name = "ParameterNameColumn";
+      this.ParameterNameColumn.Width = 250;
+      // 
+      // ParameterValueColumn
+      // 
+      this.ParameterValueColumn.HeaderText = "Value";
+      this.ParameterValueColumn.MinimumWidth = 12;
+      this.ParameterValueColumn.Name = "ParameterValueColumn";
+      this.ParameterValueColumn.Width = 250;
+      // 
+      // EnableColumn
+      // 
+      this.EnableColumn.HeaderText = "Optimize";
+      this.EnableColumn.MinimumWidth = 12;
+      this.EnableColumn.Name = "EnableColumn";
+      this.EnableColumn.Width = 250;
+      // 
+      // StartColumn
+      // 
+      this.StartColumn.HeaderText = "Starting Value";
+      this.StartColumn.MinimumWidth = 12;
+      this.StartColumn.Name = "StartColumn";
+      this.StartColumn.Width = 250;
+      // 
+      // StopColumn
+      // 
+      this.StopColumn.HeaderText = "Ending Value";
+      this.StopColumn.MinimumWidth = 12;
+      this.StopColumn.Name = "StopColumn";
+      this.StopColumn.Width = 250;
+      // 
+      // IncrementColumn
+      // 
+      this.IncrementColumn.HeaderText = "Increment By";
+      this.IncrementColumn.MinimumWidth = 12;
+      this.IncrementColumn.Name = "IncrementColumn";
+      this.IncrementColumn.Width = 250;
       // 
       // ParametersLabel
       // 
@@ -106,7 +162,7 @@
       // RunButton
       // 
       this.RunButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.RunButton.Location = new System.Drawing.Point(937, 63);
+      this.RunButton.Location = new System.Drawing.Point(937, 46);
       this.RunButton.Name = "RunButton";
       this.RunButton.Size = new System.Drawing.Size(188, 58);
       this.RunButton.TabIndex = 1;
@@ -147,7 +203,7 @@
       // ReportButton
       // 
       this.ReportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.ReportButton.Location = new System.Drawing.Point(1131, 63);
+      this.ReportButton.Location = new System.Drawing.Point(1131, 46);
       this.ReportButton.Name = "ReportButton";
       this.ReportButton.Size = new System.Drawing.Size(188, 58);
       this.ReportButton.TabIndex = 3;
@@ -157,7 +213,7 @@
       // OptimizeButton
       // 
       this.OptimizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.OptimizeButton.Location = new System.Drawing.Point(1325, 63);
+      this.OptimizeButton.Location = new System.Drawing.Point(1325, 46);
       this.OptimizeButton.Name = "OptimizeButton";
       this.OptimizeButton.Size = new System.Drawing.Size(188, 58);
       this.OptimizeButton.TabIndex = 4;
@@ -167,7 +223,7 @@
       // OptimizeResultsButton
       // 
       this.OptimizeResultsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.OptimizeResultsButton.Location = new System.Drawing.Point(1519, 63);
+      this.OptimizeResultsButton.Location = new System.Drawing.Point(1519, 46);
       this.OptimizeResultsButton.Name = "OptimizeResultsButton";
       this.OptimizeResultsButton.Size = new System.Drawing.Size(188, 58);
       this.OptimizeResultsButton.TabIndex = 5;
@@ -179,8 +235,9 @@
       this.AlgorithmComboBox.FormattingEnabled = true;
       this.AlgorithmComboBox.Location = new System.Drawing.Point(168, 52);
       this.AlgorithmComboBox.Name = "AlgorithmComboBox";
-      this.AlgorithmComboBox.Size = new System.Drawing.Size(649, 49);
+      this.AlgorithmComboBox.Size = new System.Drawing.Size(763, 49);
       this.AlgorithmComboBox.TabIndex = 6;
+      this.AlgorithmComboBox.SelectedIndexChanged += new System.EventHandler(this.AlgorithmComboBox_SelectedIndexChanged);
       // 
       // AlgorithmLabel
       // 
@@ -222,7 +279,7 @@
       this.splitContainer1.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.OptimizationGridView)).EndInit();
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
       this.ResumeLayout(false);
@@ -233,7 +290,7 @@
     private SplitContainer splitContainer1;
     private Label ParametersLabel;
     private RichTextBox richTextBox1;
-    private DataGridView dataGridView1;
+    private DataGridView OptimizationGridView;
     private Button RunButton;
     private MenuStrip menuStrip1;
     private ToolStripMenuItem fileToolStripMenuItem;
@@ -246,5 +303,12 @@
     private Label AlgorithmLabel;
     private Label DescriptionLabel;
     #endregion
-  }
+
+    private DataGridViewTextBoxColumn ParameterNameColumn;
+    private DataGridViewTextBoxColumn ParameterValueColumn;
+        private DataGridViewCheckBoxColumn EnableColumn;
+        private DataGridViewTextBoxColumn StartColumn;
+        private DataGridViewTextBoxColumn StopColumn;
+        private DataGridViewTextBoxColumn IncrementColumn;
+    }
 }

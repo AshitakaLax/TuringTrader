@@ -130,9 +130,9 @@ namespace TuringTrader.BooksAndPubs
         #region private data
         protected virtual string BENCHMARK { get; set; } = Indices.SPXTR;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     private readonly string SP500 = "$SPX";
         #endregion

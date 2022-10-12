@@ -142,9 +142,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(0, 20, 1)]
         public virtual int ENTRY_MAX_RSI { get; set; } = 5;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override int Rules(Instrument market)
         {
@@ -193,9 +193,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int EXIT_MIN_RSI { get; set; } = 65;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override int Rules(Instrument market)
         {
@@ -239,9 +239,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(5, 10, 1)]
         public virtual int DOUBLE_DAYS { get; set; } = 7;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override int Rules(Instrument market)
         {
@@ -290,9 +290,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int LX_MIN_MKT_RSI { get; set; } = 65;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override int Rules(Instrument market)
         {
@@ -342,9 +342,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int LX_MIN_MKT_RSI { get; set; } = 65;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override int Rules(Instrument market)
         {
@@ -445,9 +445,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(50, 90, 5)]
         public virtual int LX_MIN_MKT_RSI { get; set; } = 65;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override int Rules(Instrument market)
         {
@@ -485,9 +485,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(2, 7, 1)]
         public virtual int LE5_MIN_MKT_UP { get; set; } = 4;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override int Rules(Instrument market)
         {

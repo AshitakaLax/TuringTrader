@@ -54,9 +54,9 @@ namespace TuringTrader.BooksAndPubs
         [OptimizerParam(1, 10, 1)]
         public virtual int MAX_ENTRIES { get; set; } = 10;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
     #endregion
     #region internal data
     private static readonly string BENCHMARK = Indices.SPXTR;
@@ -526,9 +526,9 @@ namespace TuringTrader.BooksAndPubs
         public override int MAX_ENTRIES { get; set; } = 10;  // 10
         public override int MAX_HOLD_DAYS { get; set; } = 4;   // 4 days
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
 
     public class Bensdorp_30MinStockTrader_MRS : Bensdorp_30MinStockTrader_MRx
@@ -545,9 +545,9 @@ namespace TuringTrader.BooksAndPubs
         public override int MAX_ENTRIES { get; set; } = 10;  // 10
         public override int MAX_HOLD_DAYS { get; set; } = 2;   // 2 days
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 
@@ -566,9 +566,9 @@ namespace TuringTrader.BooksAndPubs
         public override DateTime START_TIME => Globals.START_TIME;
         public override DateTime END_TIME => Globals.END_TIME;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
     #region Combo: MRL + MRS
@@ -586,9 +586,9 @@ namespace TuringTrader.BooksAndPubs
         public override DateTime START_TIME => Globals.START_TIME;
         public override DateTime END_TIME => Globals.END_TIME;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 }

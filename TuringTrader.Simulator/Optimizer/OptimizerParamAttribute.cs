@@ -45,19 +45,25 @@ namespace TuringTrader.Simulator
         /// </summary>
         public readonly int Step;
 
+    /// <summary>
+    /// The default of whether the optimizer attributed should be enabled.
+    /// </summary>
+    public readonly bool IsEnabled;
+
         /// <summary>
-        /// Create and initialize optimizer parameter attribute.
-        /// </summary>
-        /// <param name="start">start value</param>
-        /// <param name="end">end value</param>
-        /// <param name="increment">step size</param>
-        public OptimizerParamAttribute(int start, int end, int increment)
-        {
-            Start = start;
-            End = end;
-            Step = increment;
-        }
+    /// Create and initialize optimizer parameter attribute.
+    /// </summary>
+    /// <param name="start">start value</param>
+    /// <param name="end">end value</param>
+    /// <param name="increment">step size</param>
+    public OptimizerParamAttribute(int start, int end, int increment, bool isEnabled = false)
+    {
+      Start = start;
+      End = end;
+      Step = increment;
+      IsEnabled = isEnabled;
     }
+   }
 }
 
 //==============================================================================

@@ -42,7 +42,11 @@ namespace TuringTrader.Simulator.v2.Demo
 
         public override string Name => "A01_Hello";
 
-        public override void Run() => Output.WriteLine("Hello Trader. TEST_PARAM = {0}", TEST_PARAM);
+    public override string Description => "";
+
+    public override string Author => "";
+
+    public override void Run() => Output.WriteLine("Hello Trader. TEST_PARAM = {0}", TEST_PARAM);
         public override void Report() => Output.WriteLine("Here is your report");
     }
 }

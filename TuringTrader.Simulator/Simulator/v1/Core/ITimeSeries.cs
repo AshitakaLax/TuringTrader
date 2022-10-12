@@ -33,7 +33,6 @@ namespace TuringTrader.Simulator
     /// <typeparam name="T">type of time series</typeparam>
     public interface ITimeSeries<T>
     {
-        #region T this[int barsBack]
         /// <summary>
         /// Retrieve historical value from time series.
         /// </summary>
@@ -43,8 +42,7 @@ namespace TuringTrader.Simulator
         {
             get;
         }
-        #endregion
-    }
+     }
 }
 
 //==============================================================================

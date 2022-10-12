@@ -248,9 +248,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Faber's Ivy 5 Timing";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override string SAFE_INSTRUMENT => Assets.BIL; // SPDR Barclays 1-3 Month T-Bill ETF
         protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
@@ -288,9 +288,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Faber's Ivy 5 Rotation";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override string SAFE_INSTRUMENT => Assets.BIL; // SPDR Barclays 1-3 Month T-Bill ETF
         protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
@@ -318,9 +318,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Faber's Ivy 10 Timing";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override string SAFE_INSTRUMENT => "BIL"; // SPDR Barclays 1-3 Month T-Bill ETF
         protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>
@@ -378,9 +378,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Faber's Ivy 10 Rotation";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override string SAFE_INSTRUMENT => "BIL"; // SPDR Barclays 1-3 Month T-Bill ETF
 
@@ -433,9 +433,9 @@ namespace TuringTrader.BooksAndPubs
     {
         public override string Name => "Davis' Three-Way System";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     private readonly string BENCHMARK = Indices.PORTF_60_40;
 
@@ -593,9 +593,9 @@ namespace TuringTrader.BooksAndPubs
 
         public override string Name => "Faber's Sector Rotation";
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     protected override string SAFE_INSTRUMENT => Assets.BIL; // SPDR Barclays 1-3 Month T-Bill ETF
         protected override HashSet<AssetClass> ASSET_CLASSES => new HashSet<AssetClass>

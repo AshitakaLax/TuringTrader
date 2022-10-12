@@ -97,19 +97,17 @@ namespace TuringTrader.Simulator
         #endregion
 
         //----- general info
-        #region public readonly SimulatorCore Simulator
+
         /// <summary>
         /// Parent Simulator object.
         /// </summary>
         public readonly SimulatorCore Simulator;
-        #endregion
-        #region public readonly DataSource DataSource
+
         /// <summary>
         /// Associated DataSource object.
         /// </summary>
         public readonly DataSource DataSource;
-        #endregion
-        #region public string Nickname
+
         /// <summary>
         /// DataSource's nickname.
         /// </summary>
@@ -120,8 +118,7 @@ namespace TuringTrader.Simulator
                 return DataSource.Info[DataSourceParam.nickName];
             }
         }
-        #endregion
-        #region public string Name
+
         /// <summary>
         /// Instrument's full name, e.g. Microsoft Corporation.
         /// </summary>
@@ -132,8 +129,7 @@ namespace TuringTrader.Simulator
                 return DataSource.Info[DataSourceParam.name];
             }
         }
-        #endregion
-        #region public string Symbol
+
         /// <summary>
         /// Instrument's fully qualified symbol. For stocks, this is identical
         /// to the ticker. For options, this will include the expiry date,
@@ -146,11 +142,8 @@ namespace TuringTrader.Simulator
                 return this[0].Symbol;
             }
         }
-        #endregion
-
-        //----- option-specific info
-        #region public bool IsOption
-        /// <summary>
+    
+    /// <summary>
         /// Flag indicating if this is an option contract.
         /// </summary>
         public bool IsOption
@@ -160,7 +153,7 @@ namespace TuringTrader.Simulator
                 return DataSource.IsOption;
             }
         }
-        #endregion
+
         #region public string OptionUnderlying
         /// <summary>
         /// Options only: Underlying symbol.
@@ -367,6 +360,7 @@ namespace TuringTrader.Simulator
         /// <param name="price">optional price specifier</param>
         /// <param name="condition">lambda, specifying exec condition</param>
         /// <returns>Order object</returns>
+        /// This has been implemented as a Extension's method for algorithm.
         public Order Trade(int quantity, OrderType tradeExecution = OrderType.openNextBar, double price = 0.00, Func<Instrument, bool> condition = null)
         {
             if (quantity == 0)

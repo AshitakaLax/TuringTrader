@@ -254,72 +254,72 @@ namespace TuringTrader.BooksAndPubs
         public override string Name => base.Name + " (AGG)";
         public override object ASSET => Assets.AGG;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_HeineBondModel_SHY : Boucher_HeineBondModel_Core
     {
         public override string Name => base.Name + " (SHY)";
         public override object ASSET => Assets.SHY;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_HeineBondModel_IEF: Boucher_HeineBondModel_Core
     {
         public override string Name => base.Name + " (IEF)";
         public override object ASSET => Assets.IEF;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_HeineBondModel_TLH : Boucher_HeineBondModel_Core
     {
         public override string Name => base.Name + " (TLH)";
         public override object ASSET => Assets.TLH;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_HeineBondModel_TLT : Boucher_HeineBondModel_Core
     {
         public override string Name => base.Name + " (TLT)";
         public override object ASSET => Assets.TLT;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_HeineBondModel_TIP : Boucher_HeineBondModel_Core
     {
         public override string Name => base.Name + " (TIP)";
         public override object ASSET => Assets.TIP;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_HeineBondModel_LQD : Boucher_HeineBondModel_Core
     {
         public override string Name => base.Name + " (LQD)";
         public override object ASSET => Assets.LQD;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_HeineBondModel_JNK : Boucher_HeineBondModel_Core
     {
         public override string Name => base.Name + " (JNK)";
         public override object ASSET => Assets.JNK;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 
@@ -478,63 +478,63 @@ namespace TuringTrader.BooksAndPubs
         public override string Name => base.Name + " (AGG)";
         public override object ASSET => Assets.AGG;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_BondBillUtilityModel_SHY : Boucher_BondBillUtilityModel_Core
     {
         public override string Name => base.Name + " (SHY)";
         public override object ASSET => Assets.SHY;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_BondBillUtilityModel_IEF : Boucher_BondBillUtilityModel_Core
     {
         public override string Name => base.Name + " (IEF)";
         public override object ASSET => Assets.IEF;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_BondBillUtilityModel_TLH : Boucher_BondBillUtilityModel_Core
     {
         public override string Name => base.Name + " (TLH)";
         public override object ASSET => Assets.TLH;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_BondBillUtilityModel_TLT : Boucher_BondBillUtilityModel_Core
     {
         public override string Name => base.Name + " (TLT)";
         public override object ASSET => Assets.TLT;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_BondBillUtilityModel_LQD : Boucher_BondBillUtilityModel_Core
     {
         public override string Name => base.Name + " (LQD)";
         public override object ASSET => Assets.LQD;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     public class Boucher_BondBillUtilityModel_JNK : Boucher_BondBillUtilityModel_Core
     {
         public override string Name => base.Name + " (JNK)";
         public override object ASSET => Assets.JNK;
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 }

@@ -36,17 +36,15 @@ namespace TuringTrader.Simulator
     /// </summary>
     public class OptimizerParam
     {
-        #region internal data
         private readonly IAlgorithm _algorithm;
         private readonly OptimizerParamAttribute _attribute;
-        #endregion
 
-        #region public static IEnumerable<OptimizerParam> GetParams(Algorithm algo)
         /// <summary>
         /// Retrieve all optimizable parameters for algorithm.
         /// </summary>
         /// <param name="algo">input algorithm</param>
         /// <returns>optimizable parameters</returns>
+        [Obsolete("Utilize the IOptimizerManager instead")]
         public static IEnumerable<OptimizerParam> GetParams(IAlgorithm algo)
         {
             Type algoType = algo.GetType();
@@ -65,9 +63,8 @@ namespace TuringTrader.Simulator
 
             yield break;
         }
-        #endregion
+        
 
-        #region public OptimizerParam(Algorithm algorithm, string name)
         /// <summary>
         /// Construct and initialize new optimizer param for algorithm. This is for internal
         /// use by the optimizer and should not be called by user applications.
@@ -102,10 +99,9 @@ namespace TuringTrader.Simulator
             Start = _attribute.Start;
             End = _attribute.End;
             Step = _attribute.Step;
+            IsEnabled = _attribute.IsEnabled;
         }
-        #endregion
 
-        #region public string Name
         /// <summary>
         /// Name of optimizer parameter.
         /// </summary>
@@ -114,8 +110,6 @@ namespace TuringTrader.Simulator
             get;
             private set;
         }
-        #endregion
-        #region public bool IsEnabled
         /// <summary>
         /// Flag indicating enabled status of optimizer parameter.
         /// </summary>
@@ -124,8 +118,6 @@ namespace TuringTrader.Simulator
             get;
             set;
         }
-        #endregion
-        #region public int Value
         /// <summary>
         /// Current value of optimizer parameter.
         /// </summary>
@@ -174,8 +166,7 @@ namespace TuringTrader.Simulator
                     throw new Exception(string.Format("OptimizerParam: parameter {0} not found", Name));
             }
         }
-        #endregion
-        #region public int Start
+
         /// <summary>
         /// Starting value of optimizer parameter.
         /// </summary>
@@ -184,8 +175,7 @@ namespace TuringTrader.Simulator
             get;
             set;
         }
-        #endregion
-        #region public int End
+
         /// <summary>
         /// Ending value of optimizer parameter.
         /// </summary>
@@ -194,8 +184,7 @@ namespace TuringTrader.Simulator
             get;
             set;
         }
-        #endregion
-        #region public int Step
+
         /// <summary>
         /// Step size of optimizer parameter.
         /// </summary>
@@ -204,7 +193,6 @@ namespace TuringTrader.Simulator
             get;
             set;
         }
-        #endregion
     }
 }
 

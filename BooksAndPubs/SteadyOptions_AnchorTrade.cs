@@ -474,9 +474,9 @@ namespace TuringTrader.BooksAndPubs
             }
         }
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
 
     private void MaintainIncomeHedge()
         {

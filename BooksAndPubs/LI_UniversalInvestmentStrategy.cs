@@ -483,9 +483,9 @@ namespace TuringTrader.BooksAndPubs
             "TLT", // VUSTX. LogicalInvest uses HEDGE strategy here
         };
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
     #region 3x Leveraged 'Hell on Fire'
@@ -500,9 +500,9 @@ namespace TuringTrader.BooksAndPubs
             Assets.TMF,
         };
 
-    public override string Description => throw new NotImplementedException();
+    public override string Description => "";
 
-    public override string Author => throw new NotImplementedException();
+    public override string Author => "";
   }
     #endregion
 
