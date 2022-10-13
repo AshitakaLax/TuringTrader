@@ -8,5 +8,9 @@ namespace TuringTraderWin.Algorithm
 {
   public interface IAlgorithm
   {
+    /// <summary>
+    /// Gets the information about the Algorithm.
+    /// </summary>
+    IAlgorithmInfo Info { get; }
   }
 }

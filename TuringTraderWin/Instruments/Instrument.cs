@@ -26,8 +26,6 @@ namespace TuringTraderWin.Instruments
     public ITimeSeries<double> Low { get; private set; }
     public ITimeSeries<double> Close { get; private set; }
     public ITimeSeries<double> Volume { get; private set; }
-
-
-
+    public string NickName { get; set; }
   }
 }

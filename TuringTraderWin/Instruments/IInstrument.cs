@@ -9,6 +9,11 @@ namespace TuringTraderWin.Instruments
 {
   public interface IInstrument
   {
+    /// <summary>
+    /// Gets or sets the a nick name unique to the Instrument at run-time. 
+    /// This should be unique from all other instruments.
+    /// </summary>
+    string NickName { get; set; }
     ITimeSeries<DateTime> Time { get; }
     ITimeSeries<double> Open { get; }
     ITimeSeries<double> High { get; }

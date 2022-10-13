@@ -405,6 +405,7 @@ namespace TuringTrader.Simulator
                 Dictionary<DataSource, IEnumerator<Bar>> enumData = new Dictionary<DataSource, IEnumerator<Bar>>();
 
                 // reset all enumerators
+                // TODO-LB: This could be done in parallel with proper Data Structures.
                 foreach (DataSource source in _dataSources)
                 {
                     source.Simulator = this; // we'd love to do this during construction
