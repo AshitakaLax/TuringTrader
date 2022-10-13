@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataSource;
 using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
@@ -43,6 +44,8 @@ namespace TuringTraderWin.Simulator
     public IEnumerable<DateTime> SimTimes { get; set; }
     public bool IsLastBar { get; set; }
     public List<Order> PendingOrders { get; set; }
+    public IAlgorithm Algorithm { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public IEnumerable<AlgorithmParameter> AlgorithmParameters { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public DateTime CalcNextSimTime(DateTime timestamp)
     {
@@ -82,6 +85,11 @@ namespace TuringTraderWin.Simulator
     public void QueueOrder(IOrder order)
     {
       throw new NotImplementedException();
+    }
+
+    public void RunSimulator(CancellationToken cancellationToken)
+    {
+      //
     }
 
     public void Withdraw(double amount)

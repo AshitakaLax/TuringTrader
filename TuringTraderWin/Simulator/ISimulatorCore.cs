@@ -62,6 +62,13 @@ namespace TuringTraderWin.Simulator
 
     // Positions is apart of the IInstrumentsManager now.
 
+    /// <summary>
+    /// Runs the simulator on its own thread.
+    /// The SimulatorManager will manage running and stopping this simulator.
+    /// </summary>
+    /// <param name="cancellationToken">The token to know whether the Simulation has been cancelled.</param>
+    void RunSimulator(CancellationToken cancellationToken);
+
     void InitializeSimTimes();
 
     /// <summary>

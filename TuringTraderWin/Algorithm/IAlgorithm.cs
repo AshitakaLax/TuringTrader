@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TuringTraderWin.DataSource;
 using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
+using TuringTraderWin.Simulator;
 
 namespace TuringTraderWin.Algorithm
 {
@@ -24,9 +25,11 @@ namespace TuringTraderWin.Algorithm
 
     /// <summary>
     /// This is called each bar increment. 
+    /// This could be cancelled between bars.
     /// </summary>
-    /// <param name="previousBar"></param>
-    void HandleBarIncrement(Bar previousBar);
+    /// <param name="previousBar">The Previous Bar, null if first.</param>
+    /// <param name="simulatorCore">The simulator information available.</param>
+    void HandleBarIncrement(Bar previousBar, ISimulatorCore simulatorCore);
     IEnumerable<AlgorithmParameter> GetDefaultParameters { get; }
 
     //TODO Run Async with a Result that has the status of the Run. This would work better if you are running multiple Simulations in parallel.
