@@ -16,5 +16,18 @@ namespace TuringTraderWin.DataSource
     /// </summary>
     /// <returns></returns>
     IDataSource GetDataSource();
+
+    /// <summary>
+    /// Adds a Data Source to the Data Source Manager.
+    /// </summary>
+    /// <param name="dataSource"></param>
+    void AddDataSource(IDataSource dataSource);
+
+    /// <summary>
+    /// Adds a Data Source to the Data Source Manager.
+    /// </summary>
+    /// <param name="ticker">The stock Ticker to get data about.</param>
+    void AddDataSource(string ticker);
+
   }
 }

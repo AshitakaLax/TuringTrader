@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataStructures;
 using TuringTraderWin.Orders;
 
@@ -37,6 +38,15 @@ namespace TuringTraderWin.Simulator
 
     IEnumerable<DateTime> SimTimes { get; set; }
 
+    /// <summary>
+    /// Gets or sets the Algorithm associated with the Simulation.
+    /// </summary>
+    IAlgorithm  Algorithm { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Parameters for the specific Algorithm.
+    /// </summary>
+    IEnumerable<AlgorithmParameter> AlgorithmParameters { get; set; }
 
     /// <summary>
     /// Flag, indicating the last bar processed by the simulator. Algorithms

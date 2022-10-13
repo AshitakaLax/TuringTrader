@@ -1,10 +1,12 @@
 using Microsoft.Extensions.Logging;
 using TuringTrader.Simulator;
+using TuringTraderWin.Algorithm;
 using TuringTraderWin.Optimizer;
+using IAlgorithm = TuringTraderWin.Algorithm.IAlgorithm;
 
 namespace TuringTraderWin
 {
-  public partial class MainWindow : Form
+    public partial class MainWindow : Form
   {
     private readonly IAlgorithmManager AlgorithmManager;
     private readonly ILogger Logger;
@@ -45,11 +47,16 @@ namespace TuringTraderWin
 
 
       OptimizationGridView.Rows.Clear();
-      foreach(OptimizerParam parameter in OptimizerManager.GetParams(AlgorithmManager.SelectedAlgorithm))
+      foreach(AlgorithmParameter parameter in OptimizerManager.GetParams(AlgorithmManager.SelectedAlgorithm))
       {
-        OptimizationGridView.Rows.Add(new object[] { parameter.Name, parameter.Value, parameter.IsEnabled, parameter.Start, parameter.End, parameter.Step });
+        OptimizationGridView.Rows.Add(new object[] { parameter.Name, parameter.Value, parameter.IsEnabled, parameter.Start, parameter.End, parameter.IncrementStepAmount });
 
       }
+    }
+
+    private void RunButton_Click(object sender, EventArgs e)
+    {
+
     }
   }
 }

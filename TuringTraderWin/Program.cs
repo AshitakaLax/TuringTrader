@@ -1,10 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using TuringTraderWin.Algorithm;
 using TuringTraderWin.Optimizer;
 
 namespace TuringTraderWin
 {
-  internal static class Program
+    internal static class Program
   {
     public static IServiceProvider ServiceProvider { get; set; }
     static void ConfigureServices(ServiceCollection services)

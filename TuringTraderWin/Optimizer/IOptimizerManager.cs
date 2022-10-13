@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TuringTrader.Simulator;
+using TuringTraderWin.Algorithm;
 
 namespace TuringTraderWin.Optimizer
 {
@@ -14,7 +14,7 @@ namespace TuringTraderWin.Optimizer
     /// </summary>
     /// <param name="algo">input algorithm</param>
     /// <returns>optimizable parameters</returns>
-    IEnumerable<OptimizerParam> GetParams(IAlgorithm algo);
+    IEnumerable<AlgorithmParameter> GetParams(IAlgorithm algo);
     /// <summary>
     /// Gets the number of iterations based on the optimizations provided.
     /// </summary>
