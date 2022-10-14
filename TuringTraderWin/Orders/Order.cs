@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using TuringTraderWin.Instruments;
 
 namespace TuringTraderWin.Orders
@@ -12,39 +8,25 @@ namespace TuringTraderWin.Orders
   /// </summary>
   public class Order : IOrder
   {
-    /// <summary>
-    /// instrument this order is for
-    /// </summary>
-    public IInstrument Instrument;
+    /// <inheritdoc/>
+    public IInstrument Instrument { get; set; }
 
-    /// <summary>
-    /// type of order
-    /// </summary>
-    public OrderType Type;
+    /// <inheritdoc/>
+    public OrderType Type { get; set; }
 
-    /// <summary>
-    /// quantity of order
-    /// </summary>
-    public int Quantity;
+    /// <inheritdoc/>
+    public int Quantity { get; set; }
 
-    /// <summary>
-    /// price of order, only required for stop orders
-    /// </summary>
-    public double Price;
+    /// <inheritdoc/>
+    public double Price { get; set; }
 
-    /// <summary>
-    /// user-defined comment
-    /// </summary>
-    public string Comment;
+    /// <inheritdoc/>
+    public string Comment { get; set; }
 
-    /// <summary>
-    /// time stamp of queuing this order
-    /// </summary>
-    public DateTime QueueTime;
-
-    /// <summary>
-    /// exec condition
-    /// </summary>
-    public Func<IInstrument, bool> Condition = null;
+    /// <inheritdoc/>
+    public DateTime QueueTime { get; set; }
+    
+    /// <inheritdoc/>
+    public Func<IInstrument, bool> Condition { get; set; }
   }
 }

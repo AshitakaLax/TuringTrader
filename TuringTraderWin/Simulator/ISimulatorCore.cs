@@ -20,7 +20,7 @@ namespace TuringTraderWin.Simulator
     /// </summary>
     TimeSeries<double> NetAssetValue { get; set; }
 
-    ISimulatorPortfolioInfo simulatorPortfolioInfo { get; set; }
+    ISimulatorPortfolioInfo SimulatorPortfolioInfo { get; set; }
 
     /// <summary>
     /// Return class type name. This method will return the name of the
@@ -36,7 +36,7 @@ namespace TuringTraderWin.Simulator
 
     int TradingDays { get; set; }
 
-    IEnumerable<DateTime> SimTimes { get; set; }
+    TimeSeries<DateTime> SimTimes { get; set; }
 
     /// <summary>
     /// Gets or sets the Algorithm associated with the Simulation.
@@ -58,7 +58,7 @@ namespace TuringTraderWin.Simulator
     /// <summary>
     /// List of pending orders.
     /// </summary>
-    List<Order> PendingOrders { get; set; }
+    List<IOrder> PendingOrders { get; set; }
 
     // Positions is apart of the IInstrumentsManager now.
 
