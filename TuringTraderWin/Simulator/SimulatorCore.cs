@@ -21,11 +21,24 @@ namespace TuringTraderWin.Simulator
     /// </summary>
     private readonly ILogger Logger;
 
+    /// <summary>
+    /// The Data Source Manager.
+    /// </summary>
     private readonly IDataSourceManager DataSourceManager;
 
+    /// <summary>
+    /// The Instrument Manager.
+    /// </summary>
     private readonly IInstrumentManager InstrumentManager;
 
+    /// <summary>
+    /// The OptimizerManager.
+    /// </summary>
     private readonly IOptimizerManager OptimizerManager;
+   
+    /// <summary>
+    /// The Transaction History.
+    /// </summary>
     private readonly ITransactionHistory TransactionHistory;
 
     public SimulatorCore(ILogger<SimulatorCore> logger, IDataSourceManager dataSourceManager, IInstrumentManager instrumentManager, IOptimizerManager optimizerManager, ITransactionHistory transactionHistory)
@@ -40,40 +53,69 @@ namespace TuringTraderWin.Simulator
       SimulatorPortfolioInfo = new SimulatorPortfolioInfo();
     }
 
+    /// <inheritdoc/>
     public TimeSeries<double> NetAssetValue { get; set; }
+
+    /// <inheritdoc/>
     public ISimulatorPortfolioInfo SimulatorPortfolioInfo { get; set; }
+
+    /// <inheritdoc/>
     public string Name { get; set; }
+
+    /// <inheritdoc/>
     public DateTime StartTime { get; set; }
+
+    /// <inheritdoc/>
     public DateTime? WarmupStartTime { get; set; }
+
+    /// <inheritdoc/>
     public DateTime EndTime { get; set; }
+
+    /// <inheritdoc/>
     public int TradingDays { get; set; }
+
+    /// <inheritdoc/>
     public TimeSeries<DateTime> SimTimes { get; set; }
+
+    /// <inheritdoc/>
     public bool IsLastBar { get; set; }
+
+    /// <inheritdoc/>
     public List<IOrder> PendingOrders { get; set; } = new List<IOrder>();
+
+    /// <inheritdoc/>
     public IAlgorithm Algorithm { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    /// <inheritdoc/>
     public IEnumerable<AlgorithmParameter> AlgorithmParameters { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+    /// <inheritdoc/>
     public DateTime CalcNextSimTime(DateTime timestamp)
     {
       throw new NotImplementedException();
     }
 
-    public void Deposit(double amount)
+    /// <inheritdoc/>
+    public virtual void Deposit(double amount)
     {
       throw new NotImplementedException();
     }
 
-    public double FillModel(Order orderTicket, Bar barOfExecution, double theoreticalPrice)
+    /// <inheritdoc/>
+    public virtual double FillModel(IOrder orderTicket, Bar barOfExecution, double theoreticalPrice)
+    {
+      return theoreticalPrice;
+    }
+
+
+    /// <inheritdoc/>
+    public virtual double GetNetAssetValue()
     {
       throw new NotImplementedException();
     }
 
-    public double GetNetAssetValue()
-    {
-      throw new NotImplementedException();
-    }
-
-    public void InitializeSimTimes()
+    /// <inheritdoc/>
+    public virtual void InitializeSimTimes()
     {
       // This is equivalent to the SimTimes Getter.
       if(WarmupStartTime == null || WarmupStartTime > StartTime)
@@ -104,22 +146,27 @@ namespace TuringTraderWin.Simulator
 
     }
 
+
+    /// <inheritdoc/>
     public bool IsValidBar(Bar bar)
     {
       throw new NotImplementedException();
     }
 
+    /// <inheritdoc/>
     public bool IsValidSimTime(DateTime timestamp)
     {
       throw new NotImplementedException();
     }
 
+    /// <inheritdoc/>
     public void QueueOrder(IOrder order)
     {
       order.QueueTime = SimTimes.BarsAvailable > 0 ? SimTimes[0] : default;
       PendingOrders.Add(order);
     }
 
+    /// <inheritdoc/>
     public void RunSimulator(CancellationToken cancellationToken)
     {
       // iterate through the time sim's like the other approach does.
@@ -198,7 +245,7 @@ namespace TuringTraderWin.Simulator
         {
           //----- user transactions
           case OrderType.closeThisBar:
-            execBar = instrument[1];
+            execBar = ticket.BarOfExecution;
             execTime = SimTimes[1];
             price = execBar.HasBidAsk
                 ? (ticket.Quantity > 0 ? execBar.Ask : execBar.Bid)
@@ -206,7 +253,7 @@ namespace TuringTraderWin.Simulator
             break;
 
           case OrderType.openNextBar:
-            execBar = instrument[0];
+            execBar = ticket.BarOfExecution;
             execTime = SimTimes[0];
             price = execBar.HasBidAsk
                 ? (ticket.Quantity > 0 ? execBar.Ask : execBar.Bid)
@@ -214,7 +261,7 @@ namespace TuringTraderWin.Simulator
             break;
 
           case OrderType.stopNextBar:
-            execBar = instrument[0];
+            execBar = ticket.BarOfExecution;
             execTime = SimTimes[0];
             if (ticket.Quantity > 0)
             {
@@ -233,8 +280,8 @@ namespace TuringTraderWin.Simulator
             break;
 
           case OrderType.limitNextBar:
-            execBar = instrument[0];
-            execTime = SimTime[0];
+            execBar = ticket.BarOfExecution;
+            execTime = SimTimes[0];
             if (ticket.Quantity > 0)
             {
               if (ticket.Price < execBar.Low)
@@ -255,17 +302,16 @@ namespace TuringTraderWin.Simulator
 
           case OrderType.instrumentDelisted:
           case OrderType.endOfSimFakeClose:
-            execBar = instrument[0];
-            execTime = SimTime[0];
-            price = execBar.HasBidAsk
-                ? (instrument.Position > 0 ? execBar.Bid : execBar.Ask)
-                : execBar.Close;
+            execBar = ticket.BarOfExecution;
+            execTime = SimTimes[0];
+            // Original price = execBar.HasBidAsk ? (instrument.Position > 0 ? execBar.Bid : execBar.Ask) : execBar.Close;
+            price = execBar.HasBidAsk? (false ? execBar.Bid : execBar.Ask) : execBar.Close;
             break;
 
           case OrderType.optionExpiryClose:
             // execBar = instrument[0]; // option bar
-            execBar = _instruments[instrument.OptionUnderlying][0]; // underlying bar
-            execTime = SimTime[1];
+            execBar = ticket.BarOfExecution; // original _instruments[instrument.OptionUnderlying][0]; // underlying bar
+            execTime = SimTimes[1];
             price = ticket.Price;
             break;
 

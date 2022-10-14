@@ -1,4 +1,5 @@
 ﻿
+using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
 
 namespace TuringTraderWin.Orders
@@ -10,6 +11,9 @@ namespace TuringTraderWin.Orders
   {
     /// <inheritdoc/>
     public IInstrument Instrument { get; set; }
+
+    /// <inheritdoc/>
+    public Bar BarOfExecution { get; set; }
 
     /// <inheritdoc/>
     public OrderType Type { get; set; }

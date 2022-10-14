@@ -109,7 +109,7 @@ namespace TuringTraderWin.Simulator
     /// <param name="barOfExecution">bar of order execution</param>
     /// <param name="theoreticalPrice">theoretical fill price</param>
     /// <returns>custom fill price. default: theoretical fill price</returns>
-    double FillModel(Order orderTicket, Bar barOfExecution, double theoreticalPrice);
+    double FillModel(IOrder orderTicket, Bar barOfExecution, double theoreticalPrice);
 
 
     /// <summary>

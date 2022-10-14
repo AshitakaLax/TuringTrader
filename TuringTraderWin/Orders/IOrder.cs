@@ -23,7 +23,6 @@ namespace TuringTraderWin.Orders
     /// </summary>
     Bar BarOfExecution { get; set; }
 
-
     /// <summary>
     /// Gets or sets the type of order.
     /// </summary>
