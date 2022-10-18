@@ -42,7 +42,7 @@ namespace TuringTraderWin.DataSource
       return DataSources.First();
     }
 
-    public void LoadDataSources(IEnumerable<IInstrument> instruments)
+    public void LoadDataSources(IEnumerable<IInstrument> instruments, DateTime start, DateTime stop)
     {
       foreach (IInstrument instrument in instruments)
       {
@@ -51,6 +51,8 @@ namespace TuringTraderWin.DataSource
           if(dataSource.CanSupportInstrument(instrument))
           {
             DataDictionary[instrument] = dataSource;
+            dataSource.LoadData(instrument, start, stop);
+            // TODO load up the Data Sources for the time range of the simulation here, or whatever is in the cache.
             break;
 
           }

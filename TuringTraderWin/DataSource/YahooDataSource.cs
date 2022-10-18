@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NodaTime;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,12 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
-using YahooFinanceApi;
+//using YahooFinanceApi;
+using YahooQuotesApi;
+using Security = YahooQuotesApi.Security;
 
 namespace TuringTraderWin.DataSource
 {
   public class YahooDataSource : IDataSource
   {
+    private YahooQuotes Quotes;
+
+    public YahooDataSource()
+    {
+      Quotes = new YahooQuotesBuilder().Build();
+    }
 
     //TODO: Utilize existing libraries to pull in dependency on Yahoo Finance. Also check whether the data already exists in a Cache
     // We will need to have a cache that exists prior to that.
@@ -62,10 +71,13 @@ namespace TuringTraderWin.DataSource
     public IEnumerable<Bar> LoadData(string ticker, DateTime startTime, DateTime endTime)
     {
       List<Bar> data = new List<Bar>();
-      IReadOnlyList<Candle> history = Yahoo.GetHistoricalAsync(ticker, startTime, endTime, Period.Daily).Result;
-      foreach(Candle candle in history)
+      Quotes = new YahooQuotesBuilder().WithHistoryStartDate(Instant.FromDateTimeUtc(startTime.ToUniversalTime())).Build();
+     Security security = Quotes.GetAsync(ticker, HistoryFlags.PriceHistory).Result;
+
+      PriceTick[] ticks = security.PriceHistory.Value;
+      foreach(PriceTick candle in ticks)
       {
-        data.Add(new Bar("", candle.DateTime, (double)candle.Open, (double)candle.High, (double)candle.Low, (double)candle.Close, candle.Volume));
+        data.Add(new Bar(ticker, candle.Date.ToDateTimeUnspecified(), (double)candle.Open, (double)candle.High, (double)candle.Low, (double)candle.Close, candle.Volume));
       }
 
       return data;

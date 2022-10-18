@@ -11,10 +11,10 @@ namespace TuringTraderWin.Instruments
   {
     public OptionInstrument() : base()
     {
-      Bid = new BarSeriesAccessor<double>((int t) => this[t].Bid);
-      Ask = new BarSeriesAccessor<double>((int t) => this[t].Ask);
-      BidVolume = new BarSeriesAccessor<double>((int t) => this[t].BidVolume);
-      AskVolume = new BarSeriesAccessor<double>((int t) => this[t].AskVolume);
+      //Bid = new BarSeriesAccessor<double>((int t) => this[t].Bid);
+      //Ask = new BarSeriesAccessor<double>((int t) => this[t].Ask);
+      //BidVolume = new BarSeriesAccessor<double>((int t) => this[t].BidVolume);
+      //AskVolume = new BarSeriesAccessor<double>((int t) => this[t].AskVolume);
     }
 
 

@@ -66,7 +66,8 @@ namespace TuringTraderWin.Simulator
         
         ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters = new ConcurrentDictionary<string, AlgorithmParameter>(sim.AlgorithmParameters.ToDictionary(param => param.Name));
         IEnumerable<IInstrument> instruments = sim.Algorithm.Initialize(algorithmParameters, DataSourceManager, sim);
-
+        DataSourceManager.LoadDataSources(instruments, sim.StartTime, sim.EndTime);
+        
         cancellationTokens[sim] = new CancellationTokenSource();
 
       });

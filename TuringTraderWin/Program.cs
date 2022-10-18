@@ -21,7 +21,7 @@ namespace TuringTraderWin
         .AddTransient<ITransactionHistory, TransactionHistory>()
         .AddTransient<IInstrumentManager, InstrumentManager>()
         .AddTransient<ISimulatorCore, SimulatorCore>()
-        .AddTransient<IDataSourceManager, DataSourceManager>()
+        .AddSingleton<IDataSourceManager, DataSourceManager>()
       .AddSingleton<IOptimizerManager, OptimizerManager>();
     }
 

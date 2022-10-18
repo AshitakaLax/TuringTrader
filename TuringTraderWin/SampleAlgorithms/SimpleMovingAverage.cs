@@ -76,10 +76,8 @@ namespace TuringTraderWin.SampleAlgorithms
         Ticker = "^IXIC",
         Description = "Comparing against Nasdaq"
       });
-      // Setup Data Sources
-      dataSourceManager.
-      // load Ticker symbol here.
 
+      // These instruments data will be loaded into the datamanager later.
       return instruments;
     }
 

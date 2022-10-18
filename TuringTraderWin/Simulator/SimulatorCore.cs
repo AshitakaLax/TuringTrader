@@ -201,7 +201,6 @@ namespace TuringTraderWin.Simulator
     public void RunSimulator(CancellationToken cancellationToken)
     {
       // iterate through the time sim's like the other approach does.
-
       long numberOfSteps = DataSourceManager.GetDataSource().GetNumberOfTimeSteps();
       DateTime requestedDay = StartTime;
       for (int i = 0; i < numberOfSteps; i++)

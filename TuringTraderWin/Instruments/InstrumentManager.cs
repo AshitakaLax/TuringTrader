@@ -10,24 +10,27 @@ namespace TuringTraderWin.Instruments
   public class InstrumentManager : IInstrumentManager
   {
     /// <inheritdoc/>
-    public ConcurrentDictionary<IInstrument, int> Positions { get; set; }
+    public ConcurrentDictionary<IInstrument, int> Positions { get; set; } = new ConcurrentDictionary<IInstrument, int>();
 
     /// <inheritdoc/>
     public void AddInstrument(IInstrument instrument)
     {
-      throw new NotImplementedException();
+      Positions[instrument] = 0;
     }
 
     /// <inheritdoc/>
     public IInstrument GetInstrument(string nickName)
     {
-      throw new NotImplementedException();
+      return Positions.Keys.FirstOrDefault(instrument => instrument.NickName == nickName);
     }
 
     /// <inheritdoc/>
     public void RemoveInstrument(IInstrument instrument)
     {
-      throw new NotImplementedException();
+      if(Positions.ContainsKey(instrument))
+      {
+        Positions.Remove(instrument, out _);
+      }
     }
   }
 }

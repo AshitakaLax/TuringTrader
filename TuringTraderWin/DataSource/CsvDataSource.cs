@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TuringTraderWin.DataStructures;
+using TuringTraderWin.Instruments;
 
 namespace TuringTraderWin.DataSource
 {
@@ -21,10 +22,30 @@ namespace TuringTraderWin.DataSource
     }
     public List<Bar> CachedData { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+    public bool CanSupportInstrument(IInstrument instrument)
+    {
+      throw new NotImplementedException();
+    }
+
+    public IEnumerable<Bar> GetFollowingBars(DateTime time)
+    {
+      throw new NotImplementedException();
+    }
+
+    public long GetNumberOfTimeSteps()
+    {
+      throw new NotImplementedException();
+    }
+
     public IEnumerable<Bar> LoadData(string ticker, DateTime startTime, DateTime endTime)
     {
       // TODO utilize CsvHelper to create the data needed.
       return null;
+    }
+
+    public void LoadData(IInstrument instrument, DateTime startTime, DateTime endTime)
+    {
+      throw new NotImplementedException();
     }
 
     public void UpdateData(List<Bar> data, DateTime startTime, DateTime endTime)
