@@ -1,7 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using TuringTraderWin.Algorithm;
+using TuringTraderWin.DataSource;
+using TuringTraderWin.Instruments;
 using TuringTraderWin.Optimizer;
+using TuringTraderWin.Orders;
+using TuringTraderWin.Simulator;
 
 namespace TuringTraderWin
 {
@@ -12,8 +16,13 @@ namespace TuringTraderWin
     {
       services.AddSingleton<MainWindow>()
         .AddLogging()
-        .AddTransient<IAlgorithmManager, AlgorithmManager>()
-      .AddTransient<IOptimizerManager, OptimizerManager>();
+        .AddSingleton<ISimulatorManager, SimulatorManager>()
+        .AddSingleton<IAlgorithmManager, AlgorithmManager>()
+        .AddTransient<ITransactionHistory, TransactionHistory>()
+        .AddTransient<IInstrumentManager, InstrumentManager>()
+        .AddTransient<ISimulatorCore, SimulatorCore>()
+        .AddTransient<IDataSourceManager, DataSourceManager>()
+      .AddSingleton<IOptimizerManager, OptimizerManager>();
     }
 
     /// <summary>

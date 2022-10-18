@@ -1,37 +1,32 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using TuringTrader.Simulator;
+using TuringTraderWin.Algorithm;
 
 namespace TuringTraderWin.Optimizer
 {
   public class OptimizerManager : IOptimizerManager
   {
+    private readonly ILogger Logger;
+    public OptimizerManager(ILogger<OptimizerManager> logger)
+    {
+      Logger = logger;
+    }
+    public ConcurrentDictionary<IAlgorithm, List<AlgorithmParameter>> AlgorithmParameterDictionary { get; set; } = new ConcurrentDictionary<IAlgorithm, List<AlgorithmParameter>>();
+
     /// <summary>
     /// Retrieve all optimizable parameters for algorithm.
     /// </summary>
     /// <param name="algo">input algorithm</param>
     /// <returns>optimizable parameters</returns>
-    public IEnumerable<OptimizerParam> GetParams(IAlgorithm algo)
+    public IEnumerable<AlgorithmParameter> GetDefaultParams(IAlgorithm algo)
     {
-      Type algoType = algo.GetType();
-
-      IEnumerable<PropertyInfo> properties = algoType.GetProperties()
-          .Where(p => Attribute.IsDefined(p, typeof(OptimizerParamAttribute)));
-
-      foreach (PropertyInfo property in properties)
-        yield return new OptimizerParam(algo, property.Name);
-
-      IEnumerable<FieldInfo> fields = algoType.GetFields()
-          .Where(p => Attribute.IsDefined(p, typeof(OptimizerParamAttribute)));
-
-      foreach (FieldInfo field in fields)
-        yield return new OptimizerParam(algo, field.Name);
-
-      yield break;
+      return algo.GetDefaultParameters;
     }
 
     /// <inheritdoc/>
@@ -39,12 +34,12 @@ namespace TuringTraderWin.Optimizer
     {
       // figure out total number of iterations
       int numIterationsTotal = 1;
-      foreach (OptimizerParam parameter in algo.OptimizerParams.Values)
+      foreach (AlgorithmParameter parameter in algo.GetDefaultParameters)
       {
         int iterationsThisLevel = 0;
         if (parameter.IsEnabled)
         {
-          for (int i = parameter.Start; i <= parameter.End; i += parameter.Step)
+          for (int i = parameter.Start; i <= parameter.End; i += parameter.IncrementStepAmount)
             iterationsThisLevel++;
         }
         else
@@ -56,6 +51,11 @@ namespace TuringTraderWin.Optimizer
       }
 
       return numIterationsTotal;
+    }
+
+    public void SetAlgorithmParameters(IAlgorithm algo, IEnumerable<AlgorithmParameter> parameters)
+    {
+      throw new NotImplementedException();
     }
   }
 }

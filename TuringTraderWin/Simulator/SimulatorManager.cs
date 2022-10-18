@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataSource;
+using TuringTraderWin.Optimizer;
 
 namespace TuringTraderWin.Simulator
 {
@@ -28,14 +29,18 @@ namespace TuringTraderWin.Simulator
     private Action<ISimulatorPortfolioInfo, ISimulatorCore> SimCompleteHandler;
 
     private Action<string, int> SimulatorProgressCallback;
+    private readonly IOptimizerManager OptimizerManager;
+
 
     /// <summary>
     /// The Simulator Manager that handles running all of the Simulators.
     /// </summary>
     /// <param name="logger">The Logger.</param>
-    public SimulatorManager(ILogger<SimulatorManager> logger, IDataSourceManager dataSourceManager)
+    public SimulatorManager(ILogger<SimulatorManager> logger, IDataSourceManager dataSourceManager, IOptimizerManager optimizerManager)
     {
       Logger = logger;
+      DataSourceManager = dataSourceManager;
+      OptimizerManager = optimizerManager;
     }
     public ConcurrentDictionary<string, ISimulatorCore> Simulations { get; set; } = new ConcurrentDictionary<string, ISimulatorCore>();
     
@@ -58,7 +63,7 @@ namespace TuringTraderWin.Simulator
       Parallel.ForEach(simulators, sim =>
       {
         ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters = new ConcurrentDictionary<string, AlgorithmParameter>(sim.AlgorithmParameters.ToDictionary(param => param.Name));
-        sim.Algorithm.Initialize(algorithmParameters, DataSourceManager);
+        sim.Algorithm.Initialize(algorithmParameters, DataSourceManager, sim);
 
         cancellationTokens[sim] = new CancellationTokenSource();
 

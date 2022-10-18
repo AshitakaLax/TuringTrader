@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataSource;
 using TuringTraderWin.DataStructures;
+using TuringTraderWin.Instruments;
 using TuringTraderWin.Simulator;
 
 namespace TuringTraderWin.SampleAlgorithms
@@ -54,12 +55,22 @@ namespace TuringTraderWin.SampleAlgorithms
       // Setup the initial Deposit
       simulatorCore.Deposit(30000);
       // Setup Data Sources
-      dataSourceManager.
-      // 
+      // load Ticker symbol here.
+      
     }
-    public void HandleBarIncrement(Bar previousBar)
+    public void HandleBarIncrement(Bar previousBar, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
     {
-      throw new NotImplementedException();
+      // calculate the Simple moving average value for this interation.
+
+      // Here is where the logic is.
+
+      // items we will need.
+      IInstrument instrument = instrumentManager.GetInstrument("SQQQ");
+      // InstrumentManager to get all of the different investments we are interested in.
+      // It would be good to get these by their Ticker Symbol.
+      // We should be able to leverage all of the existing Extension methods that are apart of the original Turing Trader.
+
+
     }
 
 

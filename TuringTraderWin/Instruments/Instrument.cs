@@ -27,5 +27,11 @@ namespace TuringTraderWin.Instruments
     public ITimeSeries<double> Close { get; private set; }
     public ITimeSeries<double> Volume { get; private set; }
     public string NickName { get; set; }
+    public string Description { get; set; }
+    public string Name { get; set; }
+    public string Ticker { get; set; }
+    public string BackingSymbol { get; set; }
+    public bool IsOption { get; set; } = false;
+    public bool IsOptionPut { get; set; } = false;
   }
 }

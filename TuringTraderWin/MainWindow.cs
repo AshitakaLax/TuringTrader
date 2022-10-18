@@ -1,7 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TuringTrader.Simulator;
 using TuringTraderWin.Algorithm;
 using TuringTraderWin.Optimizer;
+using TuringTraderWin.Simulator;
 using IAlgorithm = TuringTraderWin.Algorithm.IAlgorithm;
 
 namespace TuringTraderWin
@@ -11,12 +12,17 @@ namespace TuringTraderWin
     private readonly IAlgorithmManager AlgorithmManager;
     private readonly ILogger Logger;
     private readonly IOptimizerManager OptimizerManager;
+    private readonly ISimulatorManager SimulatorManager;
 
-    public MainWindow(IAlgorithmManager algorithmManager, ILogger<MainWindow> logger, IOptimizerManager optimizerManager)
+    private readonly IServiceProvider ServiceProvider;
+
+    public MainWindow(IAlgorithmManager algorithmManager, ILogger<MainWindow> logger, IOptimizerManager optimizerManager, ISimulatorManager simulatorManager, IServiceProvider serviceProvider)
     {
       Logger = logger;
       AlgorithmManager = algorithmManager;
       OptimizerManager = optimizerManager;
+      SimulatorManager = simulatorManager;
+      ServiceProvider = serviceProvider;
       InitializeComponent();
 
       UpdateAlgorithmDropDown();
@@ -47,7 +53,7 @@ namespace TuringTraderWin
 
 
       OptimizationGridView.Rows.Clear();
-      foreach(AlgorithmParameter parameter in OptimizerManager.GetParams(AlgorithmManager.SelectedAlgorithm))
+      foreach(AlgorithmParameter parameter in OptimizerManager.GetDefaultParams(AlgorithmManager.SelectedAlgorithm))
       {
         OptimizationGridView.Rows.Add(new object[] { parameter.Name, parameter.Value, parameter.IsEnabled, parameter.Start, parameter.End, parameter.IncrementStepAmount });
 
@@ -56,7 +62,21 @@ namespace TuringTraderWin
 
     private void RunButton_Click(object sender, EventArgs e)
     {
-
+      ISimulatorCore sim = ServiceProvider.GetService<ISimulatorCore>();
+      sim.Name = AlgorithmComboBox.Text;
+      sim.Algorithm = AlgorithmManager.SelectedAlgorithm;
+      // Update the sim algorithm parameters, or these should be set by the optimizerManager.
+      // and we should just get them.
+      SimulatorManager.AddSimulator(sim);
+      SimulatorManager.RunSimulators(new List<string>() { sim.Name });
+    }
+    private IEnumerable<AlgorithmParameter> GetGridAlgorithmParameters()
+    {
+      foreach(DataGridViewRow row in OptimizationGridView.Rows)
+      {
+        
+        row.Cells[0].Value
+      }
     }
   }
 }

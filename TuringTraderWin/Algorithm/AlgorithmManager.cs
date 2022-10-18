@@ -11,6 +11,7 @@ namespace TuringTraderWin.Algorithm
     public class AlgorithmManager : IAlgorithmManager
     {
         private readonly ILogger Logger;
+
         /// <summary>
         /// Creates the Algorthim Manager.
         /// </summary>

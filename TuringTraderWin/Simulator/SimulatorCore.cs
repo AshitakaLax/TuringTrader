@@ -6,6 +6,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using TuringTraderWin.Algorithm;
+using TuringTraderWin.Calendar;
 using TuringTraderWin.DataSource;
 using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
@@ -84,21 +85,35 @@ namespace TuringTraderWin.Simulator
     public List<IOrder> PendingOrders { get; set; } = new List<IOrder>();
 
     /// <inheritdoc/>
-    public IAlgorithm Algorithm { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public IAlgorithm Algorithm { get; set; }
 
     /// <inheritdoc/>
-    public IEnumerable<AlgorithmParameter> AlgorithmParameters { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public IEnumerable<AlgorithmParameter> AlgorithmParameters { get; set; }
 
     /// <inheritdoc/>
     public DateTime CalcNextSimTime(DateTime timestamp)
     {
-      throw new NotImplementedException();
+      return HolidayCalendar.NextLiveSimTime(timestamp);
     }
 
     /// <inheritdoc/>
     public virtual void Deposit(double amount)
     {
-      throw new NotImplementedException();
+      if (amount < 0.0)
+        throw new Exception("SimulatorCore: Deposit w/ negative amount");
+
+      if (amount > 0.0)
+      {
+        Order order = new Order()
+        {
+          Instrument = null,
+          Quantity = -1,
+          Type = OrderType.cash,
+          Price = amount,
+        };
+
+        QueueOrder(order);
+      }
     }
 
     /// <inheritdoc/>
@@ -150,13 +165,29 @@ namespace TuringTraderWin.Simulator
     /// <inheritdoc/>
     public bool IsValidBar(Bar bar)
     {
-      throw new NotImplementedException();
+      if (bar.HasBidAsk)
+      {
+        if (bar.BidVolume <= 0
+                || bar.AskVolume <= 0
+                || bar.Bid < 0.2 * bar.Ask)
+          return false;
+      }
+
+      return true;
     }
 
     /// <inheritdoc/>
     public bool IsValidSimTime(DateTime timestamp)
     {
-      throw new NotImplementedException();
+      if (timestamp.DayOfWeek >= DayOfWeek.Monday
+      && timestamp.DayOfWeek <= DayOfWeek.Friday)
+      {
+        if (timestamp.TimeOfDay.TotalHours >= 9.5
+        && timestamp.TimeOfDay.TotalHours <= 16.0)
+          return true;
+      }
+
+      return false;
     }
 
     /// <inheritdoc/>
@@ -176,7 +207,7 @@ namespace TuringTraderWin.Simulator
 
       foreach (Bar bar in data)
       {
-        Algorithm.HandleBarIncrement(bar, this);
+        Algorithm.HandleBarIncrement(bar, this, InstrumentManager);
         if (cancellationToken.IsCancellationRequested)
         {
           Logger.LogWarning($"Algorithm({Algorithm.Info.Name}) has been Cancelled!");
@@ -190,7 +221,21 @@ namespace TuringTraderWin.Simulator
 
     public void Withdraw(double amount)
     {
-      throw new NotImplementedException();
+      if (amount < 0.0)
+        throw new Exception("SimulatorCore: Withdraw w/ negative amount");
+
+      if (amount > 0.0)
+      {
+        Order order = new Order()
+        {
+          Instrument = null,
+          Quantity = 1,
+          Type = OrderType.cash,
+          Price = amount,
+        };
+
+        QueueOrder(order);
+      }
     }
 
     private void ExecuteOrders()
@@ -203,7 +248,7 @@ namespace TuringTraderWin.Simulator
           // results in a debit, a negative quantity in a credit
           SimulatorPortfolioInfo.Cash -= ticket.Quantity * ticket.Price;
 
-          Transaction transaction = new Transaction()
+          Transaction cashTransaction = new Transaction()
           {
             Symbol = "N/A",
             Type = TransactionType.Cash,
@@ -211,7 +256,7 @@ namespace TuringTraderWin.Simulator
             FillPrice = ticket.Price,
             Commission = 0.0
           };
-          TransactionHistory.AddTransaction(transaction);
+          TransactionHistory.AddTransaction(cashTransaction);
           //LogEntry l = new LogEntry()
           //{
           //  Symbol = "N/A",
@@ -329,14 +374,15 @@ namespace TuringTraderWin.Simulator
         // adjust position, unless its the end-of-sim order
         // this is to ensure that the Positions collection can
         // be queried after the simulation finished
-        if (ticket.Type != OrderType.endOfSimFakeClose)
-        {
-          if (!Positions.ContainsKey(instrument))
-            Positions[instrument] = 0;
-          Positions[instrument] += ticket.Quantity;
-          if (Positions[instrument] == 0)
-            Positions.Remove(instrument);
-        }
+        // LB: this doesn't seem very clean, but I'm sure I'll run into this issue later.
+        //if (ticket.Type != OrderType.endOfSimFakeClose)
+        //{
+        //  if (!Positions.ContainsKey(instrument))
+        //    Positions[instrument] = 0;
+        //  Positions[instrument] += ticket.Quantity;
+        //  if (Positions[instrument] == 0)
+        //    Positions.Remove(instrument);
+        //}
 
         // determine # of shares
         int numberOfShares = instrument.IsOption
@@ -347,33 +393,31 @@ namespace TuringTraderWin.Simulator
         double commission = ticket.Type != OrderType.optionExpiryClose
                         && ticket.Type != OrderType.instrumentDelisted
                         && ticket.Type != OrderType.endOfSimFakeClose
-            ? Math.Abs(numberOfShares * CommissionPerShare)
+            ? Math.Abs(numberOfShares * SimulatorPortfolioInfo.CommissionPerShare)
             : 0.00;
 
         // pay for it, unless it's the end-of-sim order
         // same reasoning as for adjustment of position applies
         if (ticket.Type != OrderType.endOfSimFakeClose)
         {
-          Cash = Cash
+          SimulatorPortfolioInfo.Cash = SimulatorPortfolioInfo.Cash
               - numberOfShares * fillPrice
               - commission;
         }
 
         // add log entry
-        LogEntry log = new LogEntry()
+        Transaction transaction = new Transaction()
         {
-          Symbol = ticket.Instrument.Symbol,
-          InstrumentType = ticket.Instrument.IsOption
-                ? (ticket.Instrument.OptionIsPut ? LogEntryInstrument.OptionPut : LogEntryInstrument.OptionCall)
-                : LogEntryInstrument.Equity,
-          OrderTicket = ticket,
+          Symbol = ticket.Instrument.Ticker,
+          Type = ticket.Instrument.IsOption
+                ? (ticket.Instrument.IsOptionPut ? TransactionType.OptionPut : TransactionType.OptionCall)
+                : TransactionType.Equity,
+          Order = ticket,
           BarOfExecution = execBar,
           FillPrice = fillPrice,
-          Commission = commission,
+          Commission = commission
         };
-        // do not remove instrument here, is required for MFE/ MAE analysis
-        //ticket.Instrument = null; // the instrument holds the data source... which consumes lots of memory
-        Log.Add(log);
+        TransactionHistory.AddTransaction(transaction);
       }
     }
   }
