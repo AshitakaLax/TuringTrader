@@ -202,12 +202,21 @@ namespace TuringTraderWin.Simulator
     {
       // iterate through the time sim's like the other approach does.
 
-      //iterate through the Data provided by the Data Source.
-      IEnumerable<Bar> data = DataSourceManager.GetDataSource().LoadData(StartTime, EndTime);
-
-      foreach (Bar bar in data)
+      long numberOfSteps = DataSourceManager.GetDataSource().GetNumberOfTimeSteps();
+      DateTime requestedDay = StartTime;
+      for (int i = 0; i < numberOfSteps; i++)
       {
-        Algorithm.HandleBarIncrement(bar, this, InstrumentManager);
+        IEnumerable<Bar> singleDayBars = DataSourceManager.GetDataSource().GetFollowingBars(requestedDay);
+        if(!singleDayBars.Any())
+        {
+          continue;
+        }
+
+          // update by one day to get the next bar.
+          requestedDay = singleDayBars.First().Time.AddDays(1.0);
+
+        Algorithm.HandleBarIncrement(singleDayBars, this, InstrumentManager);
+
         if (cancellationToken.IsCancellationRequested)
         {
           Logger.LogWarning($"Algorithm({Algorithm.Info.Name}) has been Cancelled!");
@@ -216,6 +225,7 @@ namespace TuringTraderWin.Simulator
 
         // handle orders
         ExecuteOrders();
+
       }
     }
 

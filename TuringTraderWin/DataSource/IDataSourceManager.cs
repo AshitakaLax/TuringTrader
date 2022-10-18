@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TuringTraderWin.Instruments;
 
 namespace TuringTraderWin.DataSource
 {
@@ -16,6 +17,12 @@ namespace TuringTraderWin.DataSource
     /// </summary>
     /// <returns></returns>
     IDataSource GetDataSource();
+
+    /// <summary>
+    /// Loads data from the sources to 
+    /// </summary>
+    /// <param name="instruments"></param>
+    void LoadDataSources(IEnumerable<IInstrument> instruments);
 
     /// <summary>
     /// Adds a Data Source to the Data Source Manager.

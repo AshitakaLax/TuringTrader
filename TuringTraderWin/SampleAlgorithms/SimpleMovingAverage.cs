@@ -46,7 +46,7 @@ namespace TuringTraderWin.SampleAlgorithms
     /// </summary>
     private Action<int> ProgressHandlerCallback;
 
-    public void Initialize(ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters, IDataSourceManager dataSourceManager, ISimulatorCore simulatorCore)
+    public IEnumerable<IInstrument> Initialize(ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters, IDataSourceManager dataSourceManager, ISimulatorCore simulatorCore)
     {
       //Setup the Start and End times
       simulatorCore.StartTime = DateTime.Parse("10/01/2021", CultureInfo.InvariantCulture);
@@ -54,11 +54,37 @@ namespace TuringTraderWin.SampleAlgorithms
 
       // Setup the initial Deposit
       simulatorCore.Deposit(30000);
+
+      List<IInstrument> instruments = new List<IInstrument>();
+      instruments.Add(new Instrument()
+      {
+        Name = "SQQQ",
+        BackingSymbol = "SQQQ",
+        IsOption = false,
+        IsOptionPut = false,
+        NickName = "SQQQ",
+        Ticker = "SQQQ",
+        Description = "First SQQQ"
+      });
+      instruments.Add(new Instrument()
+      {
+        Name = "Nasdaq",
+        BackingSymbol = "^IXIC",
+        IsOption = false,
+        IsOptionPut = false,
+        NickName = "^IXIC",
+        Ticker = "^IXIC",
+        Description = "Comparing against Nasdaq"
+      });
       // Setup Data Sources
+      dataSourceManager.
       // load Ticker symbol here.
-      
+
+      return instruments;
     }
-    public void HandleBarIncrement(Bar previousBar, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
+
+
+    public void HandleBarIncrement(IEnumerable<Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
     {
       // calculate the Simple moving average value for this interation.
 

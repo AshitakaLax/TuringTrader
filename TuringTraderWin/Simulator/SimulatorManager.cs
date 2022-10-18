@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataSource;
+using TuringTraderWin.Instruments;
 using TuringTraderWin.Optimizer;
 
 namespace TuringTraderWin.Simulator
@@ -64,7 +65,7 @@ namespace TuringTraderWin.Simulator
       {
         
         ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters = new ConcurrentDictionary<string, AlgorithmParameter>(sim.AlgorithmParameters.ToDictionary(param => param.Name));
-        sim.Algorithm.Initialize(algorithmParameters, DataSourceManager, sim);
+        IEnumerable<IInstrument> instruments = sim.Algorithm.Initialize(algorithmParameters, DataSourceManager, sim);
 
         cancellationTokens[sim] = new CancellationTokenSource();
 

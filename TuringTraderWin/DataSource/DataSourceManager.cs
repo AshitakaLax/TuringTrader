@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TuringTrader.Simulator;
+using TuringTraderWin.Instruments;
 
 namespace TuringTraderWin.DataSource
 {
@@ -23,6 +25,7 @@ namespace TuringTraderWin.DataSource
     }
 
     public List<IDataSource> DataSources { get; set; } = new List<IDataSource>();
+    public ConcurrentDictionary<IInstrument, IDataSource> DataDictionary { get; set; } = new ConcurrentDictionary<IInstrument, IDataSource>();
 
     public void AddDataSource(IDataSource dataSource)
     {
@@ -31,12 +34,28 @@ namespace TuringTraderWin.DataSource
 
     public void AddDataSource(string ticker)
     {
-      throw new NotImplementedException();
+
     }
 
     public IDataSource GetDataSource()
     {
       return DataSources.First();
+    }
+
+    public void LoadDataSources(IEnumerable<IInstrument> instruments)
+    {
+      foreach (IInstrument instrument in instruments)
+      {
+        foreach(IDataSource dataSource in DataSources)
+        {
+          if(dataSource.CanSupportInstrument(instrument))
+          {
+            DataDictionary[instrument] = dataSource;
+            break;
+
+          }
+        }
+      }
     }
   }
 }

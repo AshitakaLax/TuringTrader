@@ -21,15 +21,19 @@ namespace TuringTraderWin.Algorithm
     /// <summary>
     /// Initializes all of the items needed to run the algorithm.
     /// </summary>
-    void Initialize(ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters, IDataSourceManager dataSourceManager, ISimulatorCore simulatorCore);
+    /// <param name="algorithmParameters"></param>
+    /// <param name="dataSourceManager"></param>
+    /// <param name="simulatorCore"></param>
+    /// <returns></returns>
+    IEnumerable<IInstrument> Initialize(ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters, IDataSourceManager dataSourceManager, ISimulatorCore simulatorCore);
 
     /// <summary>
     /// This is called each bar increment. 
     /// This could be cancelled between bars.
     /// </summary>
-    /// <param name="previousBar">The Previous Bar, null if first.</param>
+    /// <param name="currentBars">The current Bars(at the end of the day), null if first.</param>
     /// <param name="simulatorCore">The simulator information available.</param>
-    void HandleBarIncrement(Bar previousBar, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager);
+    void HandleBarIncrement(IEnumerable<Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager);
     IEnumerable<AlgorithmParameter> GetDefaultParameters { get; }
 
     //TODO Run Async with a Result that has the status of the Run. This would work better if you are running multiple Simulations in parallel.

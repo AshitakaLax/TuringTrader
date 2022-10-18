@@ -21,7 +21,7 @@ namespace TuringTraderWin.DataSource
     }
     public List<Bar> CachedData { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-    public IEnumerable<Bar> LoadData(DateTime startTime, DateTime endTime)
+    public IEnumerable<Bar> LoadData(string ticker, DateTime startTime, DateTime endTime)
     {
       // TODO utilize CsvHelper to create the data needed.
       return null;

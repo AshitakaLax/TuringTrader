@@ -47,12 +47,5 @@ namespace TuringTraderWin.Instruments
     /// Don't use in the meantime till enhancement on interfaces.
     /// </summary>
     bool IsOptionPut { get; set; }
-
-    ITimeSeries<DateTime> Time { get; }
-    ITimeSeries<double> Open { get; }
-    ITimeSeries<double> High { get; }
-    ITimeSeries<double> Low { get; }
-    ITimeSeries<double> Close { get; }
-    ITimeSeries<double> Volume { get; }
   }
 }
