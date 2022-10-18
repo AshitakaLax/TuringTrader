@@ -16,7 +16,19 @@ namespace TuringTraderWin.Optimizer
     /// <returns>optimizable parameters</returns>
     IEnumerable<AlgorithmParameter> GetDefaultParams(IAlgorithm algo);
 
+    /// <summary>
+    /// Sets the Parameters for a specific Algorithm.
+    /// </summary>
+    /// <param name="algo">The algorithm to set the parameters for.</param>
+    /// <param name="parameters">The parameters to set.</param>
     void SetAlgorithmParameters(IAlgorithm algo, IEnumerable<AlgorithmParameter> parameters);
+
+    /// <summary>
+    /// Retrieve all optimizable parameters for algorithm.
+    /// </summary>
+    /// <param name="algo">input algorithm</param>
+    /// <returns>optimizable parameters</returns>
+    IEnumerable<AlgorithmParameter> GetParams(IAlgorithm algo);
 
     /// <summary>
     /// Gets the number of iterations based on the optimizations provided.

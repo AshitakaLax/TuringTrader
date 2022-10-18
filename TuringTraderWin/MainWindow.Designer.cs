@@ -80,6 +80,8 @@
       // 
       // OptimizationGridView
       // 
+      this.OptimizationGridView.AllowUserToAddRows = false;
+      this.OptimizationGridView.AllowUserToDeleteRows = false;
       this.OptimizationGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -98,6 +100,7 @@
       this.OptimizationGridView.RowTemplate.Height = 49;
       this.OptimizationGridView.Size = new System.Drawing.Size(1736, 385);
       this.OptimizationGridView.TabIndex = 1;
+      this.OptimizationGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OptimizationGridView_CellContentClick);
       // 
       // ParameterNameColumn
       // 

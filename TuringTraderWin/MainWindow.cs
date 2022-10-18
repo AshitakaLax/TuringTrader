@@ -65,6 +65,9 @@ namespace TuringTraderWin
       ISimulatorCore sim = ServiceProvider.GetService<ISimulatorCore>();
       sim.Name = AlgorithmComboBox.Text;
       sim.Algorithm = AlgorithmManager.SelectedAlgorithm;
+      sim.AlgorithmParameters = GetGridAlgorithmParameters();
+      OptimizerManager.SetAlgorithmParameters(AlgorithmManager.SelectedAlgorithm, GetGridAlgorithmParameters());
+      
       // Update the sim algorithm parameters, or these should be set by the optimizerManager.
       // and we should just get them.
       SimulatorManager.AddSimulator(sim);
@@ -72,11 +75,25 @@ namespace TuringTraderWin
     }
     private IEnumerable<AlgorithmParameter> GetGridAlgorithmParameters()
     {
+      List<AlgorithmParameter> parameters = new List<AlgorithmParameter>();
       foreach(DataGridViewRow row in OptimizationGridView.Rows)
       {
-        
-        row.Cells[0].Value
+        parameters.Add(new AlgorithmParameter()
+        {
+          Name = row.Cells["ParameterNameColumn"].Value.ToString(),
+          Value = (int)row.Cells["ParameterValueColumn"].Value,
+          IsEnabled = (bool)row.Cells["EnableColumn"].Value,
+          Start = int.Parse(row.Cells["StartColumn"].Value.ToString()),
+          End = int.Parse(row.Cells["StopColumn"].Value.ToString()),
+          IncrementStepAmount = int.Parse(row.Cells["IncrementColumn"].Value.ToString())
+        });
       }
+      return parameters;
+    }
+
+    private void OptimizationGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
     }
   }
 }

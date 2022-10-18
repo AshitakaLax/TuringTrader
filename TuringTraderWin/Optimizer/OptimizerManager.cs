@@ -53,9 +53,14 @@ namespace TuringTraderWin.Optimizer
       return numIterationsTotal;
     }
 
+    public IEnumerable<AlgorithmParameter> GetParams(IAlgorithm algo)
+    {
+      return AlgorithmParameterDictionary[algo];
+    }
+
     public void SetAlgorithmParameters(IAlgorithm algo, IEnumerable<AlgorithmParameter> parameters)
     {
-      throw new NotImplementedException();
+      AlgorithmParameterDictionary[algo] = parameters.ToList();
     }
   }
 }

@@ -62,6 +62,7 @@ namespace TuringTraderWin.Simulator
       // Initialize all of the Simulators
       Parallel.ForEach(simulators, sim =>
       {
+        
         ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters = new ConcurrentDictionary<string, AlgorithmParameter>(sim.AlgorithmParameters.ToDictionary(param => param.Name));
         sim.Algorithm.Initialize(algorithmParameters, DataSourceManager, sim);
 

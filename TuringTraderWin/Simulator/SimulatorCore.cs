@@ -76,7 +76,7 @@ namespace TuringTraderWin.Simulator
     public int TradingDays { get; set; }
 
     /// <inheritdoc/>
-    public TimeSeries<DateTime> SimTimes { get; set; }
+    public TimeSeries<DateTime> SimTimes { get; set; } = new TimeSeries<DateTime>();
 
     /// <inheritdoc/>
     public bool IsLastBar { get; set; }
