@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataSource;
@@ -14,6 +15,7 @@ namespace TuringTraderWin
     public static IServiceProvider ServiceProvider { get; set; }
     static void ConfigureServices(ServiceCollection services)
     {
+      //TODO: Update to make the file path to the CSV Stock Cache configurable.
       services.AddSingleton<MainWindow>()
         .AddLogging()
         .AddSingleton<ISimulatorManager, SimulatorManager>()
@@ -22,6 +24,7 @@ namespace TuringTraderWin
         .AddTransient<IInstrumentManager, InstrumentManager>()
         .AddTransient<ISimulatorCore, SimulatorCore>()
         .AddSingleton<IDataSourceManager, DataSourceManager>()
+        .AddSingleton<CsvDataSource>(sp => new CsvDataSource(sp.GetRequiredService<ILogger<CsvDataSource>>(), "../../../../../StockData"))
       .AddSingleton<IOptimizerManager, OptimizerManager>();
     }
 

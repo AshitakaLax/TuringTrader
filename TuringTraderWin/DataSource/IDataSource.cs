@@ -13,8 +13,10 @@ namespace TuringTraderWin.DataSource
   /// </summary>
   public interface IDataSource
   {
-    //TODO: Create Priority with the data sources so we could add multiple Data Sources(such as a local CSV file).
-
+    /// <summary>
+    /// Gets or sets the priority of the Data Source.
+    /// </summary>
+    public int Priority { get; set; }
     /// <summary>
     /// Load data between time stamps into memory.
     /// </summary>

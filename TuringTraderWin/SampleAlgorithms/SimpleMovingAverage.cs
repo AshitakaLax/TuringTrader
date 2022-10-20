@@ -82,11 +82,13 @@ namespace TuringTraderWin.SampleAlgorithms
     }
 
 
-    public void HandleBarIncrement(IEnumerable<Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
+    public void HandleBarIncrement(ConcurrentDictionary<string, Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
     {
       // calculate the Simple moving average value for this interation.
 
       // Here is where the logic is.
+      Bar sqqqBar = currentBars["SQQQ"];
+
 
       // items we will need.
       IInstrument instrument = instrumentManager.GetInstrument("SQQQ");

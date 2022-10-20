@@ -18,10 +18,13 @@ namespace TuringTraderWin.DataSource
   {
     private YahooQuotes Quotes;
 
+    
     public YahooDataSource()
     {
       Quotes = new YahooQuotesBuilder().Build();
     }
+
+    public int Priority { get; set; } = 0;
 
     //TODO: Utilize existing libraries to pull in dependency on Yahoo Finance. Also check whether the data already exists in a Cache
     // We will need to have a cache that exists prior to that.

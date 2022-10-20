@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
@@ -201,20 +202,30 @@ namespace TuringTraderWin.Simulator
     public void RunSimulator(CancellationToken cancellationToken)
     {
       // iterate through the time sim's like the other approach does.
-      long numberOfSteps = DataSourceManager.GetDataSource().GetNumberOfTimeSteps();
+      long numberOfSteps = DataSourceManager.GetNumberOfRunSteps();
       DateTime requestedDay = StartTime;
       for (int i = 0; i < numberOfSteps; i++)
       {
         IEnumerable<Bar> singleDayBars = DataSourceManager.GetDataSource().GetFollowingBars(requestedDay);
+
+
+        ConcurrentDictionary<string, Bar> singlePeriodData = new ConcurrentDictionary<string, Bar>();
+        foreach(Bar bar in singleDayBars)
+        {
+          singlePeriodData[bar.Symbol] = bar;
+        }
+
         if(!singleDayBars.Any())
         {
+          //TODO Enhancement to update by bar frequency.e
+          requestedDay = requestedDay.AddDays(1.0);
           continue;
         }
 
-          // update by one day to get the next bar.
-          requestedDay = singleDayBars.First().Time.AddDays(1.0);
+        // update by one day to get the next bar.
+        requestedDay = singleDayBars.First().Time.AddDays(1.0);
 
-        Algorithm.HandleBarIncrement(singleDayBars, this, InstrumentManager);
+        Algorithm.HandleBarIncrement(singlePeriodData, this, InstrumentManager);
 
         if (cancellationToken.IsCancellationRequested)
         {

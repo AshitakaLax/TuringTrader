@@ -18,18 +18,24 @@ namespace TuringTraderWin.DataSource
     private readonly ILogger Logger;
 
 
-    public DataSourceManager(ILogger<DataSourceManager> logger)
+    public DataSourceManager(ILogger<DataSourceManager> logger, CsvDataSource csvDataSource = null)
     {
       Logger = logger;
-      DataSources.Add(new YahooDataSource());
+      if(csvDataSource != null)
+      {
+        DataSources.Add(csvDataSource.Priority, csvDataSource);
+      }
+
+      IDataSource yahooSource = new YahooDataSource();
+      DataSources.Add(yahooSource.Priority, yahooSource);
     }
 
-    public List<IDataSource> DataSources { get; set; } = new List<IDataSource>();
+    public SortedList<int, IDataSource> DataSources { get; set; } = new SortedList<int, IDataSource>();
     public ConcurrentDictionary<IInstrument, IDataSource> DataDictionary { get; set; } = new ConcurrentDictionary<IInstrument, IDataSource>();
 
     public void AddDataSource(IDataSource dataSource)
     {
-      DataSources.Add(dataSource);
+      DataSources.Add(dataSource.Priority, dataSource);
     }
 
     public void AddDataSource(string ticker)
@@ -39,25 +45,61 @@ namespace TuringTraderWin.DataSource
 
     public IDataSource GetDataSource()
     {
-      return DataSources.First();
+      return DataSources.Values[0];
+    }
+
+    public long GetNumberOfRunSteps()
+    {
+      long steps = 0;
+      foreach (KeyValuePair<int, IDataSource> pair in DataSources)
+      {
+        long dataSourceSteps = pair.Value.GetNumberOfTimeSteps();
+        if(dataSourceSteps > steps)
+        {
+          steps = dataSourceSteps;
+        }
+      }
+
+      return steps;
     }
 
     public void LoadDataSources(IEnumerable<IInstrument> instruments, DateTime start, DateTime stop)
     {
-      foreach (IInstrument instrument in instruments)
+
+      Parallel.ForEach(instruments, (instrument) =>
       {
-        foreach(IDataSource dataSource in DataSources)
+        bool instrumentIsSupported = false;
+        foreach (KeyValuePair<int, IDataSource> pair in DataSources)
         {
-          if(dataSource.CanSupportInstrument(instrument))
+          IDataSource dataSource = pair.Value;
+          if (dataSource.CanSupportInstrument(instrument) && !instrumentIsSupported)
           {
+            instrumentIsSupported = true;
             DataDictionary[instrument] = dataSource;
             dataSource.LoadData(instrument, start, stop);
-            // TODO load up the Data Sources for the time range of the simulation here, or whatever is in the cache.
             break;
-
           }
         }
-      }
+        if(!instrumentIsSupported)
+        {
+          Logger.LogWarning($"Instrument {instrument.Name}, doesn't have a supported DataSource.");
+        }
+      });
+
+      //foreach (IInstrument instrument in instruments)
+      //{
+      //  foreach(IDataSource dataSource in DataSources)
+      //  {
+      //    if(dataSource.CanSupportInstrument(instrument))
+      //    {
+      //      DataDictionary[instrument] = dataSource;
+      //      dataSource.LoadData(instrument, start, stop);
+      //      // TODO load up the Data Sources for the time range of the simulation here, or whatever is in the cache.
+      //      break;
+
+      //    }
+      //  }
+      //}
     }
   }
 }

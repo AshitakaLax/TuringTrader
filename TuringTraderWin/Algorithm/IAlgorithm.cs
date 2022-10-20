@@ -31,9 +31,9 @@ namespace TuringTraderWin.Algorithm
     /// This is called each bar increment. 
     /// This could be cancelled between bars.
     /// </summary>
-    /// <param name="currentBars">The current Bars(at the end of the day), null if first.</param>
+    /// <param name="currentBars">The current Bars(at the end of the peroid), null if first. This is KeyValuePair of Ticker and Bar.</param>
     /// <param name="simulatorCore">The simulator information available.</param>
-    void HandleBarIncrement(IEnumerable<Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager);
+    void HandleBarIncrement(ConcurrentDictionary<string, Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager);
     IEnumerable<AlgorithmParameter> GetDefaultParameters { get; }
 
     //TODO Run Async with a Result that has the status of the Run. This would work better if you are running multiple Simulations in parallel.

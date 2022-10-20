@@ -19,6 +19,12 @@ namespace TuringTraderWin.DataSource
     IDataSource GetDataSource();
 
     /// <summary>
+    /// Goes through all of the data sources to determine the number of steps available for the simulation to run.
+    /// </summary>
+    /// <returns>The number of steps/bars in a simulation.</returns>
+    long GetNumberOfRunSteps();
+
+    /// <summary>
     /// Loads data from the sources to 
     /// </summary>
     /// <param name="instruments">The instruments to load.</param>
