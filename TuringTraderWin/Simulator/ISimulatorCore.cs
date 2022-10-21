@@ -155,6 +155,12 @@ namespace TuringTraderWin.Simulator
     /// <returns></returns>
     bool IsValidBar(Bar bar);
 
+    /// <summary>
+    /// Generates a report for the specific Simulation.
+    /// </summary>
+    /// <returns></returns>
+    string GenerateSimulatorReport();
+
     // TODO-LB: Add support for List<IInstrument> OptionChain(DataSource ds)
   }
 }

@@ -8,6 +8,10 @@ namespace TuringTraderWin.Simulator
 {
   public interface ISimulatorPortfolioInfo
   {
+    /// <summary>
+    /// Gets or sets the initial funds you are starting with in your portfolio.
+    /// </summary>
+    double CashContributions { get; set; }
 
     /// <summary>
     /// Currently available cash position. Algorithms will typically

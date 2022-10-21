@@ -49,7 +49,8 @@ namespace TuringTraderWin.Simulator
     {
       if (Simulations.ContainsKey(simulator.Name))
       {
-        throw new InvalidOperationException("Can't add existing Simulator.");
+        return;
+        //throw new InvalidOperationException("Can't add existing Simulator.");
       }
 
       Simulations[simulator.Name] = simulator;
@@ -63,7 +64,7 @@ namespace TuringTraderWin.Simulator
       // Initialize all of the Simulators
       Parallel.ForEach(simulators, sim =>
       {
-        
+        sim.SimulatorPortfolioInfo = new SimulatorPortfolioInfo();
         ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters = new ConcurrentDictionary<string, AlgorithmParameter>(sim.AlgorithmParameters.ToDictionary(param => param.Name));
         IEnumerable<IInstrument> instruments = sim.Algorithm.Initialize(algorithmParameters, DataSourceManager, sim);
         DataSourceManager.LoadDataSources(instruments, sim.StartTime, sim.EndTime);
@@ -72,14 +73,25 @@ namespace TuringTraderWin.Simulator
 
       });
 
+      ConcurrentDictionary<ISimulatorCore, Task> simTasks = new ConcurrentDictionary<ISimulatorCore, Task>();
       // Start all of the Simulators on separate Threads and 
       Parallel.ForEach(simulators, sim =>
       {
         Task simTask = Task.Run(() =>
         {
           sim.RunSimulator(cancellationTokens[sim].Token);
-        }, cancellationTokens[sim].Token);        
+        }, cancellationTokens[sim].Token);
+        simTasks[sim] = simTask;
       });
+
+      foreach(Task simTask in simTasks.Values)
+      {
+        // TODO update to publish results to a specific UI location as results come in.
+        simTask.Wait();
+      }
+
+      string allSimulations = string.Join(";", simulators.Select(sim => sim.GenerateSimulatorReport()));
+      MessageBox.Show(allSimulations);
     }
 
     public void SetSimulatorCompleteHandler(Action<ISimulatorPortfolioInfo, ISimulatorCore> handler)

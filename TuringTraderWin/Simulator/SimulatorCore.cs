@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -10,6 +11,7 @@ using TuringTraderWin.Algorithm;
 using TuringTraderWin.Calendar;
 using TuringTraderWin.DataSource;
 using TuringTraderWin.DataStructures;
+using TuringTraderWin.Extensions;
 using TuringTraderWin.Instruments;
 using TuringTraderWin.Optimizer;
 using TuringTraderWin.Orders;
@@ -115,7 +117,7 @@ namespace TuringTraderWin.Simulator
           Type = OrderType.cash,
           Price = amount,
         };
-
+        SimulatorPortfolioInfo.CashContributions += amount;
         QueueOrder(order);
       }
     }
@@ -124,6 +126,17 @@ namespace TuringTraderWin.Simulator
     public virtual double FillModel(Order orderTicket, Bar barOfExecution, double theoreticalPrice)
     {
       return theoreticalPrice;
+    }
+
+    public string GenerateSimulatorReport()
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.AppendLine($"SIMULATION: {this.Name}");
+      sb.AppendLine("Simulation with Instruments:");
+      sb.AppendLine(String.Join(',', InstrumentManager.Positions.Keys.Select(instrument => instrument.Ticker)));
+      sb.AppendLine($"Total Contributions:{SimulatorPortfolioInfo.CashContributions.PrintCash()}");
+      sb.AppendLine($"Current Value:{SimulatorPortfolioInfo.Cash.PrintCash()}");
+      return sb.ToString();
     }
 
 
@@ -275,8 +288,13 @@ namespace TuringTraderWin.Simulator
     {
       foreach(IInstrument instrument in DataSourceManager.Data.Keys)
       {
+        // Check whether there are any positions with the specific instrument.
+        if(!InstrumentManager.Positions.ContainsKey(instrument))
+        {
+          continue;
+        }
+
         Bar lastBar = DataSourceManager.Data[instrument].Last();
-        
         Transaction transaction = new Transaction()
         {
           Symbol = instrument.Ticker,
@@ -311,6 +329,7 @@ namespace TuringTraderWin.Simulator
           // to make things similar to stocks, a positive quantity
           // results in a debit, a negative quantity in a credit
           SimulatorPortfolioInfo.Cash -= ticket.Quantity * ticket.Price;
+          
 
           Transaction cashTransaction = new Transaction()
           {
@@ -368,7 +387,7 @@ namespace TuringTraderWin.Simulator
             break;
 
           case OrderType.openNextBar:
-            if(CurrentTradingBar >= DataSourceManager.GetNumberOfRunSteps())
+            if(CurrentTradingBar+1 >= DataSourceManager.GetNumberOfRunSteps())
             {
               continue;// can't make the next trade since we don't know what the next bar is. TODO: enhancement to add new trailing data.
             }

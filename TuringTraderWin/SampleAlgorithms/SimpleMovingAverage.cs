@@ -49,8 +49,9 @@ namespace TuringTraderWin.SampleAlgorithms
 
     public IEnumerable<IInstrument> Initialize(ConcurrentDictionary<string, AlgorithmParameter> algorithmParameters, IDataSourceManager dataSourceManager, ISimulatorCore simulatorCore)
     {
+      simulatorCore.Name = "Simple Moving Average";
       //Setup the Start and End times
-      simulatorCore.StartTime = DateTime.Parse("10/01/2021", CultureInfo.InvariantCulture);
+      simulatorCore.StartTime = DateTime.Parse("9/20/2022", CultureInfo.InvariantCulture);
       simulatorCore.EndTime = DateTime.Parse("10/01/2022", CultureInfo.InvariantCulture);
 
       // Setup the initial Deposit
