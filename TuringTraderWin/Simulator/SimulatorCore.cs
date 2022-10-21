@@ -83,13 +83,16 @@ namespace TuringTraderWin.Simulator
     public bool IsLastBar { get; set; }
 
     /// <inheritdoc/>
-    public List<IOrder> PendingOrders { get; set; } = new List<IOrder>();
+    public List<Order> PendingOrders { get; set; } = new List<Order>();
 
     /// <inheritdoc/>
     public IAlgorithm Algorithm { get; set; }
 
     /// <inheritdoc/>
     public IEnumerable<AlgorithmParameter> AlgorithmParameters { get; set; }
+
+    /// <inheritdoc/>
+    public long CurrentTradingBar { get; set; }
 
     /// <inheritdoc/>
     public DateTime CalcNextSimTime(DateTime timestamp)
@@ -118,7 +121,7 @@ namespace TuringTraderWin.Simulator
     }
 
     /// <inheritdoc/>
-    public virtual double FillModel(IOrder orderTicket, Bar barOfExecution, double theoreticalPrice)
+    public virtual double FillModel(Order orderTicket, Bar barOfExecution, double theoreticalPrice)
     {
       return theoreticalPrice;
     }
@@ -133,8 +136,9 @@ namespace TuringTraderWin.Simulator
     /// <inheritdoc/>
     public virtual void InitializeSimTimes()
     {
+      CurrentTradingBar = 0;
       // This is equivalent to the SimTimes Getter.
-      if(WarmupStartTime == null || WarmupStartTime > StartTime)
+      if (WarmupStartTime == null || WarmupStartTime > StartTime)
       {
         WarmupStartTime = StartTime;
       }
@@ -192,7 +196,7 @@ namespace TuringTraderWin.Simulator
     }
 
     /// <inheritdoc/>
-    public void QueueOrder(IOrder order)
+    public void QueueOrder(Order order)
     {
       order.QueueTime = SimTimes.BarsAvailable > 0 ? SimTimes[0] : default;
       PendingOrders.Add(order);
@@ -204,28 +208,32 @@ namespace TuringTraderWin.Simulator
       // iterate through the time sim's like the other approach does.
       long numberOfSteps = DataSourceManager.GetNumberOfRunSteps();
       DateTime requestedDay = StartTime;
-      for (int i = 0; i < numberOfSteps; i++)
+      for (CurrentTradingBar = 0; CurrentTradingBar < numberOfSteps; CurrentTradingBar++)
       {
-        IEnumerable<Bar> singleDayBars = DataSourceManager.GetDataSource().GetFollowingBars(requestedDay);
+        //IEnumerable<Bar> singleDayBars = DataSourceManager.GetDataSource().GetFollowingBars(requestedDay);
+        
+        //ConcurrentDictionary<string, Bar> singlePeriodData = new ConcurrentDictionary<string, Bar>();
+        //foreach(Bar bar in singleDayBars)
+        //{
+        //  singlePeriodData[bar.Symbol] = bar;
+        //}
 
+        //if(!singleDayBars.Any())
+        //{
+        //  //TODO Enhancement to update by bar frequency.e
+        //  requestedDay = requestedDay.AddDays(1.0);
+        //  continue;
+        //}
 
-        ConcurrentDictionary<string, Bar> singlePeriodData = new ConcurrentDictionary<string, Bar>();
-        foreach(Bar bar in singleDayBars)
-        {
-          singlePeriodData[bar.Symbol] = bar;
-        }
+        //// update by one day to get the next bar.
+        //requestedDay = singleDayBars.First().Time.AddDays(1.0);
 
-        if(!singleDayBars.Any())
-        {
-          //TODO Enhancement to update by bar frequency.e
-          requestedDay = requestedDay.AddDays(1.0);
-          continue;
-        }
+        // There are 2 different ideal approachs for handling all potential inputs
+        // The ideal would be to utilize an Index of the point where we are in the data structure, while Not accessing the data prior to it.
+        // This approach will provide a very performant approach once all of the data is loaded into the dataManager.
 
-        // update by one day to get the next bar.
-        requestedDay = singleDayBars.First().Time.AddDays(1.0);
-
-        Algorithm.HandleBarIncrement(singlePeriodData, this, InstrumentManager);
+        Algorithm.HandleBarIncrement(DataSourceManager.Data, (int)CurrentTradingBar, this, InstrumentManager);
+        //Algorithm.HandleBarIncrement(singlePeriodData, this, InstrumentManager);
 
         if (cancellationToken.IsCancellationRequested)
         {
@@ -235,8 +243,10 @@ namespace TuringTraderWin.Simulator
 
         // handle orders
         ExecuteOrders();
-
+        PendingOrders.Clear();
       }
+      //close out all positions with the closing value of the last bar.
+      CloseAllPositons();
     }
 
     public void Withdraw(double amount)
@@ -258,9 +268,43 @@ namespace TuringTraderWin.Simulator
       }
     }
 
+    /// <summary>
+    /// Closes all of the positions and updates the portfolio.
+    /// </summary>
+    private void CloseAllPositons()
+    {
+      foreach(IInstrument instrument in DataSourceManager.Data.Keys)
+      {
+        Bar lastBar = DataSourceManager.Data[instrument].Last();
+        
+        Transaction transaction = new Transaction()
+        {
+          Symbol = instrument.Ticker,
+          Type = TransactionType.Equity,
+          Order = new Order()
+          {
+            BarOfExecution = lastBar,
+            Instrument = instrument,
+            IsBuy = false,
+            Price = lastBar.Close,
+            Quantity = InstrumentManager.Positions[instrument],
+            QueueTime = lastBar.Time,
+            Type = OrderType.endOfSimFakeClose
+          },
+          BarOfExecution = lastBar,
+          FillPrice = lastBar.Close,
+          Commission = 0.0
+        };
+
+        SimulatorPortfolioInfo.Cash = SimulatorPortfolioInfo.Cash + (transaction.FillPrice * transaction.Order.Quantity);
+
+        TransactionHistory.AddTransaction(transaction);
+      }
+    }
+
     private void ExecuteOrders()
     {
-      foreach (IOrder ticket in PendingOrders)
+      foreach (Order ticket in PendingOrders)
       {
         if (ticket.Type == OrderType.cash)
         {
@@ -290,17 +334,23 @@ namespace TuringTraderWin.Simulator
           //};
           //Log.Add(l);
 
-          return;
+          continue;//move on to the next order.
         }
 
         // no trades during warmup phase
-        if (SimTimes[0] < StartTime)
-          return;
+        //if (SimTimes[0] < StartTime)
+        //  return;
 
         // conditional orders: cancel, if condition not met
         if (ticket.Condition != null
         && !ticket.Condition(ticket.Instrument))
           return;
+        
+        // if it is a sell, and we have no positions go to the next order
+        if(!ticket.IsBuy && !InstrumentManager.Positions.Any())
+        {
+          continue;
+        }
 
         IInstrument instrument = ticket.Instrument;
         Bar execBar = null;
@@ -318,11 +368,30 @@ namespace TuringTraderWin.Simulator
             break;
 
           case OrderType.openNextBar:
+            if(CurrentTradingBar >= DataSourceManager.GetNumberOfRunSteps())
+            {
+              continue;// can't make the next trade since we don't know what the next bar is. TODO: enhancement to add new trailing data.
+            }
+
+            // Use the next bar to execute the trade.
+            Bar nextBar = DataSourceManager.Data[ticket.Instrument][(int)CurrentTradingBar + 1];
+            if (ticket.Quantity == 0 && ticket.IsBuy)
+            {
+              // get the most shares we can afford.
+              ticket.Quantity = (int)(SimulatorPortfolioInfo.Cash / nextBar.Open);
+            }
+            else if(ticket.Quantity == 0)
+            {
+              // sell out all of the positon.
+              ticket.Quantity = (int)InstrumentManager.Positions[ticket.Instrument];
+            }
+
             execBar = ticket.BarOfExecution;
-            execTime = SimTimes[0];
-            price = execBar.HasBidAsk
-                ? (ticket.Quantity > 0 ? execBar.Ask : execBar.Bid)
-                : execBar.Open;
+            execTime = nextBar.Time;
+            price = nextBar.Open;
+            //price = execBar.HasBidAsk
+            //    ? (ticket.Quantity > 0 ? execBar.Ask : execBar.Bid)
+            //    : execBar.Open;
             break;
 
           case OrderType.stopNextBar:
@@ -386,10 +455,11 @@ namespace TuringTraderWin.Simulator
 
 
         // run fill model. default fill is theoretical price
-        var fillPrice = ticket.Type == OrderType.cash
-            || ticket.Type == OrderType.optionExpiryClose
-                ? price
-                : FillModel(ticket, execBar, price);
+        var fillPrice = price;
+        //var fillPrice = ticket.Type == OrderType.cash
+        //    || ticket.Type == OrderType.optionExpiryClose
+        //        ? price
+        //        : FillModel(ticket, execBar, price);
 
         // adjust position, unless its the end-of-sim order
         // this is to ensure that the Positions collection can
@@ -416,27 +486,58 @@ namespace TuringTraderWin.Simulator
             ? Math.Abs(numberOfShares * SimulatorPortfolioInfo.CommissionPerShare)
             : 0.00;
 
+
+        // Nothing to buy
+        if (numberOfShares == 0)
+        {
+          continue;
+        }
+
         // pay for it, unless it's the end-of-sim order
         // same reasoning as for adjustment of position applies
-        if (ticket.Type != OrderType.endOfSimFakeClose)
-        {
-          SimulatorPortfolioInfo.Cash = SimulatorPortfolioInfo.Cash
-              - numberOfShares * fillPrice
-              - commission;
-        }
+        //if (ticket.Type != OrderType.endOfSimFakeClose)
+        //{
+        //  SimulatorPortfolioInfo.Cash = SimulatorPortfolioInfo.Cash
+        //      - numberOfShares * fillPrice
+        //      - commission;
+        //}
 
         // add log entry
         Transaction transaction = new Transaction()
         {
           Symbol = ticket.Instrument.Ticker,
-          Type = ticket.Instrument.IsOption
-                ? (ticket.Instrument.IsOptionPut ? TransactionType.OptionPut : TransactionType.OptionCall)
-                : TransactionType.Equity,
+          Type = TransactionType.Equity,
+          //Type = ticket.Instrument.IsOption
+          //      ? (ticket.Instrument.IsOptionPut ? TransactionType.OptionPut : TransactionType.OptionCall)
+          //      : TransactionType.Equity,
           Order = ticket,
           BarOfExecution = execBar,
           FillPrice = fillPrice,
           Commission = commission
         };
+
+        if(ticket.IsBuy)
+        {
+          // get existing shares if there are any
+          if(InstrumentManager.Positions.ContainsKey(ticket.Instrument))
+          {
+            InstrumentManager.Positions[ticket.Instrument] += numberOfShares;
+          }
+          else
+          {
+            InstrumentManager.Positions[ticket.Instrument] = numberOfShares;
+          }
+          SimulatorPortfolioInfo.Cash = SimulatorPortfolioInfo.Cash
+              - numberOfShares * fillPrice
+              - commission;
+        }
+        else
+        {
+          InstrumentManager.Positions[ticket.Instrument] = InstrumentManager.Positions[ticket.Instrument] - numberOfShares;
+          SimulatorPortfolioInfo.Cash = SimulatorPortfolioInfo.Cash
+              + numberOfShares * fillPrice
+              - commission;
+        }
         TransactionHistory.AddTransaction(transaction);
       }
     }

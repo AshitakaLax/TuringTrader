@@ -26,7 +26,7 @@ namespace TuringTraderWin.Orders
     /// <summary>
     /// Gets or sets the Order associated with the Transaction.
     /// </summary>
-    public IOrder Order { get; set; }
+    public Order Order { get; set; }
 
     /// <summary>
     /// Gets or sets the bar that triggered the order.

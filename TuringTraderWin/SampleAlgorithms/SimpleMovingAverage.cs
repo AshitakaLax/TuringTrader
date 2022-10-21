@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataSource;
 using TuringTraderWin.DataStructures;
+using TuringTraderWin.Extensions;
 using TuringTraderWin.Instruments;
 using TuringTraderWin.Simulator;
 
@@ -82,16 +83,24 @@ namespace TuringTraderWin.SampleAlgorithms
     }
 
 
-    public void HandleBarIncrement(ConcurrentDictionary<string, Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
+    //public void HandleBarIncrement(ConcurrentDictionary<string, Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
+    public void HandleBarIncrement(ConcurrentDictionary<IInstrument, List<Bar>> data, int index, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
     {
       // calculate the Simple moving average value for this interation.
+      IInstrument instrument = data.GetInstrumentByTicker("SQQQ");
+      Bar currentBar = data[instrument][index];
 
-      // Here is where the logic is.
-      Bar sqqqBar = currentBars["SQQQ"];
-
-
+      if(currentBar.Close > currentBar.Open)
+      {
+        this.Buy(instrument, simulatorCore, currentBar);
+      }
+      if(currentBar.Close < currentBar.Open)
+      {
+        this.Sell(instrument, simulatorCore, currentBar);
+      }
+      //TODO simplify the Withdrawl process to be like buy.
       // items we will need.
-      IInstrument instrument = instrumentManager.GetInstrument("SQQQ");
+      //IInstrument instrument = instrumentManager.GetInstrument("SQQQ");
       // InstrumentManager to get all of the different investments we are interested in.
       // It would be good to get these by their Ticker Symbol.
       // We should be able to leverage all of the existing Extension methods that are apart of the original Turing Trader.

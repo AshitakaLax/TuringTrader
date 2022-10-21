@@ -7,13 +7,15 @@ namespace TuringTraderWin.Orders
   /// <summary>
   /// Order ticket
   /// </summary>
-  public class Order : IOrder
+  public class Order
   {
     /// <inheritdoc/>
     public IInstrument Instrument { get; set; }
 
     /// <inheritdoc/>
     public Bar BarOfExecution { get; set; }
+
+    public bool IsBuy { get; set; } = true;
 
     /// <inheritdoc/>
     public OrderType Type { get; set; }

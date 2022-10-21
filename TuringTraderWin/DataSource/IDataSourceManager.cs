@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
 
 namespace TuringTraderWin.DataSource
@@ -12,6 +14,8 @@ namespace TuringTraderWin.DataSource
   /// </summary>
   public interface IDataSourceManager
   {
+    ConcurrentDictionary<IInstrument, List<Bar>> Data { get; set; }
+
     /// <summary>
     /// Gets the Data Source.
     /// </summary>

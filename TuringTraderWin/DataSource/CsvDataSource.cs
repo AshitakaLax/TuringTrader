@@ -96,9 +96,10 @@ namespace TuringTraderWin.DataSource
       return records.Select(bar => new Bar(bar.Name, bar.Date, bar.Open, bar.High, bar.Low, bar.Close, (long)bar.Volume));
     }
 
-    public void LoadData(IInstrument instrument, DateTime startTime, DateTime endTime)
+    public List<Bar> LoadData(IInstrument instrument, DateTime startTime, DateTime endTime)
     {
       InstrumentDataCache[instrument] = LoadData(instrument.Ticker, startTime, endTime);
+      return InstrumentDataCache[instrument].ToList();
     }
 
     public void UpdateData(List<Bar> data, DateTime startTime, DateTime endTime)

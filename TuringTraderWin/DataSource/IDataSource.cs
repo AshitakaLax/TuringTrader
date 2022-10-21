@@ -25,6 +25,7 @@ namespace TuringTraderWin.DataSource
     /// <param name="endTime">end time stamp</param>
     IEnumerable<Bar> LoadData(string ticker, DateTime startTime, DateTime endTime);
 
+
     /// <summary>
     /// Gets the greatest number of steps for the data available.
     /// </summary>
@@ -37,7 +38,7 @@ namespace TuringTraderWin.DataSource
     /// <param name="instrument">The data to load.</param>
     /// <param name="startTime">beginning time stamp</param>
     /// <param name="endTime">end time stamp</param>
-    void LoadData(IInstrument instrument, DateTime startTime, DateTime endTime);
+    List<Bar> LoadData(IInstrument instrument, DateTime startTime, DateTime endTime);
 
     void UpdateData(List<Bar> data, DateTime startTime, DateTime endTime);
 

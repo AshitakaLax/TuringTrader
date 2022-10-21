@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TuringTrader.Simulator;
+using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
 
 namespace TuringTraderWin.DataSource
@@ -32,6 +32,8 @@ namespace TuringTraderWin.DataSource
 
     public SortedList<int, IDataSource> DataSources { get; set; } = new SortedList<int, IDataSource>();
     public ConcurrentDictionary<IInstrument, IDataSource> DataDictionary { get; set; } = new ConcurrentDictionary<IInstrument, IDataSource>();
+
+    public ConcurrentDictionary<IInstrument, List<Bar>> Data{ get; set; } = new ConcurrentDictionary<IInstrument, List<Bar>>();
 
     public void AddDataSource(IDataSource dataSource)
     {
@@ -76,7 +78,7 @@ namespace TuringTraderWin.DataSource
           {
             instrumentIsSupported = true;
             DataDictionary[instrument] = dataSource;
-            dataSource.LoadData(instrument, start, stop);
+            Data[instrument] = dataSource.LoadData(instrument, start, stop);
             break;
           }
         }

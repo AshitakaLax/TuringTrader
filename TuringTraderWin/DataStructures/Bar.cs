@@ -187,5 +187,6 @@ namespace TuringTraderWin.DataStructures
     /// Flag indicating validity of option fields.
     /// </summary>
     public bool IsOption { get; private set; }
+    public long Index { get; private set; }
   }
 }

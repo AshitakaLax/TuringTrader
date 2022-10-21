@@ -29,6 +29,11 @@ namespace TuringTraderWin.Simulator
     /// </summary>
     string Name { get; set; }
 
+    /// <summary>
+    /// Gets or sets the current location you are in time.
+    /// </summary>
+    long CurrentTradingBar { get; set; }
+
     DateTime StartTime { get; set; }
     DateTime? WarmupStartTime { get; set; }
 
@@ -58,7 +63,7 @@ namespace TuringTraderWin.Simulator
     /// <summary>
     /// List of pending orders.
     /// </summary>
-    List<IOrder> PendingOrders { get; set; }
+    List<Order> PendingOrders { get; set; }
 
     // Positions is apart of the IInstrumentsManager now.
 
@@ -96,7 +101,7 @@ namespace TuringTraderWin.Simulator
     /// Queue's an order with the simulator.
     /// </summary>
     /// <param name="order">The order to execute.</param>
-    void QueueOrder(IOrder order);
+    void QueueOrder(Order order);
 
     /// <summary>
     /// Order fill model. This method is only called for those orders
@@ -109,7 +114,7 @@ namespace TuringTraderWin.Simulator
     /// <param name="barOfExecution">bar of order execution</param>
     /// <param name="theoreticalPrice">theoretical fill price</param>
     /// <returns>custom fill price. default: theoretical fill price</returns>
-    double FillModel(IOrder orderTicket, Bar barOfExecution, double theoreticalPrice);
+    double FillModel(Order orderTicket, Bar barOfExecution, double theoreticalPrice);
 
 
     /// <summary>
