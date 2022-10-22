@@ -36,7 +36,8 @@ namespace TuringTraderWin.Algorithm
         {
             //We can enhance this, but the idea is to have a simple creation of the algo's.
             AlgorithmList.Add(new SimpleMovingAverage());
-        }
+            AlgorithmList.Add(new TripleMovingAverage());
+    }
 
         /// <summary>
         /// This runs the algorithm.

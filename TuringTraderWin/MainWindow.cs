@@ -62,17 +62,26 @@ namespace TuringTraderWin
 
     private void RunButton_Click(object sender, EventArgs e)
     {
-      ISimulatorCore sim = ServiceProvider.GetService<ISimulatorCore>();
-      sim.Name = AlgorithmComboBox.Text;
-      sim.Algorithm = AlgorithmManager.SelectedAlgorithm;
-      sim.AlgorithmParameters = GetGridAlgorithmParameters();
+      //ISimulatorCore sim = ServiceProvider.GetService<ISimulatorCore>();
+      //sim.Name = AlgorithmComboBox.Text;
+      //sim.Algorithm = AlgorithmManager.SelectedAlgorithm;
+      //sim.AlgorithmParameters = GetGridAlgorithmParameters();
       OptimizerManager.SetAlgorithmParameters(AlgorithmManager.SelectedAlgorithm, GetGridAlgorithmParameters());
-      
+      Dictionary<string, IEnumerable<AlgorithmParameter>> simParameters = OptimizerManager.GenerateAllAlgorithmCombinations(AlgorithmManager.SelectedAlgorithm, GetGridAlgorithmParameters().ToList());
       // Update the sim algorithm parameters, or these should be set by the optimizerManager.
+      foreach (KeyValuePair<string, IEnumerable<AlgorithmParameter>> simPair in simParameters)
+      {
+        ISimulatorCore sim = ServiceProvider.GetService<ISimulatorCore>();
+        sim.Name = simPair.Key;
+        sim.Algorithm = AlgorithmManager.SelectedAlgorithm;
+        sim.AlgorithmParameters = simPair.Value;
+
+        SimulatorManager.AddSimulator(sim);
+      }
       // and we should just get them.
-      SimulatorManager.AddSimulator(sim);
-      SimulatorManager.RunSimulators(new List<string>() { sim.Name });
+      SimulatorManager.RunSimulators(simParameters.Keys);
     }
+
     private IEnumerable<AlgorithmParameter> GetGridAlgorithmParameters()
     {
       List<AlgorithmParameter> parameters = new List<AlgorithmParameter>();

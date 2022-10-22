@@ -36,5 +36,13 @@ namespace TuringTraderWin.Optimizer
     /// <param name="algo">The algorithm to utilize.</param>
     /// <returns>The number of iterations.</returns>
     int GetNumberOfIterations(IAlgorithm algo);
+
+    /// <summary>
+    /// Gets all of the different Parameter combinations with names for each combination for the simulation.
+    /// </summary>
+    /// <param name="algo">The algo(simplify to just the name).</param>
+    /// <param name="selectedParameters">the selected Parameters to utilize.</param>
+    /// <returns></returns>
+    Dictionary<string, IEnumerable<AlgorithmParameter>> GenerateAllAlgorithmCombinations(IAlgorithm algo, List<AlgorithmParameter> selectedParameters);
   }
 }
