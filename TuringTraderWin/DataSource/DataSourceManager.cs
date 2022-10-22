@@ -26,8 +26,8 @@ namespace TuringTraderWin.DataSource
         DataSources.Add(csvDataSource.Priority, csvDataSource);
       }
 
-      IDataSource yahooSource = new YahooDataSource();
-      DataSources.Add(yahooSource.Priority, yahooSource);
+      //IDataSource yahooSource = new YahooDataSource();
+      //DataSources.Add(yahooSource.Priority, yahooSource);
     }
 
     public SortedList<int, IDataSource> DataSources { get; set; } = new SortedList<int, IDataSource>();

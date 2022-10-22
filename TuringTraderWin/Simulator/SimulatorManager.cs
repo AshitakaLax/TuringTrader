@@ -9,6 +9,7 @@ using TuringTraderWin.Algorithm;
 using TuringTraderWin.DataSource;
 using TuringTraderWin.Instruments;
 using TuringTraderWin.Optimizer;
+using TuringTraderWin.Orders;
 
 namespace TuringTraderWin.Simulator
 {
@@ -70,7 +71,6 @@ namespace TuringTraderWin.Simulator
         DataSourceManager.LoadDataSources(instruments, sim.StartTime, sim.EndTime);
         
         cancellationTokens[sim] = new CancellationTokenSource();
-
       });
 
       ConcurrentDictionary<ISimulatorCore, Task> simTasks = new ConcurrentDictionary<ISimulatorCore, Task>();
@@ -90,7 +90,9 @@ namespace TuringTraderWin.Simulator
         simTask.Wait();
       }
 
-      string allSimulations = string.Join(";", simulators.Select(sim => sim.GenerateSimulatorReport()));
+      string allSimulations = string.Join(Environment.NewLine, simulators.Select(sim => sim.GenerateSimulatorReport()));
+
+      File.WriteAllText("Results.txt", allSimulations);
       MessageBox.Show(allSimulations);
     }
 

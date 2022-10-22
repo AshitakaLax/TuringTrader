@@ -1,12 +1,21 @@
 ﻿
+using CsvHelper.Configuration;
+
 namespace TuringTraderWin.DataStructures
 {
+  public sealed class BarMap : ClassMap<FidelityCsvBar>
+  {
+    public BarMap()
+    {
+      AutoMap();
+    }
+  }
   /// <summary>
   /// Container class holding all fields of a single bar, most notably
   /// time stamps and price information. Bar objects are read-only in nature,
   /// therefore all values need to be provided during object construction.
   /// </summary>
-  public class Bar
+  public class Bar 
   {
 
     /// <summary>

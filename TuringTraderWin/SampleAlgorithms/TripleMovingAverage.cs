@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TuringTraderWin.Algorithm;
@@ -62,8 +63,8 @@ namespace TuringTraderWin.SampleAlgorithms
     {
       simulatorCore.Name = "Triple Moving Average";
       //Setup the Start and End times
-      simulatorCore.StartTime = DateTime.Parse("9/28/2022", CultureInfo.InvariantCulture);
-      simulatorCore.EndTime = DateTime.Parse("9/30/2022", CultureInfo.InvariantCulture);
+      simulatorCore.StartTime = DateTime.Parse("10/18/2022", CultureInfo.InvariantCulture);
+      simulatorCore.EndTime = DateTime.Parse("10/21/2022", CultureInfo.InvariantCulture);
 
       // Setup the initial Deposit
       simulatorCore.Deposit(30000);
@@ -98,19 +99,69 @@ namespace TuringTraderWin.SampleAlgorithms
     public ConcurrentDictionary<IInstrument, List<double>> MediumSMA { get; set; } = new ConcurrentDictionary<IInstrument, List<double>>();
     public ConcurrentDictionary<IInstrument, List<double>> SlowSMA { get; set; } = new ConcurrentDictionary<IInstrument, List<double>>();
 
+    private bool BearBuilding = false;
+    private bool BullBuilding = false;
     // TODO: Determine whether it would be better to have a Initialize indicators(which we could also do in parallel).
     //public void HandleBarIncrement(ConcurrentDictionary<string, Bar> currentBars, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
     public void HandleBarIncrement(ConcurrentDictionary<IInstrument, List<Bar>> data, int index, ISimulatorCore simulatorCore, IInstrumentManager instrumentManager)
     {
       // calculate the Simple moving average value for this interation.
+      // Handle Bear growth
       IInstrument bearInstrument = data.GetInstrumentByTicker("SQQQ");
       InitializeSMAInstruments(data, simulatorCore.AlgorithmParameters, bearInstrument);
       Bar currentBearBar = data[bearInstrument][index];
+      int currentPosition = instrumentManager.Positions.ContainsKey(bearInstrument) ? instrumentManager.Positions[bearInstrument] : 0;
+      try
+      {
+        HandleBuyOrSellInstruments(simulatorCore, bearInstrument, index, currentBearBar, currentPosition, ref BearBuilding);
+      }
+      catch(Exception ex)
+      {
+        throw ex;
+      }
 
+      // Handle Bull growth.
       IInstrument bullInstrument = data.GetInstrumentByTicker("TQQQ");
       InitializeSMAInstruments(data, simulatorCore.AlgorithmParameters, bullInstrument);
       Bar currentBullBar = data[bullInstrument][index];
 
+       currentPosition = instrumentManager.Positions.ContainsKey(bullInstrument) ? instrumentManager.Positions[bullInstrument] : 0;
+      try { 
+      HandleBuyOrSellInstruments(simulatorCore, bullInstrument, index, currentBullBar, currentPosition, ref BullBuilding);
+    }
+      catch(Exception ex)
+      {
+        throw ex;
+      }
+}
+
+    private void HandleBuyOrSellInstruments(ISimulatorCore simulatorCore, IInstrument instrument, int index, Bar currentBar, int currentPosition, ref bool isSlopeBuilding)
+    {
+      List<double> fastSMA = FastSMA[instrument];
+      List<double> mediumSMA = MediumSMA[instrument];
+      List<double> slowSMA = SlowSMA[instrument];
+      int fastPeriod = simulatorCore.AlgorithmParameters.FirstOrDefault(ap => ap.Name == "FAST").Value;
+      int mediumPeriod = simulatorCore.AlgorithmParameters.FirstOrDefault(ap => ap.Name == "MEDIUM").Value;
+      int slowPeriod = simulatorCore.AlgorithmParameters.FirstOrDefault(ap => ap.Name == "SLOW").Value;
+
+      if (index - slowPeriod < slowSMA.Count && index - slowPeriod - 1 > 0)
+      {
+        bool fastSlopeIsPositive = fastSMA[index - fastPeriod] > fastSMA[index - fastPeriod - 1];
+        bool mediumSlopeIsPositive = mediumSMA[index - mediumPeriod] > mediumSMA[index - mediumPeriod - 1];
+        bool slowSlopeIsPositive = slowSMA[index - slowPeriod] > slowSMA[index - slowPeriod - 1];
+
+        if (!isSlopeBuilding && fastSlopeIsPositive && mediumSlopeIsPositive && slowSlopeIsPositive && currentPosition == 0)
+        {
+          isSlopeBuilding = true;
+          this.Buy(instrument, simulatorCore, currentBar);
+        }
+
+        if (isSlopeBuilding && !fastSlopeIsPositive && currentPosition > 0)
+        {
+          isSlopeBuilding = false;
+          this.Sell(instrument, simulatorCore, currentBar);
+        }
+      }
     }
 
 

@@ -42,5 +42,25 @@ namespace TuringTraderWin.Orders
     /// Gets or sets the Commission paid for the transaction.
     /// </summary>
     public double Commission { get; set; }
+
+    public override string ToString()
+    {
+      string transactionStr;
+      if (Type == TransactionType.Cash)
+      {
+        transactionStr = $"Deposited:{Order.Price}";
+        return transactionStr;
+      }
+
+      if (Order.IsBuy)
+      {
+        transactionStr = $"Buy {Symbol}: {FillPrice * Order.Quantity:C}({Order.Quantity}) ";
+      }
+      else
+      {
+        transactionStr = $"Sell {Symbol}: {FillPrice * Order.Quantity:C}({Order.Quantity}) ";
+      }
+      return transactionStr;
+    }
   }
 }

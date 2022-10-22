@@ -24,7 +24,7 @@ namespace TuringTraderWin
         .AddTransient<IInstrumentManager, InstrumentManager>()
         .AddTransient<ISimulatorCore, SimulatorCore>()
         .AddSingleton<IDataSourceManager, DataSourceManager>()
-        .AddSingleton<CsvDataSource>(sp => new CsvDataSource(sp.GetRequiredService<ILogger<CsvDataSource>>(), "../../../../../StockData"))
+        .AddSingleton<CsvDataSource>(sp => new CsvDataSource(sp.GetRequiredService<ILogger<CsvDataSource>>(), Path.Combine("..", "..", "..", "..", "StockData")))
       .AddSingleton<IOptimizerManager, OptimizerManager>();
     }
 

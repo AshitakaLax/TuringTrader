@@ -8,21 +8,22 @@ using System.Threading.Tasks;
 namespace TuringTraderWin.DataStructures
 {
   /// <summary>
-  /// This utilizes the getSandP.py script to fetch the stocks for a specific time range
+  /// This utilizes the Fidelity Export from thair Trader Pro.
   /// </summary>
-  public class CsvBar
+  public class FidelityCsvBar
   {
+
+    //[Name("Date")]
     public DateTime Date { get; set; }
-    public DateTime? Time { get; set; }
-    public double High { get; set; }
-    public double Low { get; set; }
+    //[Name("Time")]
+    public DateTime Time { get; set; }
     public double Open { get; set; }
+    public double High { get; set; }
+    //[Name("Low")]
+    public double Low { get; set; }
+    //[Name("Close")]
     public double Close { get; set; }
+    //[Name("Volume")]
     public double Volume { get; set; }
-
-    [Name("Adj Close")]
-    public double? AdjClose { get; set; }
-
-    public string Name { get; set; }
   }
 }

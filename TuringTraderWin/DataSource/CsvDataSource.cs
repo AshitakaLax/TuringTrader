@@ -3,9 +3,12 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TuringTraderWin.DataStructures;
 using TuringTraderWin.Instruments;
@@ -88,12 +91,46 @@ namespace TuringTraderWin.DataSource
       {
         return null;
       }
+      List<Bar> records = new List<Bar>();
+      // Read the file and display it line by line.  
+      foreach (string line in File.ReadLines(csvFilePath))
+      {
+        // Skip the first line.
+        if(line.StartsWith("Date"))
+        {
+          continue;
+        }
+        string[] cell = line.Split(',');
+        DateTime time = DateTime.ParseExact(cell[0] + " "+ cell[1], "MM/dd/yyyy h:mmtt", null); //"10/21/2022,3:39PM"
+        double open = double.Parse(cell[2]);
+        double high = double.Parse(cell[3]);
+        double low = double.Parse(cell[4]);
+        double close = double.Parse(cell[5]);
+        long volume = long.Parse(cell[6]);
+        records.Add(new Bar(ticker, time, open, high, low, close, volume));
+      }
 
-      using var reader = new StreamReader(csvFilePath);
-      using var csv = new CsvReader(reader);
-      IEnumerable<CsvBar> records = csv.GetRecords<CsvBar>();
+      
       Logger.LogInformation($"Read {records.Count()} records for ticker {ticker}.");
-      return records.Select(bar => new Bar(bar.Name, bar.Date, bar.Open, bar.High, bar.Low, bar.Close, (long)bar.Volume));
+      return records;
+      //if (!records.Any())
+      //{
+      //  Logger.LogWarning($"Could not read any records for ticker {ticker}.");
+      //  return Enumerable.Empty<Bar>();
+      //}
+
+      //if (DoesPropertyExist(records.First(), "Name"))
+      //{
+      //  // parse the bulk times.
+      //  return records.Select(bar => new Bar(bar.Name, DateTime.Parse(bar.Date), bar.Open, bar.High, bar.Low, bar.Close, (long)bar.Volume));
+      //}
+      // Fidelity export
+      //return records.Select(bar =>
+      //    {
+      //      return new Bar(ticker, bar.Date.ToDateTime(bar.Time), bar.Open, bar.High, bar.Low, bar.Close, (long)bar.Volume);
+      //    });
+
+      return null;
     }
 
     public List<Bar> LoadData(IInstrument instrument, DateTime startTime, DateTime endTime)
@@ -128,7 +165,7 @@ namespace TuringTraderWin.DataSource
       }
       else
       {
-        return null;
+        return csvFilePath;
       }
 
       if (!File.Exists(csvFilePath))

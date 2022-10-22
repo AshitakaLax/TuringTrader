@@ -136,6 +136,9 @@ namespace TuringTraderWin.Simulator
       sb.AppendLine(String.Join(',', InstrumentManager.Positions.Keys.Select(instrument => instrument.Ticker)));
       sb.AppendLine($"Total Contributions:{SimulatorPortfolioInfo.CashContributions.PrintCash()}");
       sb.AppendLine($"Current Value:{SimulatorPortfolioInfo.Cash.PrintCash()}");
+
+      sb.AppendLine(TransactionHistory.GetTransactionString());
+      sb.AppendLine();
       return sb.ToString();
     }
 

@@ -34,7 +34,13 @@ namespace TuringTraderWin.Orders
 
     public string GetTransactionString()
     {
-      throw new NotImplementedException();
+      int numOfTrades = Transactions.Count;
+      string transactionStr = $"Trades:{numOfTrades}";
+      foreach(Transaction transaction in Transactions)
+      {
+        transactionStr += transaction.ToString() + Environment.NewLine;
+      }
+      return transactionStr;
     }
   }
 }
