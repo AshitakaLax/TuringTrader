@@ -1,3 +1,7 @@
+I have made many updates and improvements to this. I am still in the works of dev and it is very unstable.
+It is very very loosely built off the TuringTrader, Basically none of the algorithms written for TuringTrader would work for this updated version.
+
+
 # TuringTrader
 
 ![GNU Affero General Public License](https://www.gnu.org/graphics/agplv3-155x51.png)
